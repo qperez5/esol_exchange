@@ -1,0 +1,50 @@
+<p><a href="">Add new course</a></p>
+
+<table class="table">
+<tr>
+    <th>Name</th>
+    <th>Class Type</th>
+    <th>Levels</th>
+    <th>Who Join</th>
+    <th>How Join</th>
+    <th>When Join</th>
+    <th>How Long</th>
+    <th>Cost Free</th>
+    <th>Cost Condition</th>
+    <th>Times</th>
+    <th>Documentation Required</th>
+    <th>Contact Phone</th>
+    <th>Contact Email</th>
+    <th>Contact Person</th>
+    <th>Child Care</th>
+    <th>Child Care Condition</th>
+    <th>Other Information</th>
+    <th>&nbsp;</th>
+</tr>
+{{#each course in courses}}
+<tr>
+    <td>{{course.name}}</td>
+    <td>{{course.class_type}}</td>
+    <td>{{course.levels}}</td>
+    <td>{{course.who_join}}</td>
+    <td>{{course.how_join}}</td>
+    <td>{{course.when_join}}</td>
+    <td>{{course.how_long}}</td>
+    <td>{{course.cost_free}}</td>
+    <td>{{course.cost_condition}}</td>
+    <td>{{course.times}}</td>
+    <td>{{course.documentation_required}}</td>
+    <td>{{course.contact_phone}}</td>
+    <td>{{course.contact_email}}</td>
+    <td>{{course.contact_person}}</td>
+    <td>{{course.child_care}}</td>
+    <td>{{course.child_care_condition}}</td>
+    <td>{{course.other_information}}</td>
+    <td>
+        <a href="<?php echo $this->url('course',
+                             array('action'=>'edit', 'id' => $course->id));?>">Edit</a>
+        <a href="#" {{action "delete" course}}> Delete </a>
+    </td>
+</tr>
+{{/each}}
+</table>

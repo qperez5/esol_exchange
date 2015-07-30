@@ -1,0 +1,52 @@
+
+<p><a href="">Add new organization</a></p>
+
+<table class="table">
+<tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Post Code</th>
+    <th>Contact Number</th>
+    <th>Contact Mail</th>
+    <th>Contact Person</th>
+    <th>Contact Web</th>
+    <th>Esol Assesment</th>
+    <th>Tutors Qualified</th>
+    <th>Tutors Qualified Condition</th>
+    <th>Courses Acreditated</th>
+    <th>Courses Acreditation Condition</th>
+    <th>How Acreditated</th>
+    <th>Core Curriculum</th>
+    <th>Core Curriculum Condition</th>
+    <th>Referral System</th>
+    <th>Classes Outside_newham</th>
+    <th>Other Information</th>
+    <th>&nbsp;</th>
+</tr>
+{{#each organization in orgs}}
+<tr>
+    <td>{{organization.name}}</td>
+    <td>{{organization.address}}</td>
+    <td>{{organization.post_code}}</td>
+    <td>{{organization.contact_number}}</td>
+    <td>{{organization.contact_mail}}</td>
+    <td>{{organization.contact_person}}</td>
+    <td>{{organization.contact_web}}</td>
+    <td>{{organization.esol_assesment}}</td>
+    <td>{{organization.tutors_qualified}}</td>
+    <td>{{organization.tutors_qualified_condition}}</td>
+    <td>{{organization.courses_acreditated}}</td>
+    <td>{{organization.courses_acreditation_condition}}</td>
+    <td>{{organization.how_acreditated}}</td>
+    <td>{{organization.core_curriculum}}</td>
+    <td>{{organization.core_curriculum_condition}}</td>
+    <td>{{organization.referral_system}}</td>
+    <td>{{organization.classes_outside_newham}}</td>
+    <td>{{organization.other_information}}</td>
+    <td>
+        <a href="">Edit</a>
+        <a href="#" {{action "delete" organization}}> Delete</a>
+    </td>
+</tr>
+{{/each}}
+</table>

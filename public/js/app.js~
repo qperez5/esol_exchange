@@ -1,0 +1,13 @@
+// public/js/app.js
+Esol = Ember.Application.create();
+ 
+Esol.Router.map(function() {
+	this.resource('home', {
+	path: '/'
+	});
+	this.route('coursedetails');
+	this.route('organizations');
+	this.route('organization-rest', {path: '/organization/:organization_id'});
+	//TODO add routes for the remaining ABMs
+	this.resource('contact');
+});

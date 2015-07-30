@@ -1,0 +1,6 @@
+Em.I18n.translations = {
+		
+'search.searchlabel' : 'Search courses',
+'main.paragraph' : 'Si usted vive en Newham y desea mejorar su Inglés, este sitio web es para usted. Más de cursos xxx para elegir..'
+	
+};

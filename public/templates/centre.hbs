@@ -1,0 +1,33 @@
+<p><a href="">Add new centre</a></p>
+
+<table class="table">
+<tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Post Code</th>
+    <th>Address</th>
+    <th>Buses</th>
+    <th>Tube</th>
+    <th>Accebility</th>
+    <th>Accebility Condition</th>
+    <th>Other Information</th>
+    <th>&nbsp;</th>
+</tr>
+{{#each centre in centres}}
+<tr>
+    <td>{{centre.name}}</td>
+    <td>{{centre.location}}</td>
+    <td>{{centre.post_code}}</td>
+    <td>{{centre.address}}</td>
+    <td>{{centre.buses}}</td>
+    <td>{{centre.tube}}</td>
+    <td>{{centre.accebility}}</td>
+    <td>{{centre.accebility_condition}}</td>
+    <td>{{centre.other_information}}</td>
+    <td>
+        <a href="">Edit</a>
+        <a href="#" {{action "delete" centre}}> Delete</a>
+    </td>
+</tr>
+{{/each}}
+</table>
