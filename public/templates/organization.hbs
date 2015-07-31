@@ -1,5 +1,10 @@
 
-<p><a href="">Add new organization</a></p>
+
+<button {{action 'add'}}>Add new organization</button>
+<p>
+        <button {{action "add" orgs target=view}}>✓ Add new organization</button>
+        {{orgs.name}}
+</p>
 
 <table class="table">
 <tr>
@@ -45,7 +50,7 @@
     <td>{{organization.other_information}}</td>
     <td>
         <a href="">Edit</a>
-        <a href="#" {{action "delete" organization}}> Delete</a>
+        <a href="" {{action "delete" organization}}> Delete</a>
     </td>
 </tr>
 {{/each}}

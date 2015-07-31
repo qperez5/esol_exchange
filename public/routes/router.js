@@ -1,5 +1,6 @@
 Esol.Router.map(function(){
     this.route('organization');
+    this.route('editOrganization');
     this.route('map');
     this.route('course');
     this.route('centre');
@@ -10,6 +11,10 @@ Esol.OrganizationRoute = Ember.Route.extend({
    setupController: function(controller){
       controller.set('orgs',this.store.find('organization'));
    }
+});
+
+Esol.EditOrganizationRoute = Ember.Route.extend({
+
 });
 
 Esol.CourseRoute = Ember.Route.extend({

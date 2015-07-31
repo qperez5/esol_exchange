@@ -1,15 +1,15 @@
 <?php
- // module/Organization/view/organization/organization/add.phtml:
+// module/Organization/view/organization/organization/add.phtml:
 
- $title = 'Add new organization';
- $this->headTitle($title);
- ?>
- <h1><?php echo $this->escapeHtml($title); ?></h1>
- <?php
- $form->setAttribute('action', $this->url('organization', array('action' => 'add')));
- $form->prepare();
+$title = 'Add new organization';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+  $form->setAttribute('action', $this->url('organization', array('action' => 'add')));
+  $form->prepare();
 
- echo $this->form()->openTag($form);
+  echo $this->form()->openTag($form);
   echo $this->formCollection($form);
- echo $this->form()->closeTag();
+  echo $this->form()->closeTag();
 ?>

@@ -4,6 +4,10 @@ Esol.OrganizationController = Ember.Controller.extend({
         edit:function(){
 
         },
+        add:function(){
+
+        },
+
 
         delete:function(organization){
             console.debug("deleting organization...");
@@ -12,6 +16,12 @@ Esol.OrganizationController = Ember.Controller.extend({
             organization.save();
         }
     }
+
+});
+
+Esol.EditOrganizationController = Ember.Controller.extend({
+
+
 
 });
 
