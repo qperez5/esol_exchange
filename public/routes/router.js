@@ -1,6 +1,6 @@
 Esol.Router.map(function(){
     this.route('organization');
-    this.route('editOrganization');
+    this.route('editOrganization',{path: '/editOrganization/:organization_id'});
     this.route('map');
     this.route('course');
     this.route('centre');

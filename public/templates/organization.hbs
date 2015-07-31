@@ -49,8 +49,8 @@
     <td>{{organization.classes_outside_newham}}</td>
     <td>{{organization.other_information}}</td>
     <td>
-        <a href="">Edit</a>
-        <a href="" {{action "delete" organization}}> Delete</a>
+        {{#link-to "editOrganization" organization}}Edit{{/link-to}}
+        <a href="" {{action "delete" organization}}>Delete</a>
     </td>
 </tr>
 {{/each}}
