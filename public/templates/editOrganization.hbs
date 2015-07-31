@@ -1,27 +1,140 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary bs-example">
     <div class="panel-heading">Edit Organization</div>
-    <form>
-        <input type="text" hidden="" name="id">
-        Name: <input type="text" name="name">
-        Address: <input type="text" name="address">
-        post_code: <input type="text" name="post_code"><br><br>
-        Phone: <input type="text" name="contact_number">
-        Email: <input type="text" name="contact_mail">
-        Contact: <input type="text" name="contact_person">
-        Web: <input type="text" name="contact_web"><br><br>
-        Assessment: <input type="text" name="esol_assesment">
-        tutors_qualified: <input type="text" name="tutors_qualified">
-        tutors_qualified_condition: <input type="text" name="tutors_qualified_condition"><br><br>
-        courses_acreditated: <input type="text" name="courses_acreditated">
-        courses_acreditation_condition: <input type="text" name="courses_acreditation_condition">
-        how_acreditated: <input type="text" name="how_acreditated"><br><br>
-        core_curriculum: <input type="text" name="core_curriculum">
-        core_curriculum_condition: <input type="text" name="core_curriculum_condition"><br><br>
-        referral_system: <input type="text" name="referral_system">
-        classes_outside_newham: <input type="text" name="classes_outside_newham">
-        other_information: <input type="text" name="other_information"><br><br>
+    <div class="bs-example">
+        <form>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        {{input type="text" value='Name' class="form-control" id="name"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_number">Contact Number</label>
+                        {{input type="text" value='orgs.contact_number' class="form-control" id="contact_number"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        {{input type="text" value='orgs.address' class="form-control" id="address"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_person">Contact Person</label>
+                        {{input type="text" value='orgs.contact_person' class="form-control" id="contact_person"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="post_code">Post Code</label>
+                        {{input type="text" value='orgs.post_code' class="form-control" id="post_code"}}
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="contact_web">Contact Web</label>
+                            {{input type="text" value='orgs.contact_web' class="form-control" id="contact_web"}}
+                        </div>
+                    </div>
+                </div>
 
-        <input type="submit" value="Submit">
-    </form>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="contact_mail">contact_mail</label>
+                            {{input type="text" value='orgs.contact_mail' class="form-control" id="contact_mail"}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tutors_qualified_condition">tutors_qualified_condition</label>
+                        {{input type="text" value='orgs.tutors_qualified_condition' class="form-control" id="tutors_qualified_condition"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="tutors_qualified">tutors_qualified</label>
+                        {{input type="text" value='orgs.tutors_qualified' class="form-control" id="tutors_qualified"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="courses_acreditated">courses_acreditated</label>
+                        {{input type="text" value='orgs.courses_acreditated' class="form-control" id="courses_acreditated"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="courses_acreditation_condition">courses_acreditation_condition</label>
+                        {{input type="text" value='orgs.courses_acreditation_condition' class="form-control" id="courses_acreditation_condition"}}
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="how_acreditated">how_acreditated</label>
+                            {{input type="text" value='orgs.how_acreditated' class="form-control" id="how_acreditated"}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="core_curriculum">core_curriculum</label>
+                        {{input type="text" value='core_curriculum' class="form-control" id="core_curriculum"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="core_curriculum_condition">core_curriculum_condition</label>
+                        {{input type="text" value='orgs.core_curriculum_condition' class="form-control" id="core_curriculum_condition"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="referral_system">referral_system</label>
+                        {{input type="text" value='orgs.referral_system' class="form-control" id="referral_system"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="classes_outside_newham">classes_outside_newham</label>
+                        {{input type="text" value='orgs.classes_outside_newham' class="form-control" id="classes_outside_newham"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="other_information">other_information</label>
+                        {{input type="text" value='orgs.other_information' class="form-control" id="other_information"}}
+                    </div>
+                    <div class="form-group">
+                        <label for="esol_assesment">esol_assesment</label>
+                        {{input type="text" value='orgs.esol_assesment' class="form-control" id="esol_assesment"}}
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            </hr>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        <hr>
+        </hr>
+    </div>
+
+
 </div>
+
+<form>
+    <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+        <input type="text" class="form-control" placeholder="Username">
+    </div>
+    <br>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Amount">
+        <span class="input-group-addon">.00</span>
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" class="form-control" placeholder="US Dollar">
+        <span class="input-group-addon">.00</span>
+    </div>
+</form>
+</div>
+
 
