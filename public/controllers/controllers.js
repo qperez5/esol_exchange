@@ -4,8 +4,11 @@ Esol.OrganizationController = Ember.Controller.extend({
         edit:function(){
 
         },
-        add:function(){
 
+        add:function(){
+            console.log("adding a new organization");
+            var newOrg = this.store.createRecord('organization');
+            this.transitionToRoute('editOrganization',newOrg);
         },
 
 
@@ -19,9 +22,13 @@ Esol.OrganizationController = Ember.Controller.extend({
 
 });
 
-Esol.EditOrganizationController = Ember.Controller.extend({
+Esol.EditOrganizationController = Ember.ObjectController.extend({
 
-
+    actions: {
+        save: function(){
+            this.get("model").save();
+        }
+    }
 
 });
 
@@ -44,6 +51,17 @@ Esol.CourseController = Ember.Controller.extend({
     }
 });
 
+Esol.EditCourseController = Ember.ObjectController.extend({
+
+    actions: {
+        save: function(){
+            this.get("model").save();
+        }
+    }
+
+});
+
+
 Esol.CentreController = Ember.Controller.extend({
     actions:{
         delete:function(centre){
@@ -52,6 +70,16 @@ Esol.CentreController = Ember.Controller.extend({
             centre.deleteRecord();
             centre.save();
 
+        }
+    }
+
+});
+
+Esol.EditCentreController = Ember.ObjectController.extend({
+
+    actions: {
+        save: function(){
+            this.get("model").save();
         }
     }
 

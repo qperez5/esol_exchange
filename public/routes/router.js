@@ -3,7 +3,9 @@ Esol.Router.map(function(){
     this.route('editOrganization',{path: '/editOrganization/:organization_id'});
     this.route('map');
     this.route('course');
+    this.route('editCourse',{path: '/editCourse/:course_id'});
     this.route('centre');
+    this.route('editCentre',{path: '/editCentre/:centre_id'});
 });
 
 
@@ -23,9 +25,18 @@ Esol.CourseRoute = Ember.Route.extend({
     }
 });
 
+Esol.EditCourseRoute = Ember.Route.extend({
+
+});
+
+
 Esol.CentreRoute = Ember.Route.extend({
     setupController: function(controller){
         controller.set('centres',this.store.find('centre'));
     }
+});
+
+Esol.EditCentreRoute = Ember.Route.extend({
+
 });
 

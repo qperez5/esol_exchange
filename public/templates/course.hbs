@@ -1,5 +1,4 @@
-<p><a href="">Add new course</a></p>
-
+<button {{action 'add'}}>Add new course</button>
 <table class="table">
 <tr>
     <th>Name</th>
@@ -41,8 +40,7 @@
     <td>{{course.child_care_condition}}</td>
     <td>{{course.other_information}}</td>
     <td>
-        <a href="<?php echo $this->url('course',
-                             array('action'=>'edit', 'id' => $course->id));?>">Edit</a>
+        {{#link-to "editCourse" course}}Edit{{/link-to}}
         <a href="#" {{action "delete" course}}> Delete </a>
     </td>
 </tr>

@@ -1,5 +1,4 @@
-<p><a href="">Add new centre</a></p>
-
+<button {{action 'add'}}>Add new centre</button>
 <table class="table">
 <tr>
     <th>Name</th>
@@ -25,7 +24,7 @@
     <td>{{centre.accebility_condition}}</td>
     <td>{{centre.other_information}}</td>
     <td>
-        <a href="">Edit</a>
+        {{#link-to "editCentre" centre}}Edit{{/link-to}}
         <a href="#" {{action "delete" centre}}> Delete</a>
     </td>
 </tr>

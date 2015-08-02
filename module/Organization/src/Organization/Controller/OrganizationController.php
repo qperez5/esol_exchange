@@ -43,8 +43,8 @@ namespace Organization\Controller;
     }
 
     public function update($id, $data)
-    {   // Action used for PUT requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
+    {   // Action used  for PUT requests
+        return new JsonModel(array('organizations' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
     }
 
     public function delete($id)
@@ -57,3 +57,4 @@ namespace Organization\Controller;
     }
 
 }
+    
