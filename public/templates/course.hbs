@@ -1,48 +1,56 @@
-<button {{action 'add'}}>Add new course</button>
-<table class="table">
-<tr>
-    <th>Name</th>
-    <th>Class Type</th>
-    <th>Levels</th>
-    <th>Who Join</th>
-    <th>How Join</th>
-    <th>When Join</th>
-    <th>How Long</th>
-    <th>Cost Free</th>
-    <th>Cost Condition</th>
-    <th>Times</th>
-    <th>Documentation Required</th>
-    <th>Contact Phone</th>
-    <th>Contact Email</th>
-    <th>Contact Person</th>
-    <th>Child Care</th>
-    <th>Child Care Condition</th>
-    <th>Other Information</th>
-    <th>&nbsp;</th>
-</tr>
-{{#each course in courses}}
-<tr>
-    <td>{{course.name}}</td>
-    <td>{{course.class_type}}</td>
-    <td>{{course.levels}}</td>
-    <td>{{course.who_join}}</td>
-    <td>{{course.how_join}}</td>
-    <td>{{course.when_join}}</td>
-    <td>{{course.how_long}}</td>
-    <td>{{course.cost_free}}</td>
-    <td>{{course.cost_condition}}</td>
-    <td>{{course.times}}</td>
-    <td>{{course.documentation_required}}</td>
-    <td>{{course.contact_phone}}</td>
-    <td>{{course.contact_email}}</td>
-    <td>{{course.contact_person}}</td>
-    <td>{{course.child_care}}</td>
-    <td>{{course.child_care_condition}}</td>
-    <td>{{course.other_information}}</td>
-    <td>
-        {{#link-to "editCourse" course}}Edit{{/link-to}}
-        <a href="#" {{action "delete" course}}> Delete </a>
-    </td>
-</tr>
-{{/each}}
-</table>
+<button class="btn btn-primary" {{action 'add'}}>Add new course</button>
+<div class="panel panel-default pre-scrollable">
+    <table class="table table-bordered container">
+        <thead>
+            <tr>
+                <th><p class="text-info">Name</p></th>
+                <th><p class="text-info">Class Type</p></th>
+                <th><p class="text-info">Levels</p></th>
+                <th><p class="text-info">Who Join</p></th>
+                <th><p class="text-info">How Join</p></th>
+                <th><p class="text-info">When Join</p></th>
+                <th><p class="text-info">How Long</p></th>
+                <th><p class="text-info">Cost Free</p></th>
+                <th><p class="text-info">Cost Condition</p></th>
+                <th><p class="text-info">Times</p></th>
+                <th><p class="text-info">Documentation Required</p></th>
+                <th><p class="text-info">Contact Phone</p></th>
+                <th><p class="text-info">Contact Email</p></th>
+                <th><p class="text-info">Contact Person</p></th>
+                <th><p class="text-info">Child Care</p></th>
+                <th><p class="text-info">Child Care Condition</p></th>
+                <th><p class="text-info">Other Information</p></th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+
+        {{#each course in courses}}
+        <tbody>
+            <tr>
+                <td><p class="text-primary">{{course.name}}</p></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.class_type}}</p></div></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.levels}}</p></div></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.who_join}}</p></div></td>
+                <td><p class="text-primary">{{course.how_join}}</p></td>
+                <td class="setWidth concat" ><div><p class="text-primary">{{course.when_join}}</p></div></td>
+                <td class="setWidth concat" ><div><p class="text-primary">{{course.how_long}}</p></div></td>
+                <td><p class="text-primary">{{course.cost_free}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.cost_condition}}</p></div></td>
+                <td><p class="text-primary">{{course.times}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.documentation_required}}</p></div></td>
+                <td><p class="text-primary">{{course.contact_phone}}</p></td>
+                <td><p class="text-primary">{{course.contact_email}}</p></td>
+                <td><p class="text-primary">{{course.contact_person}}</p></td>
+                <td><p class="text-primary">{{course.child_care}}</p></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.child_care_condition}}</p></div></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{course.other_information}}</p></div></td>
+                <td>
+                    {{#link-to "editCourse" course}}Edit{{/link-to}}
+                    <a href="#" {{action "delete" course}}> Delete </a>
+            </td>
+            </tr>
+        </tbody>
+
+        {{/each}}
+    </table>
+</div>

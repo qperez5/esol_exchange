@@ -7,7 +7,7 @@ Esol.Organization = DS.Model.extend({
     address: attr("string"),
     post_code: attr("string"),
     contact_number: attr("string"),
-    contact_mail: attr("string"),
+    contact_email: attr("string"),
     contact_person: attr("string"),
     contact_web: attr("string"),
     esol_assesment: attr("string"),
@@ -43,7 +43,6 @@ Esol.Course = DS.Model.extend({
     child_care_condition: attr("string"),
     other_information: attr("string"),
     organization_id: attr("string")
-    //organization_id: belongsTo("organization")
 
 });
 
@@ -56,7 +55,11 @@ Esol.Centre = DS.Model.extend({
     tube: attr("string"),
     accebility: attr("string"),
     accebility_condition: attr("string"),
-    other_information: attr("string")
+    other_information: attr("string"),
+
+    fullAddress: function(){
+        return this.get("address") + " " + this.get("post_code");
+    }.property("post_code","address")
 
 });
 

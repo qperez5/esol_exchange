@@ -3,6 +3,26 @@ body {
     padding-bottom: 40px;
 }
 
+.setWidth {
+    max-width: 100px;
+
+}
+
+.mapSize{
+    height: 600px;
+    width: auto;
+
+}
+.concat div {
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 2px;
+
+}
+
 .zf-green {
     color: #68b604;
 }

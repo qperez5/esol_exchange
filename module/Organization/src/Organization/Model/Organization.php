@@ -12,7 +12,7 @@ class Organization implements InputFilterAwareInterface
     public $address;
     public $post_code;
     public $contact_number;
-    public $contact_mail;
+    public $contact_email;
     public $contact_person;
     public $contact_web;
     public $esol_assesment;
@@ -35,7 +35,7 @@ class Organization implements InputFilterAwareInterface
         $this->address  = (!empty($data['address'])) ? $data['address'] : null;
         $this->post_code = (!empty($data['post_code'])) ? $data['post_code'] : null;
         $this->contact_number = (!empty($data['contact_number'])) ? $data['contact_number'] : null;
-        $this->contact_mail  = (!empty($data['contact_mail'])) ? $data['contact_mail'] : null;
+        $this->contact_email  = (!empty($data['contact_email'])) ? $data['contact_email'] : null;
         $this->contact_person  = (!empty($data['contact_person'])) ? $data['contact_person'] : null;
         $this->contact_web = (!empty($data['contact_web'])) ? $data['contact_web'] : null;
         $this->esol_assesment = (!empty($data['esol_assesment'])) ? $data['esol_assesment'] : null;
@@ -154,7 +154,7 @@ class Organization implements InputFilterAwareInterface
             ));
 
             $inputFilter->add(array(
-                'name'     => 'contact_mail',
+                'name'     => 'contact_email',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),

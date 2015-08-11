@@ -1,32 +1,40 @@
-<button {{action 'add'}}>Add new centre</button>
-<table class="table">
-<tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Post Code</th>
-    <th>Address</th>
-    <th>Buses</th>
-    <th>Tube</th>
-    <th>Accebility</th>
-    <th>Accebility Condition</th>
-    <th>Other Information</th>
-    <th>&nbsp;</th>
-</tr>
-{{#each centre in centres}}
-<tr>
-    <td>{{centre.name}}</td>
-    <td>{{centre.location}}</td>
-    <td>{{centre.post_code}}</td>
-    <td>{{centre.address}}</td>
-    <td>{{centre.buses}}</td>
-    <td>{{centre.tube}}</td>
-    <td>{{centre.accebility}}</td>
-    <td>{{centre.accebility_condition}}</td>
-    <td>{{centre.other_information}}</td>
-    <td>
-        {{#link-to "editCentre" centre}}Edit{{/link-to}}
-        <a href="#" {{action "delete" centre}}> Delete</a>
-    </td>
-</tr>
-{{/each}}
-</table>
+<button class="btn btn-primary" {{action 'add'}}>Add new centre</button>
+<div class="panel panel-default pre-scrollable">
+    <table class="table table-bordered container">
+            <thead>
+            <tr>
+                <th class="col-md-6"><p class="text-info">Name</p></th>
+                <th class="col-md-6"><p class="text-info">Location</p></th>
+                <th class="col-md-6"><p class="text-info">Post Code</p></th>
+                <th class="col-md-6"><p class="text-info">Address</p></th>
+                <th class="col-md-6"><p class="text-info">Buses</p></th>
+                <th class="col-md-6"><p class="text-info">Tube</p></th>
+                <th class="col-md-6"><p class="text-info">Accebility</p></th>
+                <th class="col-md-6"><p class="text-info">Accebility Condition</p></th>
+                <th class="col-md-6"><p class="text-info">Other Information</p></th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+
+            {{#each centre in centres}}
+            <tbody>
+                <tr>
+                    <td><p class="text-primary">{{centre.name}}</p></td>
+                    <td><p class="text-primary">{{centre.location}}</p></td>
+                    <td><p class="text-primary">{{centre.post_code}}</p></td>
+                    <td><p class="text-primary">{{centre.address}}</p></td>
+                    <td><p class="text-primary">{{centre.buses}}</p></td>
+                    <td><p class="text-primary">{{centre.tube}}</p></td>
+                    <td><p class="text-primary">{{centre.accebility}}</p></td>
+                    <td><p class="text-primary">{{centre.accebility_condition}}</p></td>
+                    <td><p class="text-primary">{{centre.other_information}}</p></td>
+                    <td>
+                        {{#link-to "editCentre" centre}}Edit{{/link-to}}
+                        <a href="#" {{action "delete" centre}}> Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+
+        {{/each}}
+    </table>
+</div>

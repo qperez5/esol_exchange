@@ -40,12 +40,21 @@ namespace Centre\Controller;
 
     public function create($data)
     {   // Action used for POST requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'New Album', 'band' => 'New Band')));
+        $centre = new Centre();
+        $centre->exchangeArray($data['centre']);
+        $this->getCentreTable()->saveCentre($centre);
+        $data['centre']['id']= $centre->id;
+        return new JsonModel($data);
     }
 
     public function update($id, $data)
     {   // Action used for PUT requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
+        $data['centre']['id']=$id;
+        $centre = $this->getCentreTable()->getCentre($id);
+        $centre->exchangeArray($data['centre']);
+        $this->getCentreTable()->saveCentre($centre);
+
+        return new JsonModel($data);
     }
 
     public function delete($id)
@@ -53,8 +62,7 @@ namespace Centre\Controller;
 
         $this->getCentreTable()->deleteCentre($id);
 
-        return new JsonModel(array('data' => 'deleted'));
+        return new JsonModel(array('centres' => 'deleted'));
 
-        //return new JsonModel(array('data' => 'album id 3 deleted'));
     }
 }

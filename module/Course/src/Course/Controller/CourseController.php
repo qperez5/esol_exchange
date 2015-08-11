@@ -39,12 +39,21 @@ namespace Course\Controller;
 
     public function create($data)
     {   // Action used for POST requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'New Album', 'band' => 'New Band')));
+        $course = new Course();
+        $course->exchangeArray($data['course']);
+        $this->getCourseTable()->saveCourse($course);
+        $data['course']['id']= $course->id;
+        return new JsonModel($data);
     }
 
     public function update($id, $data)
     {   // Action used for PUT requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
+        $data['course']['id']=$id;
+        $course = $this->getCourseTable()->getCourse($id);
+        $course->exchangeArray($data['course']);
+        $this->getCourseTable()->saveCourse($course);
+
+        return new JsonModel($data);
     }
 
     public function delete($id)
@@ -52,8 +61,7 @@ namespace Course\Controller;
 
         $this->getCourseTable()->deleteCourse($id);
 
-        return new JsonModel(array('data' => 'deleted'));
+        return new JsonModel(array('courses' => 'deleted'));
 
-        //return new JsonModel(array('data' => 'album id 3 deleted'));
     }
 }

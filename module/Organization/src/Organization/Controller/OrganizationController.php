@@ -2,6 +2,7 @@
 namespace Organization\Controller;
 
  use Organization\Controller\AbstractRestfulController;
+ use Organization\Model\Organization;
  use Zend\View\Model\JsonModel;
  use Zend\View\Model\ViewModel;
 
@@ -39,12 +40,21 @@ namespace Organization\Controller;
 
     public function create($data)
     {   // Action used for POST requests
-        return new JsonModel(array('data' => array('id'=> 3, 'name' => 'New Album', 'band' => 'New Band')));
+        $organization = new Organization();
+        $organization->exchangeArray($data['organization']);
+        $this->getOrganizationTable()->saveOrganization($organization);
+        $data['organization']['id']= $organization->id;
+        return new JsonModel($data);
     }
 
     public function update($id, $data)
-    {   // Action used  for PUT requests
-        return new JsonModel(array('organizations' => array('id'=> 3, 'name' => 'Updated Album', 'band' => 'Updated Band')));
+    {
+        $data['organization']['id']=$id;
+        $organization = $this->getOrganizationTable()->getOrganization($id);
+        $organization->exchangeArray($data['organization']);
+        $this->getOrganizationTable()->saveOrganization($organization);
+
+        return new JsonModel($data);
     }
 
     public function delete($id)
@@ -53,7 +63,6 @@ namespace Organization\Controller;
         $this->getOrganizationTable()->deleteOrganization($id);
         return new JsonModel(array('organizations' => 'deleted'));
 
-        //return new JsonModel(array('data' => 'album id 3 deleted'));
     }
 
 }

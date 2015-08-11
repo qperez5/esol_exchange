@@ -36,7 +36,7 @@ class OrganizationTable
             'address'  => $organization->address,
             'post_code' => $organization->post_code,
             'contact_number'  => $organization->contact_number,
-            'contact_mail'  => $organization->contact_mail,
+            'contact_email'  => $organization->contact_email,
             'contact_person' => $organization->contact_person,
             'contact_web'  => $organization->contact_web,
             'esol_assesment' => $organization->esol_assesment,

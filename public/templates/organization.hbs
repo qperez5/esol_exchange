@@ -1,53 +1,64 @@
 
 
-<button {{action 'add'}}>Add new organization</button>
+    <button class="btn btn-primary" {{action 'add'}}>Add new organization</button>
+    <div class="panel panel-default pre-scrollable">
+    <table class=" table table-bordered container ">
+        <thead>
+            <tr>
+                <th class="col-md-6"><p class="text-info">Id</p></th>
+                <th class="col-md-6"><p class="text-info">Name</p></th>
+                <th class="col-md-6"><p class="text-info">Address</p></th>
+                <th class="col-md-2"><p class="text-info">Post Code</p></th>
+                <th class="col-md-4"><p class="text-info">Contact Number</p></th>
+                <th class="col-md-5"><p class="text-info">Contact Mail</p></th>
+                <th class="col-md-3"><p class="text-info">Contact Person</p></th>
+                <th class="col-md-3"><p class="text-info">Contact Web</p></th>
+                <th class="col-md-9"><p class="text-info">Esol Assesment</p></th>
+                <th class="col-md-1"><p class="text-info">Tutors Qualified</p></th>
+                <th class="col-md-3"><p class="text-info">Tutors Qualified Condition</p></th>
+                <th class="col-md-1"><p class="text-info">Courses Acreditated</p></th>
+                <th class="col-md-4"><p class="text-info">Courses Acreditation Condition</p></th>
+                <th class="col-md-3"><p class="text-info">How Acreditated</p></th>
+                <th class="col-md-1"><p class="text-info">Core Curriculum</p></th>
+                <th class="col-md-3"><p class="text-info">Core Curriculum Condition</p></th>
+                <th class="col-md-3"><p class="text-info">Referral System</p></th>
+                <th class="col-md-3"><p class="text-info">Classes Outside_newham</p></th>
+                <th class="col-md-3"><p class="text-info">Other Information</p></th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
 
-<table class="table">
-<tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Post Code</th>
-    <th>Contact Number</th>
-    <th>Contact Mail</th>
-    <th>Contact Person</th>
-    <th>Contact Web</th>
-    <th>Esol Assesment</th>
-    <th>Tutors Qualified</th>
-    <th>Tutors Qualified Condition</th>
-    <th>Courses Acreditated</th>
-    <th>Courses Acreditation Condition</th>
-    <th>How Acreditated</th>
-    <th>Core Curriculum</th>
-    <th>Core Curriculum Condition</th>
-    <th>Referral System</th>
-    <th>Classes Outside_newham</th>
-    <th>Other Information</th>
-    <th>&nbsp;</th>
-</tr>
-{{#each organization in orgs}}
-<tr>
-    <td>{{organization.name}}</td>
-    <td>{{organization.address}}</td>
-    <td>{{organization.post_code}}</td>
-    <td>{{organization.contact_number}}</td>
-    <td>{{organization.contact_mail}}</td>
-    <td>{{organization.contact_person}}</td>
-    <td>{{organization.contact_web}}</td>
-    <td>{{organization.esol_assesment}}</td>
-    <td>{{organization.tutors_qualified}}</td>
-    <td>{{organization.tutors_qualified_condition}}</td>
-    <td>{{organization.courses_acreditated}}</td>
-    <td>{{organization.courses_acreditation_condition}}</td>
-    <td>{{organization.how_acreditated}}</td>
-    <td>{{organization.core_curriculum}}</td>
-    <td>{{organization.core_curriculum_condition}}</td>
-    <td>{{organization.referral_system}}</td>
-    <td>{{organization.classes_outside_newham}}</td>
-    <td>{{organization.other_information}}</td>
-    <td>
-        {{#link-to "editOrganization" organization}}Edit{{/link-to}}
-        <a href="" {{action "delete" organization}}>Delete</a>
-    </td>
-</tr>
-{{/each}}
-</table>
+        {{#each organization in orgs}}
+        <tbody>
+            <tr>
+                <td><p class="text-primary">{{organization.id}}</p></td>
+                <td><p class="text-primary">{{organization.name}}</p></td>
+                <td><p class="text-primary">{{organization.address}}</td>
+                <td><p class="text-primary">{{organization.post_code}}</td>
+                <td><p class="text-primary">{{organization.contact_number}}</td>
+                <td><p class="text-primary">{{organization.contact_email}}</td>
+                <td><p class="text-primary">{{organization.contact_person}}</td>
+                <td><p class="text-primary">{{organization.contact_web}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.esol_assesment}}</div></td>
+                <td><p class="text-primary">{{organization.tutors_qualified}}</td>
+                <td class="setWidth concat"> <div><p class="text-primary">{{organization.tutors_qualified_condition}}</div></td>
+                <td><p class="text-primary">{{organization.courses_acreditated}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.courses_acreditation_condition}}</div></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.how_acreditated}}</div></td>
+                <td><p class="text-primary">{{organization.core_curriculum}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.core_curriculum_condition}}</div></td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.referral_system}}</div></td>
+                <td><p class="text-primary">{{organization.classes_outside_newham}}</td>
+                <td class="setWidth concat"><div><p class="text-primary">{{organization.other_information}}</div></td>
+                <td>
+                    {{#link-to "editOrganization" organization}}Edit{{/link-to}}
+                    {{#link-to "deleteOrganization" organization}}Delete{{/link-to}}
+                    
+            </td>
+        </tr>
+
+        </tbody>
+
+        {{/each}}
+    </table>
+</div>
