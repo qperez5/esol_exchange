@@ -47,7 +47,7 @@ class CourseTable
             'contact_email' => $course->contact_email,
             'contact_person'  => $course->contact_person,
             'child_care' => $course->child_care,
-            'child_care_condition'  => $course->child_care_condition,
+            'child_condition'  => $course->child_condition,
             'organization_id' => $course->organization_id,
             'other_information' => $course->other_information,
         );

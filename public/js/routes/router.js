@@ -5,8 +5,11 @@ Esol.Router.map(function(){
     this.route('map');
     this.route('course');
     this.route('editCourse',{path: '/editCourse/:course_id'});
+    this.route('deleteCourse',{path: '/deleteCourse/:course_id'});
     this.route('centre');
     this.route('editCentre',{path: '/editCentre/:centre_id'});
+    this.route('deleteCentre',{path: '/deleteCentre/:centre_id'});
+    this.route('searchResult');
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
@@ -40,6 +43,11 @@ Esol.EditCourseRoute = Ember.Route.extend({
 
 });
 
+Esol.DeleteCourseRoute = Ember.Route.extend({
+    model: function(params){
+        return this.store.findRecord("course",params.course_id);
+    }
+});
 
 Esol.CentreRoute = Ember.Route.extend({
     setupController: function(controller){
@@ -55,3 +63,15 @@ Esol.EditCentreRoute = Ember.Route.extend({
 
 });
 
+Esol.DeleteCentreRoute = Ember.Route.extend({
+    model: function(params){
+        return this.store.findRecord("centre",params.centre_id);
+    }
+});
+
+Esol.SearchResultRoute = Ember.Route.extend({
+    setupController: function(controller){
+        controller.set('courses',this.store.find('course'));
+    }
+
+});

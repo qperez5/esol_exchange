@@ -9,6 +9,7 @@ body {
 }
 
 .mapSize{
+    margin: 5px;
     height: 600px;
     width: auto;
 
@@ -71,8 +72,12 @@ body {
     margin-top: 100px;
 }
 .advance-search {
-    margin-top: 15px;
+    margin-top: 5px;
 
+}
+#detailedSearch{
+    padding: 8px;
+    margin-top: 15px;
 }
 .nav li a,
 .nav li a:hover {
@@ -125,7 +130,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #map-canvas {
-    margin-top: 10px;
     width: 100%;
     height: 400px;
 }
@@ -142,12 +146,12 @@ img {
     margin-top: 10px;
 }
 
-.result_list {
-    display: none;
-}
-
 .pagraph{
     margin-top: 20px;
+}
+
+.btn-danger{
+    margin-top: 5px;
 }
 
 /* default height */

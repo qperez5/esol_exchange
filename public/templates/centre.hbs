@@ -30,7 +30,8 @@
                     <td><p class="text-primary">{{centre.other_information}}</p></td>
                     <td>
                         {{#link-to "editCentre" centre}}Edit{{/link-to}}
-                        <a href="#" {{action "delete" centre}}> Delete</a>
+                        {{#link-to "deleteCentre" centre}} Delete{{/link-to}}
+
                     </td>
                 </tr>
             </tbody>

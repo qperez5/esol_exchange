@@ -18,6 +18,10 @@ Esol.DeleteOrganizationController = Ember.ObjectController.extend({
             var organization = this.get("model");
             organization.deleteRecord();
             organization.save();
+        },
+        cancel:function(){
+            console.debug("canceling delete the org...");
+            this.transitionToRoute('organization');
         }
     }
 });
@@ -31,9 +35,6 @@ Esol.EditOrganizationController = Ember.ObjectController.extend({
     }
 });
 
-Esol.MapController = Ember.Controller.extend({
-
-});
 
 Esol.CourseController = Ember.Controller.extend({
     actions: {
@@ -41,14 +42,24 @@ Esol.CourseController = Ember.Controller.extend({
             console.log("adding a new course");
             var newCourse = this.store.createRecord('course');
             this.transitionToRoute('editCourse',newCourse);
-        },
+        }
+    }
+});
 
-        delete: function (course) {
-            console.debug("deleting course...");
-            console.dir(course);
+Esol.DeleteCourseController = Ember.ObjectController.extend({
+    actions: {
+
+        delete:function(){
+            console.debug("deleting the course...");
+            console.dir(this.get("model"));
+            var course = this.get("model");
             course.deleteRecord();
             course.save();
-
+            this.transitionToRoute('centre');
+        },
+        cancel:function(){
+            console.debug("canceling delete the course...");
+            this.transitionToRoute('course');
         }
     }
 });
@@ -65,22 +76,32 @@ Esol.EditCourseController = Ember.ObjectController.extend({
 
 
 Esol.CentreController = Ember.Controller.extend({
-    actions:{
+
+    actions: {
         add:function(){
             console.log("adding a new centre");
             var newCentre = this.store.createRecord('centre');
             this.transitionToRoute('editCentre',newCentre);
-        },
-
-        delete:function(centre){
-            console.debug("deleting centre...");
-            console.dir(centre);
-            centre.deleteRecord();
-            centre.save();
-
         }
     }
 
+});
+
+Esol.DeleteCentreController = Ember.ObjectController.extend({
+    actions: {
+
+        delete:function(){
+            console.debug("deleting the centre...");
+            console.dir(this.get("model"));
+            var centre = this.get("model");
+            centre.deleteRecord();
+            centre.save();
+        },
+        cancel:function(){
+            console.debug("canceling delete the centre...");
+            this.transitionToRoute('centre');
+        }
+    }
 });
 
 Esol.EditCentreController = Ember.ObjectController.extend({
@@ -103,7 +124,7 @@ Esol.EditCentreController = Ember.ObjectController.extend({
     addressFound: function(results, status){
         if(status == google.maps.GeocoderStatus.OK){
             var mapVar = this.get("map");
-            var geoLocation = (results[0].geometry.location);
+            var geoLocation = results[0].geometry.location;
             var lat = geoLocation.lat();
             var lng = (results[0].geometry.location.lng());
             mapVar.setZoom(16);
@@ -112,8 +133,32 @@ Esol.EditCentreController = Ember.ObjectController.extend({
                 map: mapVar,
                 position: results[0].geometry.location
             });
-            this.get("model").set("location",lat + "," + " " + lng);
+            this.get("model").set("location","POINT(" + lat + "," + " " + lng+")");
         }
     }
 
 });
+
+Esol.MapController = Ember.Controller.extend({
+
+    actions: {
+        detailedSearchEnabled: false,
+        enableAdvancedSearch: function() {
+            var currentlyEnabled = this.get("detailedSearchEnabled");
+            this.set("detailedSearchEnabled", !currentlyEnabled);
+        },
+        search: function(){
+            console.debug("Searching...");
+        }
+    }
+});
+
+Esol.SearchResultController = Ember.ObjectController.extend({
+
+    actions: {
+
+    }
+
+});
+
+

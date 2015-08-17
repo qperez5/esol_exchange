@@ -40,7 +40,7 @@ Esol.Course = DS.Model.extend({
     contact_email: attr("string"),
     contact_person: attr("string"),
     child_care: attr("string"),
-    child_care_condition: attr("string"),
+    child_condition: attr("string"),
     other_information: attr("string"),
     organization_id: attr("string")
 

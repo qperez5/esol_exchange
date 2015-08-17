@@ -1,4 +1,5 @@
 <button class="btn btn-primary" {{action 'add'}}>Add new course</button>
+ <div>{{#link-to "result" course}}Consulta{{/link-to}}</div>
 <div class="panel panel-default pre-scrollable">
     <table class="table table-bordered container">
         <thead>
@@ -46,7 +47,8 @@
                 <td class="setWidth concat"><div><p class="text-primary">{{course.other_information}}</p></div></td>
                 <td>
                     {{#link-to "editCourse" course}}Edit{{/link-to}}
-                    <a href="#" {{action "delete" course}}> Delete </a>
+                    {{#link-to "deleteCourse" course}}Delete{{/link-to}}
+
             </td>
             </tr>
         </tbody>

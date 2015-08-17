@@ -2,6 +2,8 @@
 namespace Centre\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Expression;
 
 class CentreTable
 {
@@ -21,7 +23,16 @@ class CentreTable
     public function getCentre($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('id' => $id));
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select("centre");
+        $select->where(array("id" => $id));
+        $select->columns(array("id","name",array("location" => new Expression("AsWKT(location)")),
+            "post_code","address","buses","tube","accebility","accebility_condition","other_information"));
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $rowset = $statement->execute();
+
+
+
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -33,7 +44,7 @@ class CentreTable
     {
         $data = array(
             'name' => $centre->name,
-            'location'  => $centre->location,
+            'location'  => (!empty($centre->location)) ? new Expression("GeomFromText(". $centre->location .")") : null,
             'post_code' => $centre->post_code,
             'address'  => $centre->address,
             'buses'  => $centre->buses,

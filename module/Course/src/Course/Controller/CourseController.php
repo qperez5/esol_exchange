@@ -3,7 +3,7 @@ namespace Course\Controller;
 
  use Course\Controller\AbstractRestfulController;
  use Zend\View\Model\JsonModel;
- use Zend\View\Model\ViewModel;
+ use Course\Model\Course;
 
 
  class CourseController extends AbstractRestfulJsonController
@@ -25,7 +25,7 @@ namespace Course\Controller;
 	    $results = $this->getCourseTable()->fetchAll();
     	$data = array();
     	foreach($results as $result) {
-        	$data[] = $result;//->getArrayCopy()
+        	$data[] = $result;
     	}
     	return new JsonModel(array("courses" => $data));
     }

@@ -2,8 +2,8 @@
 namespace Centre\Controller;
 
  use Centre\Controller\AbstractRestfulController;
+ use Centre\Model\Centre;
  use Zend\View\Model\JsonModel;
- use Zend\View\Model\ViewModel;
 
 
  class CentreController extends AbstractRestfulJsonController
