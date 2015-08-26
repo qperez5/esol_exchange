@@ -1,10 +1,9 @@
 <?php
 namespace Organization\Controller;
 
- use Organization\Controller\AbstractRestfulController;
+ use Application\Controller\AbstractRestfulJsonController;
  use Organization\Model\Organization;
  use Zend\View\Model\JsonModel;
- use Zend\View\Model\ViewModel;
 
 
  class OrganizationController extends AbstractRestfulJsonController

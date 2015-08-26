@@ -8,116 +8,168 @@
                         <label for="name">Name</label>
                         {{input type="text" value=name class="form-control" id="name"}}
                     </div>
+                </div>
+                <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="contact_number">class_type</label>
+                        <label for="class_type">Class type</label>
                         {{input type="text" value=class_type class="form-control" id="class_type"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="address">levels</label>
-                        {{input type="text" value=levels class="form-control" id="levels"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="contact_person">who_join</label>
-                        {{input type="text" value=who_join class="form-control" id="who_join"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="post_code">how_join</label>
-                        {{input type="text" value=how_join class="form-control" id="how_join"}}
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="contact_web">when_join</label>
-                            {{input type="text" value=when_join class="form-control" id="when_join"}}
-                        </div>
+                        <label for="esol_assesment">Esol assessment?</label>
+                        {{input type="text" value=esol_assesment class="form-control" id="esol_assesment"}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <div class="form-group">
-                            <label for="contact_mail">how_long</label>
-                            {{input type="text" value=how_long class="form-control" id="how_long"}}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="courses_acreditated">cost_free</label>
-                        {{input type="text" value=cost_free class="form-control" id="cost_free"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="tutors_qualified">cost_condition</label>
-                        {{input type="text" value=cost_condition class="form-control" id="cost_condition"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="courses_acreditation_condition">times</label>
-                        {{input type="text" value=times class="form-control" id="times"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="tutors_qualified_condition">documentation_required</label>
-                        {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="how_acreditated">contact_phone</label>
-                            {{input type="text" value=contact_phone class="form-control" id="contact_phone"}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="core_curriculum">contact_email</label>
-                        {{input type="text" value=contact_email class="form-control" id="contact_email"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="referral_system">contact_person</label>
+                        <label for="contact_person">Contact person</label>
                         {{input type="text" value=contact_person class="form-control" id="contact_person"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="core_curriculum_condition">child_care</label>
-                        {{input type="text" value=child_care class="form-control" id="child_care"}}
+                        <label for="contact_phone">Phone</label>
+                        {{input type="text" value=contact_phone class="form-control" id="contact_phone"}}
                     </div>
+                </div>
+                <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="classes_outside_newham">child_care_condition</label>
+                        <label for="contact_email">Email</label>
+                        {{input type="text" value=contact_email class="form-control" id="contact_email"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="who_join">Who can join?</label>
+                        {{input type="text" value=who_join class="form-control" id="who_join"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="how_join">How to join?</label>
+                        {{input type="text" value=how_join class="form-control" id="how_join"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="when_join">When join?</label>
+                        {{input type="text" value=when_join class="form-control" id="when_join"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="cost_free">Is it for free?</label>
+                        {{view "select" id="cost_free" value=cost_free
+                        classNames="form-control"
+                        content=yesNoConditionedOptions
+                        optionLabelPath="content.label"
+                        optionValuePath="content.value"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="cost_condition">Cost condition</label>
+                        {{input type="text" value=cost_condition class="form-control" id="cost_condition"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="how_long">How long is it?</label>
+                        {{input type="text" value=how_long class="form-control" id="how_long"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="child_care">Child care facility?</label>
+                        {{view "select" id="child_care" value=child_care
+                        classNames="form-control"
+                        content=yesNoConditionedOptions
+                        optionLabelPath="content.label"
+                        optionValuePath="content.value"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="child_care_condition">Child care conditions</label>
                         {{input type="text" value=child_care_condition class="form-control" id="child_care_condition"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="esol_assesment">esol_assesment</label>
-                        {{input type="text" value=esol_assesment class="form-control" id="esol_assesment"}}
+                        <label for="times">Times</label>
+                        {{input type="text" value=times class="form-control" id="times"}}
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="esol_assesment">organization_id</label>
-                        {{input type="text" value=organization_id class="form-control" id="organization_id"}}
+                        <label for="levels">Levels</label>{{model.levels}}
+                        {{view "select" content=levelList id="levels" classNames="form-control"
+                        multiple="true" selection=model.levels}}
                     </div>
+                </div>
+                <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="other_information">other_information</label>
+                        <label for="centre_id">In which centre?</label>
+                        {{view "select" content=centres
+                        classNames="form-control"
+                        multiple="true"
+                        optionValuePath="content.id"
+                        optionLabelPath="content.name"
+                        id="centre_id"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="organization_id">Organization</label>
+                        {{view "select" content=organizations value=organization.id
+                        classNames="form-control"
+                        optionValuePath="content.id"
+                        optionLabelPath="content.name"
+                        id="organization_id"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="documentation_required">Documentation required</label>
+                        {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="other_information">Other Information</label>
                         {{input type="text" value=other_information class="form-control" id="other_information"}}
                     </div>
                 </div>
             </div>
             <hr>
             </hr>
-            <button class="btn btn-primary" {{action "save"}}>Save</button>
-        <hr>
-        </hr>
-    </form>
-
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class="btn btn-primary" {{action "save"}}>Save</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-danger" {{action "cancel"}}>Cancel</button>
+                </div>
+            </div>
+            <hr>
+            </hr>
+        </form>
+    </div>
 </div>
-        </div>
+
 
 
 

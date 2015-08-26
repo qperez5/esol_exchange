@@ -24,8 +24,10 @@ class Course implements InputFilterAwareInterface
     public $contact_person;
     public $child_care;
     public $child_condition;
-    public $organization_id;
+    public $organization;
     public $other_information;
+
+    public $centres;
 
     protected $inputFilter;
 
@@ -48,10 +50,8 @@ class Course implements InputFilterAwareInterface
         $this->contact_person = (!empty($data['contact_person'])) ? $data['contact_person'] : null;
         $this->child_care = (!empty($data['child_care'])) ? $data['child_care'] : null;
         $this->child_condition  = (!empty($data['child_condition'])) ? $data['child_condition'] : null;
-        $this->organization_id = (!empty($data['organization_id'])) ? $data['organization_id'] : null;
+        $this->organization = (!empty($data['organization'])) ? $data['organization'] : null;
         $this->other_information = (!empty($data['other_information'])) ? $data['other_information'] : null;
-
-
     }
 
     // Add the following method:
@@ -175,7 +175,7 @@ class Course implements InputFilterAwareInterface
             ));
 
             $inputFilter->add(array(
-                'name'     => 'organization_id',
+                'name'     => 'organization',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'Int'),

@@ -1,6 +1,5 @@
 Esol.OrganizationController = Ember.Controller.extend({
     actions: {
-
         add:function(){
             console.log("adding a new organization");
             var newOrg = this.store.createRecord('organization');
@@ -31,10 +30,12 @@ Esol.EditOrganizationController = Ember.ObjectController.extend({
     actions: {
         save: function(){
             this.get("model").save();
+        },
+        cancel: function(){
+            this.transitionToRoute('organization');
         }
     }
 });
-
 
 Esol.CourseController = Ember.Controller.extend({
     actions: {
@@ -66,14 +67,39 @@ Esol.DeleteCourseController = Ember.ObjectController.extend({
 
 Esol.EditCourseController = Ember.ObjectController.extend({
 
+    organizations: function(){
+        return this.store.find("organization");
+    }.property(),
+
+    centres: function(){
+        return this.store.find("centre");
+    }.property(),
+
+    yesNoConditionedOptions: function(){
+        return [
+            {"value": "y", "label": "Yes"},
+            {"value": "n", "label": "No"},
+            {"value": "c", "label": "Conditioned"}
+        ];
+    }.property(),
+
+    levelList: function(){
+        return [
+            'Entry 1','Entry 2','Entry 3','Formal course','Informal classes','Conversation / speaking only',
+            'ESOL with IT','ESOL with sewing','Women only','ESOL for Citizenship', 'ESOL for Employment',
+            'Beginners/pre-literate','Pre-entry'
+        ];
+    }.property(),
+
     actions: {
         save: function(){
             this.get("model").save();
+        },
+        cancel: function(){
+            this.transitionToRoute('course');
         }
     }
-
 });
-
 
 Esol.CentreController = Ember.Controller.extend({
 
@@ -84,12 +110,10 @@ Esol.CentreController = Ember.Controller.extend({
             this.transitionToRoute('editCentre',newCentre);
         }
     }
-
 });
 
 Esol.DeleteCentreController = Ember.ObjectController.extend({
     actions: {
-
         delete:function(){
             console.debug("deleting the centre...");
             console.dir(this.get("model"));
@@ -108,9 +132,21 @@ Esol.EditCentreController = Ember.ObjectController.extend({
 
     map: null,
 
+    yesNoConditionedOptions: function(){
+        return [
+            {"value": "y", "label": "Yes"},
+            {"value": "n", "label": "No"},
+            {"value": "c", "label": "Conditioned"}
+        ];
+    }.property(),
+
     actions: {
         save: function(){
             this.get("model").save();
+        },
+        cancel:function(){
+            console.debug("canceling editing the centre...");
+            this.transitionToRoute('centre');
         },
         search: function () {
             var geocoder = new google.maps.Geocoder();
@@ -133,13 +169,15 @@ Esol.EditCentreController = Ember.ObjectController.extend({
                 map: mapVar,
                 position: results[0].geometry.location
             });
-            this.get("model").set("location","POINT(" + lat + "," + " " + lng+")");
+            this.get("model").set("location","POINT(" + lat + " " + lng+")");
         }
     }
-
 });
 
 Esol.MapController = Ember.Controller.extend({
+    isFree: false,
+    childCare: false,
+    disability: false,
 
     actions: {
         detailedSearchEnabled: false,
@@ -147,8 +185,9 @@ Esol.MapController = Ember.Controller.extend({
             var currentlyEnabled = this.get("detailedSearchEnabled");
             this.set("detailedSearchEnabled", !currentlyEnabled);
         },
-        search: function(){
+        search: function(query){
             console.debug("Searching...");
+            this.get("model")
         }
     }
 });
@@ -160,5 +199,3 @@ Esol.SearchResultController = Ember.ObjectController.extend({
     }
 
 });
-
-

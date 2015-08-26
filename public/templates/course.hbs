@@ -1,26 +1,15 @@
 <button class="btn btn-primary" {{action 'add'}}>Add new course</button>
- <div>{{#link-to "result" course}}Consulta{{/link-to}}</div>
-<div class="panel panel-default pre-scrollable">
+
+<div class="panel panel-default">
     <table class="table table-bordered container">
         <thead>
             <tr>
                 <th><p class="text-info">Name</p></th>
                 <th><p class="text-info">Class Type</p></th>
-                <th><p class="text-info">Levels</p></th>
-                <th><p class="text-info">Who Join</p></th>
-                <th><p class="text-info">How Join</p></th>
-                <th><p class="text-info">When Join</p></th>
-                <th><p class="text-info">How Long</p></th>
-                <th><p class="text-info">Cost Free</p></th>
-                <th><p class="text-info">Cost Condition</p></th>
-                <th><p class="text-info">Times</p></th>
-                <th><p class="text-info">Documentation Required</p></th>
                 <th><p class="text-info">Contact Phone</p></th>
                 <th><p class="text-info">Contact Email</p></th>
                 <th><p class="text-info">Contact Person</p></th>
-                <th><p class="text-info">Child Care</p></th>
-                <th><p class="text-info">Child Care Condition</p></th>
-                <th><p class="text-info">Other Information</p></th>
+
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -28,31 +17,22 @@
         {{#each course in courses}}
         <tbody>
             <tr>
-                <td><p class="text-primary">{{course.name}}</p></td>
+                <td>{{#link-to "editCourse" course.id}}<p class="text-primary">{{course.name}}{{/link-to}}</p></td>
                 <td class="setWidth concat"><div><p class="text-primary">{{course.class_type}}</p></div></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.levels}}</p></div></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.who_join}}</p></div></td>
-                <td><p class="text-primary">{{course.how_join}}</p></td>
-                <td class="setWidth concat" ><div><p class="text-primary">{{course.when_join}}</p></div></td>
-                <td class="setWidth concat" ><div><p class="text-primary">{{course.how_long}}</p></div></td>
-                <td><p class="text-primary">{{course.cost_free}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.cost_condition}}</p></div></td>
-                <td><p class="text-primary">{{course.times}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.documentation_required}}</p></div></td>
+
                 <td><p class="text-primary">{{course.contact_phone}}</p></td>
                 <td><p class="text-primary">{{course.contact_email}}</p></td>
                 <td><p class="text-primary">{{course.contact_person}}</p></td>
-                <td><p class="text-primary">{{course.child_care}}</p></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.child_care_condition}}</p></div></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.other_information}}</p></div></td>
-                <td>
-                    {{#link-to "editCourse" course}}Edit{{/link-to}}
-                    {{#link-to "deleteCourse" course}}Delete{{/link-to}}
 
+                <td>
+                    {{#link-to "searchResult" course}}Result{{/link-to}}
+                    {{#link-to "deleteCourse" course}}Delete{{/link-to}}
             </td>
             </tr>
         </tbody>
 
         {{/each}}
     </table>
+
 </div>
+

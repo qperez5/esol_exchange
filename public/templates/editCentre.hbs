@@ -8,32 +8,37 @@
                             <label for="name">Name</label>
                             {{input type="text" value=name class="form-control" id="name"}}
                         </div>
-                        <div class="form-group">
-                            <label for="location">location</label>
-                            {{input type="text" value=wkt class="form-control" id="location"}}
+                        <div class="form-group displayNone">
+                            <label for="location">Location</label>
+                            {{input type="text" value=location class="form-control" id="location"}}
                         </div>
                         <div class="form-group">
-                            <label for="contact_mail">accebility</label>
-                            {{input type="text" value=accebility class="form-control" id="accebility"}}
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="form-group">
-                            <label for="courses_acreditated">accebility_condition</label>
-                            {{input type="text" value=accebility_condition class="form-control" id="accebility_condition"}}
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="form-group">
-                            <label for="post_code">buses</label>
+                            <label for="buses">Buses</label>
                             {{input type="text" value=buses class="form-control" id="buses"}}
                         </div>
+                    </div>
+                    <div class="col-xs-4">
                         <div class="form-group">
-                            <label for="contact_web">tube</label>
-                            {{input type="text" value=tube class="form-control" id="tube"}}
+                            <label for="accebility">Accessibility</label>
+                            {{view "select" id="accebility" value=accebility
+                            classNames="form-control"
+                            content=yesNoConditionedOptions
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
                         </div>
                         <div class="form-group">
-                            <label for="other_information">Other Information</label>
+                            <label for="tube">Tube</label>
+                            {{input type="text" value=tube class="form-control" id="tube"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+
+                        <div class="form-group">
+                            <label for="accebility_condition">Accessibility condition</label>
+                            {{input type="text" value=accebility_condition class="form-control" id="accebility_condition"}}
+                        </div>
+                        <div class="form-group">
+                            <label for="other_information">Other information</label>
                             {{input type="text" value=other_information class="form-control" id="other_information"}}
                         </div>
                     </div>
@@ -59,17 +64,18 @@
                         </div>
                     </div>
                 </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <hr>
-                        </hr>
+                <hr>
+                </hr>
+                <div class="row">
+                    <div class="col-xs-6">
                         <button class="btn btn-primary" {{action "save"}}>Save</button>
-                        <hr>
-                        </hr>
+                    </div>
+                    <div class="col-xs-6">
+                        <button class="btn btn-danger" {{action "cancel"}}>Cancel</button>
                     </div>
                 </div>
-            </div>
+                <hr>
+                </hr>
         </form>
     </div>
 </div>

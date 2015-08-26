@@ -1,6 +1,7 @@
 <?php
 namespace Course\Model;
 
+use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 
 class CourseTable
@@ -29,6 +30,46 @@ class CourseTable
         return $row;
     }
 
+    public function findCourses($free, $disability, $child_care, $level, $area, $postcode){
+        $where = new Where();
+
+        if(isset($free)){
+            if($free == 'true'){
+                $where->in("cost_free",array("y","c"));
+            } else {
+                $where->equalTo("cost_free","n");
+            }
+        }
+
+        if(isset($disability)){
+            if($disability == 'true'){
+                $where->in("accebility",array("y","c"));
+            } else {
+                $where->equalTo("accebility","n");
+            }
+        }
+
+        if(isset($child_care)){
+            if($child_care == 'true'){
+                $where->in("child_care",array("y","c"));
+            } else {
+                $where->equalTo("child_care","n");
+            }
+        }
+
+        //TODO terminar con el resto de los filtros de busqueda
+
+        $rowset = $this->tableGateway->select($where);
+        return $rowset;
+    }
+
+    public function findCourseCentres($courseId){
+        $courseCentreTable = new TableGateway('course_centre', $this->tableGateway->getAdapter());
+        $rowset = $courseCentreTable->select(array('course_id' => $courseId));
+
+        return $rowset;
+    }
+
     public function saveCourse(Course $course)
     {
         $data = array(
@@ -48,7 +89,7 @@ class CourseTable
             'contact_person'  => $course->contact_person,
             'child_care' => $course->child_care,
             'child_condition'  => $course->child_condition,
-            'organization_id' => $course->organization_id,
+            'organization_id' => $course->organization,
             'other_information' => $course->other_information,
         );
 

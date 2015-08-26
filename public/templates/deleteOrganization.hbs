@@ -1,5 +1,22 @@
-<div>
-    <h1><p class="text-primary">Are sure you want delete the organization named <span class="text-info" >{{name}}</span>? </p></h1>
-    <button class="btn btn-primary" {{action 'delete'}}>Accept</button>
-    <button class="btn btn-danger" {{action 'cancel'}}>Cancel</button>
+<div class="panel panel-primary bs-example">
+    <div class="panel-heading">Deleting an organization</div>
+        <div class="bs-example">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h1><p class="text-primary">Are sure you want delete the organization named <span class="text-info" >{{name}}</span>? </p></h1>
+                </div>
+            </div>
+            <hr>
+            </hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class="btn btn-primary" {{action 'delete'}}>Accept</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-danger" {{action 'cancel'}}>Cancel</button>
+                </div>
+            </div>
+            <hr>
+            </hr>
+    </div>
 </div>

@@ -16,8 +16,15 @@ class CentreTable
 
     public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select();
-        return $resultSet;
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select("centre");
+        $select->columns(array("id","name","location" =>
+            new Expression("AsWKT(location)"),"post_code","address","buses","tube","accebility",
+            "accebility_condition","other_information"));
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $rowset = $statement->execute();
+
+        return $rowset;
     }
 
     public function getCentre($id)
@@ -26,8 +33,11 @@ class CentreTable
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select("centre");
         $select->where(array("id" => $id));
-        $select->columns(array("id","name",array("location" => new Expression("AsWKT(location)")),
-            "post_code","address","buses","tube","accebility","accebility_condition","other_information"));
+
+        $select->columns(array("id","name","location" =>
+            new Expression("AsWKT(location)"),"post_code","address","buses","tube","accebility",
+            "accebility_condition","other_information"));
+
         $statement = $sql->prepareStatementForSqlObject($select);
         $rowset = $statement->execute();
 
@@ -37,14 +47,17 @@ class CentreTable
         if (!$row) {
             throw new \Exception("Could not find row $id");
         }
-        return $row;
+        $centre = new Centre();
+        $centre->exchangeArray($row);
+
+        return $centre;
     }
 
     public function saveCentre(Centre $centre)
     {
         $data = array(
             'name' => $centre->name,
-            'location'  => (!empty($centre->location)) ? new Expression("GeomFromText(". $centre->location .")") : null,
+            'location'  => (!empty($centre->location)) ? new Expression("GeomFromText('". $centre->location ."')") : null,
             'post_code' => $centre->post_code,
             'address'  => $centre->address,
             'buses'  => $centre->buses,

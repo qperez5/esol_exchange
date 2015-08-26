@@ -1,6 +1,66 @@
+<div class="panel panel-primary bs-example">
+    <div class="panel-heading centered-text"><h2 class="">{{name}}</h2></div>
+    <div class="panel-heading centered-text"><h4>{{class_type}}: {{levels}}</h4></div>
+    <div class="panel-heading centered-text">{{levels}}</div>
+    <div class="panel-heading centered-text">Contact:&nbsp; {{contact_person}}&nbsp; &nbsp; {{contact_phone}} &nbsp; {{contact_email}}</div>
+    <div class="panel-heading centered-text">{{#link-to "map"}}<h2 class="label label-warning ">See on map <span class="glyphicon glyphicon-map-marker"></span></h2>{{/link-to}}</div>
+    <div class="bs-example">
+        <form>
+            <div class="row">
+                <div class="col-xs-5">
+                    <h3 class="text-error">How can join?</h3>
+                    <p class="text-error">{{how_join}}</p>
+                </div>
+            <div class="col-xs-1"></div>
+                <div class="col-xs-5">
+                    <h3 class="text-error">Who can I join?</h3>
+                    <p class="text-error">{{who_join}}</p>
+                </div>
+            </div>
+            <hr></hr>
+            <div class="row">
+                <div class="col-xs-5">
+                    <h3 class="text-error">When can I join?</h3>
+                    <p class="text-error">{{when_join}}</p>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-5">
+                    <h3 class="text-error">How much does it cost?</h3>
+                    <p class="text-error" id="cost_free">
+                        {{#if cost_free}}
+                            <span> It is for free </span>
+                            {{cost_condition}}
+                        {{else}}
+                             &nbsp; <span>{{cost_condition}}</span>
+                        {{/if}}
+                    </p>
+                </div>
+            </div>
+            <hr></hr>
+            <div class="row">
+                <div class="col-xs-5">
+                    <h3 class="text-error">What is the schedule?</h3>
+                    <p class="text-error">{{times}}</p>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-5">
+                    <h3 class="text-error">What document do I need for join?</h3>
+                    <p class="text-error">{{documentation_required}}</p>
+                </div>
+            </div>
+            <hr></hr>
+            <div class="row">
+                <h3 class="text-error">Notes:</h3>
+                <div class="col-xs-12">
+                    <p class="text-error">About accecibility: </p>
+                    <p class="text-error">About chilscare service:{{child_care_condition}} </p>
+                    <p class="text-error">Other information: {{other_information}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<ul>
-    {{#each course in courses}}
-        <li>Hello, {{course.name}}</li>
-    {{/each}}
-</ul>
+
+
+

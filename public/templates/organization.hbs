@@ -1,60 +1,27 @@
 
 
     <button class="btn btn-primary" {{action 'add'}}> Add new organization </button>
-    <div class="panel panel-default pre-scrollable">
-    <table class=" table table-bordered container ">
+    <div class="panel panel-default" id="pag">
+    <table id="example" class=" table table-bordered container ">
         <thead>
             <tr>
-                <th class="col-md-6"><p class="text-info">Id</p></th>
-                <th class="col-md-6"><p class="text-info">Name</p></th>
-                <th class="col-md-6"><p class="text-info">Address</p></th>
-                <th class="col-md-2"><p class="text-info">Post Code</p></th>
-                <th class="col-md-4"><p class="text-info">Contact Number</p></th>
-                <th class="col-md-5"><p class="text-info">Contact Mail</p></th>
-                <th class="col-md-3"><p class="text-info">Contact Person</p></th>
-                <th class="col-md-3"><p class="text-info">Contact Web</p></th>
-                <th class="col-md-9"><p class="text-info">Esol Assesment</p></th>
-                <th class="col-md-1"><p class="text-info">Tutors Qualified</p></th>
-                <th class="col-md-3"><p class="text-info">Tutors Qualified Condition</p></th>
-                <th class="col-md-1"><p class="text-info">Courses Acreditated</p></th>
-                <th class="col-md-4"><p class="text-info">Courses Acreditation Condition</p></th>
-                <th class="col-md-3"><p class="text-info">How Acreditated</p></th>
-                <th class="col-md-1"><p class="text-info">Core Curriculum</p></th>
-                <th class="col-md-3"><p class="text-info">Core Curriculum Condition</p></th>
-                <th class="col-md-3"><p class="text-info">Referral System</p></th>
-                <th class="col-md-3"><p class="text-info">Classes Outside_newham</p></th>
-                <th class="col-md-3"><p class="text-info">Other Information</p></th>
-                <th>&nbsp;</th>
+                <th class="col-md-5"><p class="text-info">Name</p></th>
+                <th class="col-md-4"><p class="text-info">Address</p></th>
+                <th class="col-md-3"><p class="text-info">Contact Number</p></th>
+                <th class="col-md-1">&nbsp;</th>
             </tr>
         </thead>
 
         {{#each organization in orgs}}
         <tbody>
             <tr>
-                <td><p class="text-primary">{{organization.id}}</p></td>
-                <td><p class="text-primary">{{organization.name}}</p></td>
-                <td><p class="text-primary">{{organization.address}}</td>
-                <td><p class="text-primary">{{organization.post_code}}</td>
-                <td><p class="text-primary">{{organization.contact_number}}</td>
-                <td><p class="text-primary">{{organization.contact_email}}</td>
-                <td><p class="text-primary">{{organization.contact_person}}</td>
-                <td><p class="text-primary">{{organization.contact_web}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.esol_assesment}}</div></td>
-                <td><p class="text-primary">{{organization.tutors_qualified}}</td>
-                <td class="setWidth concat"> <div><p class="text-primary">{{organization.tutors_qualified_condition}}</div></td>
-                <td><p class="text-primary">{{organization.courses_acreditated}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.courses_acreditation_condition}}</div></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.how_acreditated}}</div></td>
-                <td><p class="text-primary">{{organization.core_curriculum}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.core_curriculum_condition}}</div></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.referral_system}}</div></td>
-                <td><p class="text-primary">{{organization.classes_outside_newham}}</td>
-                <td class="setWidth concat"><div><p class="text-primary">{{organization.other_information}}</div></td>
+                <td>{{#link-to "editOrganization" organization}}<p class="text-primary"> {{organization.name}} </p>{{/link-to}}</td>
+                <td><p class="text-primary">{{organization.address}}<span>. </span>{{organization.post_code}}</p></td>
+                <td><p class="text-primary">{{organization.contact_person}}<span>, </span> {{organization.contact_number}}</p></td>
                 <td>
-                    {{#link-to "editOrganization" organization}}Edit{{/link-to}}
-                    {{#link-to "deleteOrganization" organization}}Delete{{/link-to}}
-                    
-            </td>
+
+                    <p class="label label-warning">{{#link-to "deleteOrganization" organization}}<span class='glyphicon glyphicon-remove'></span>{{/link-to}}</p>
+                </td>
         </tr>
 
         </tbody>

@@ -1,7 +1,7 @@
 <?php
 namespace Centre\Controller;
 
- use Centre\Controller\AbstractRestfulController;
+ use Application\Controller\AbstractRestfulJsonController;
  use Centre\Model\Centre;
  use Zend\View\Model\JsonModel;
 

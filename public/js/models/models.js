@@ -21,7 +21,6 @@ Esol.Organization = DS.Model.extend({
     referral_system: attr("string"),
     classes_outside_newham: attr("string"),
     other_information: attr("string")
-
 });
 
 Esol.Course = DS.Model.extend({
@@ -42,8 +41,8 @@ Esol.Course = DS.Model.extend({
     child_care: attr("string"),
     child_condition: attr("string"),
     other_information: attr("string"),
-    organization_id: attr("string")
-
+    organization: belongsTo("organization",{async: true}),
+    centres: hasMany("centre",{async: true})
 });
 
 Esol.Centre = DS.Model.extend({
@@ -56,14 +55,9 @@ Esol.Centre = DS.Model.extend({
     accebility: attr("string"),
     accebility_condition: attr("string"),
     other_information: attr("string"),
-
+    courses: hasMany("course",{async: true}),
     fullAddress: function(){
         return this.get("address") + " " + this.get("post_code");
     }.property("post_code","address")
 
-});
-
-Esol.CourseCentre = DS.Model.extend({
-    course_id: hasMany("course",{async: true}),
-    centre_id: hasMany("centre",{async: true})
 });

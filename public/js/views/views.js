@@ -8,9 +8,7 @@ Esol.MapView = Ember.View.extend({
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(mapCanvas, mapOptions)
-
     }
-
 });
 
 Esol.EditCentreView = Ember.View.extend({
@@ -24,8 +22,13 @@ Esol.EditCentreView = Ember.View.extend({
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
         this.get("controller").set("map",map);
-
     }
-
 });
 
+Esol.OrganizationView = Ember.View.extend({
+    templateName: "organization",
+    didInsertElement: function(){
+        var pagination = document.getElementById('pag');
+        pagination.bs_pagination;
+    }
+});
