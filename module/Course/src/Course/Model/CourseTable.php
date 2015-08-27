@@ -81,7 +81,7 @@ class CourseTable
             'when_join'  => $course->when_join,
             'how_long' => $course->how_long,
             'cost_free'  => $course->cost_free,
-            'cost_condition' => $course->cost_free,
+            'cost_condition' => $course->cost_condition,
             'times'  => $course->times,
             'documentation_required' => $course->documentation_required,
             'contact_phone'  => $course->contact_phone,

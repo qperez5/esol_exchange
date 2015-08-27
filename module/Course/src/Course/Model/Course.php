@@ -24,7 +24,7 @@ class Course implements InputFilterAwareInterface
     public $contact_person;
     public $child_care;
     public $child_condition;
-    public $organization;
+    public $organization_id;
     public $other_information;
 
     public $centres;
@@ -50,7 +50,7 @@ class Course implements InputFilterAwareInterface
         $this->contact_person = (!empty($data['contact_person'])) ? $data['contact_person'] : null;
         $this->child_care = (!empty($data['child_care'])) ? $data['child_care'] : null;
         $this->child_condition  = (!empty($data['child_condition'])) ? $data['child_condition'] : null;
-        $this->organization = (!empty($data['organization'])) ? $data['organization'] : null;
+        $this->organization_id = (!empty($data['organization_id'])) ? $data['organization_id'] : null;
         $this->other_information = (!empty($data['other_information'])) ? $data['other_information'] : null;
     }
 

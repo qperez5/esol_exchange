@@ -17,8 +17,8 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="esol_assesment">Esol assessment?</label>
-                        {{input type="text" value=esol_assesment class="form-control" id="esol_assesment"}}
+                        <label for="documentation_required">Documentation required</label>
+                        {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
                     </div>
                 </div>
             </div>
@@ -99,8 +99,8 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="child_care_condition">Child care conditions</label>
-                        {{input type="text" value=child_care_condition class="form-control" id="child_care_condition"}}
+                        <label for="child_condition">Child care conditions</label>
+                        {{input type="text" value=child_condition class="form-control" id="child_condition"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -131,22 +131,17 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="organization_id">Organization</label>
+                        <label for="organization">Organization</label>
                         {{view "select" content=organizations value=organization.id
                         classNames="form-control"
                         optionValuePath="content.id"
                         optionLabelPath="content.name"
-                        id="organization_id"}}
+                        id="organization"}}
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="documentation_required">Documentation required</label>
-                        {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
-                    </div>
-                </div>
+
                 <div class="col-xs-4">
                     <div class="form-group">
                         <label for="other_information">Other Information</label>

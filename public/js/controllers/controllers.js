@@ -94,6 +94,7 @@ Esol.EditCourseController = Ember.ObjectController.extend({
     actions: {
         save: function(){
             this.get("model").save();
+            this.transitionToRoute('course');
         },
         cancel: function(){
             this.transitionToRoute('course');

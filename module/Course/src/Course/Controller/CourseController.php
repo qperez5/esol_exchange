@@ -26,6 +26,7 @@ namespace Course\Controller;
         if($this->hasFilterParameters()){
             //filter results
             $results = $this->findCourses();
+            return $results;
         } else {
             //all results
             return $this->allCourses();
@@ -42,7 +43,7 @@ namespace Course\Controller;
         $results = $this->getCourseTable()->fetchAll();
         $data = array();
         foreach($results as $result) {
-            $data[] = $result;
+            $data[] = $this->convertToJson($result);
         }
         return new JsonModel(array("courses" => $data));
     }
@@ -65,7 +66,8 @@ namespace Course\Controller;
 
     private function convertToJson($course){
         $courseData = $course->getArrayCopy();
-        $courseData["organization"] = $course->organization;
+        $courseData["organization"] = $course->organization_id;
+        return $courseData;
     }
 
     public function create($data)
@@ -111,11 +113,8 @@ namespace Course\Controller;
 
     public function delete($id)
     {   // Action used for DELETE requests
-
         $this->getCourseTable()->deleteCourse($id);
-
         return new JsonModel(array('courses' => 'deleted'));
-
     }
 
      private function findCourses() {

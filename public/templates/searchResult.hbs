@@ -1,9 +1,19 @@
 <div class="panel panel-primary bs-example">
-    <div class="panel-heading centered-text"><h2 class="">{{name}}</h2></div>
-    <div class="panel-heading centered-text"><h4>{{class_type}}: {{levels}}</h4></div>
-    <div class="panel-heading centered-text">{{levels}}</div>
-    <div class="panel-heading centered-text">Contact:&nbsp; {{contact_person}}&nbsp; &nbsp; {{contact_phone}} &nbsp; {{contact_email}}</div>
-    <div class="panel-heading centered-text">{{#link-to "map"}}<h2 class="label label-warning ">See on map <span class="glyphicon glyphicon-map-marker"></span></h2>{{/link-to}}</div>
+    <div class="panel-heading centered-text">
+        <div class="row">
+            <div class="col-xs-7">
+                <div class=""><h2 class="">{{name}}</h2></div>
+                <div class=""><h4>{{class_type}}: {{levels}}</h4></div>
+                <div class=""><span>Contact:</span> &nbsp; {{contact_person}}&nbsp; &nbsp; {{contact_phone}} &nbsp; {{contact_email}}</div>
+                <div class="">{{#link-to "map"}}<h2 class="label label-warning ">See on map
+                    <span class="glyphicon glyphicon-map-marker"></span></h2>{{/link-to}}</div>
+            </div>
+            <div class="col-xs-5 ">
+                <div id="map-canvas-small" class=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-primary">
     <div class="bs-example">
         <form>
             <div class="row">
@@ -58,6 +68,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </div>
 
