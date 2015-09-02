@@ -35,7 +35,7 @@ namespace Centre\Controller;
     {   // Action used for GET requests with resource Id
          $centre = $this->getCentreTable()->getCentre($id);
 
-        return new JsonModel(array("data" => $centre));
+        return new JsonModel(array("centre" => $centre));
     }
 
     public function create($data)

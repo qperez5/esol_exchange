@@ -6,17 +6,17 @@
                     <h1><p class="text-primary">Are sure you want delete the organization named <span class="text-info" >{{name}}</span>? </p></h1>
                 </div>
             </div>
-            <hr>
-            </hr>
-            <div class="row">
-                <div class="col-xs-6">
-                    <button class="btn btn-primary" {{action 'delete'}}>Accept</button>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="pull-right rightMargin">
+                <div class="col-xs-8">
+                    <button class="btn btn-danger btn-lg" {{action "cancel"}}>Cancel</button>
                 </div>
-                <div class="col-xs-6">
-                    <button class="btn btn-danger" {{action 'cancel'}}>Cancel</button>
+                <div class="col-xs-4">
+                    <button class="btn btn-primary btn-lg" {{action 'delete'}}>Accept</button>
                 </div>
             </div>
-            <hr>
-            </hr>
+        </div>
     </div>
 </div>

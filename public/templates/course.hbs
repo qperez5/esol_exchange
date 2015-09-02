@@ -5,7 +5,6 @@
         <thead>
             <tr>
                 <th><p class="text-info">Name</p></th>
-                <th><p class="text-info">Class Type</p></th>
                 <th><p class="text-info">Contact Phone</p></th>
                 <th><p class="text-info">Contact Email</p></th>
                 <th><p class="text-info">Contact Person</p></th>
@@ -18,15 +17,13 @@
         <tbody>
             <tr>
                 <td>{{#link-to "editCourse" course.id}}<p class="text-primary">{{course.name}}{{/link-to}}</p></td>
-                <td class="setWidth concat"><div><p class="text-primary">{{course.class_type}}</p></div></td>
-
                 <td><p class="text-primary">{{course.contact_phone}}</p></td>
                 <td><p class="text-primary">{{course.contact_email}}</p></td>
                 <td><p class="text-primary">{{course.contact_person}}</p></td>
 
                 <td>
                     {{#link-to "searchResult" course}}Result{{/link-to}}
-                    {{#link-to "deleteCourse" course}}Delete{{/link-to}}
+                    {{#link-to "deleteCourse" course title="Delete"}}Delete{{/link-to}}
             </td>
             </tr>
         </tbody>

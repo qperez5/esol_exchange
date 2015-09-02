@@ -1,6 +1,7 @@
 <?php
 namespace Course\Model;
 
+use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -70,7 +71,7 @@ class CourseTable
         return $rowset;
     }
 
-    public function saveCourse(Course $course)
+    public function saveCourse(Course $course,array $centres)
     {
         $data = array(
             'name' => $course->name,
@@ -89,13 +90,14 @@ class CourseTable
             'contact_person'  => $course->contact_person,
             'child_care' => $course->child_care,
             'child_condition'  => $course->child_condition,
-            'organization_id' => $course->organization,
+            'organization_id' => $course->organization_id,
             'other_information' => $course->other_information,
         );
 
         $id = (int) $course->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
+            $course->id = $this->tableGateway->getLastInsertValue();
         } else {
             if ($this->getCourse($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
@@ -103,11 +105,64 @@ class CourseTable
                 throw new \Exception('Course id does not exist');
             }
         }
+
+        $this->saveCourseCentres($course,$centres);
+    }
+
+    private function saveCourseCentres(Course $course,array $centres){
+        if(!empty($centres)){
+            try {
+                $this->beginTransaction();
+                $sql = new Sql($this->tableGateway->getAdapter());
+
+                //borrar relaciones antiguas entre cursos y centros
+                //delete from course_centre where course_id = :idCurso
+                $delete = $sql->delete("course_centre");
+                $delete->where(array("course_id" => $course->id));
+                $statement = $sql->prepareStatementForSqlObject($delete);
+                $statement->execute();
+
+                //crear nuevas relaciones entre cursos y centros
+                foreach ($centres as $centreId) {
+                    //insert into course_centre values (:cursoId,:centroId)
+                    $insert = $sql->insert("course_centre");
+                    $insert->values(array("course_id" => $course->id, "centre_id" => $centreId));
+                    $statement = $sql->prepareStatementForSqlObject($insert);
+                    $statement->execute();
+                }
+                $this->commitTransaction();
+            } catch (Exception $e) {
+                $this->rollbackTransaction();
+            }
+        }
     }
 
     public function deleteCourse($id)
     {
         $this->tableGateway->delete(array('id' => (int) $id));
+    }
+
+    private function beginTransaction()
+    {
+        $this->getConnection()->beginTransaction();
+    }
+
+    private function commitTransaction()
+    {
+        $this->getConnection()->commit();
+    }
+
+    private function rollbackTransaction()
+    {
+        $this->getConnection()->rollback();
+    }
+
+    /**
+     * @return \Zend\Db\Adapter\Driver\ConnectionInterface
+     */
+    private function getConnection()
+    {
+        return $this->tableGateway->getAdapter()->getDriver()->getConnection();
     }
 }
 ?>

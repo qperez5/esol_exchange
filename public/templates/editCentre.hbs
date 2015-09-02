@@ -8,15 +8,21 @@
                             <label for="name">Name</label>
                             {{input type="text" value=name class="form-control" id="name"}}
                         </div>
-                        <div class="form-group displayNone">
-                            <label for="location">Location</label>
-                            {{input type="text" value=location class="form-control" id="location"}}
-                        </div>
+                    </div>
+                    <div class="col-xs-4">
                         <div class="form-group">
                             <label for="buses">Buses</label>
                             {{input type="text" value=buses class="form-control" id="buses"}}
                         </div>
                     </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="tube">Tube</label>
+                            {{input type="text" value=tube class="form-control" id="tube"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-4">
                         <div class="form-group">
                             <label for="accebility">Accessibility</label>
@@ -26,23 +32,23 @@
                             optionLabelPath="content.label"
                             optionValuePath="content.value"}}
                         </div>
+                    </div>
+                    <div class="col-xs-4">
                         <div class="form-group">
-                            <label for="tube">Tube</label>
-                            {{input type="text" value=tube class="form-control" id="tube"}}
+                            <label for="accebility_condition">Accessibility condition</label>
+                            {{textarea disabled=accecibilityNotConditioned rows="2" type="text" value=accebility_condition
+                            class="form-control textareaScroll" id="accebility_condition"}}
                         </div>
                     </div>
                     <div class="col-xs-4">
-
-                        <div class="form-group">
-                            <label for="accebility_condition">Accessibility condition</label>
-                            {{input type="text" value=accebility_condition class="form-control" id="accebility_condition"}}
-                        </div>
                         <div class="form-group">
                             <label for="other_information">Other information</label>
-                            {{input type="text" value=other_information class="form-control" id="other_information"}}
+                            {{textarea rows="2" type="text" value=other_information
+                            class="form-control textareaScroll" id="other_information"}}
                         </div>
                     </div>
                 </div>
+
                 <hr>
                 </hr>
                 <div class="row">
@@ -57,26 +63,24 @@
                         </div>
                         <button class="btn btn-primary" {{action "search"}}>See on map</button>
                     </div>
-
                     <div class="col-xs-8">
                         <div class="form-group">
                             <div id="map-canvas" class="mapSize"></div>
                         </div>
                     </div>
                 </div>
-                <hr>
-                </hr>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <button class="btn btn-primary" {{action "save"}}>Save</button>
-                    </div>
-                    <div class="col-xs-6">
-                        <button class="btn btn-danger" {{action "cancel"}}>Cancel</button>
-                    </div>
-                </div>
-                <hr>
-                </hr>
         </form>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="pull-right rightMargin">
+                <div class="col-xs-8">
+                    <button class="btn btn-danger btn-lg" {{action "cancel"}}>Cancel</button>
+                </div>
+            <div class="col-xs-4">
+                <button class="btn btn-primary btn-lg" {{action "save"}}>Save</button>
+            </div>
+        </div>
     </div>
 </div>
 

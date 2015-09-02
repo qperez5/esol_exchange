@@ -73,7 +73,7 @@ div.container a.brand {
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: Helvetica,'Helvetica Neue','Nunito', sans-serif,'Nunito', sans-serif;
     color: #faf3bc;
     background: #a3a130;
 }
@@ -100,16 +100,20 @@ body {
     display: "table";
 }
 
+.deleteHover:hover {
+    display: "table";
+}
+
 .small {
     width: 30%;
     height: 50px;
     margin-top: 20px;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Nunito', sans-serif;
+    font-family: Helvetica,'Helvetica Neue','Nunito', sans-serif;
 }
 
-.contact {
+.marginTop {
     margin-top: 50px;
 }
 
@@ -171,7 +175,21 @@ img {
 }
 
 .btn-danger{
-    margin-top: 5px;
+    /*margin-top: 5px;*/
+}
+.rightMargin{
+    margin-right: 40px;
+    padding-right: 30px;
+}
+
+.backgroundColour{
+    background: #f3a130;
+}
+
+.textareaScroll{
+    resize: none;
+    height: 55px;
+    max-height: 55px;
 }
 
 /* default height */

@@ -2,12 +2,15 @@
     <div class="panel-heading">Edit Organization</div>
     <div class="bs-example">
         <form>
+
             <div class="row">
                 <div class="col-xs-4">
                     <div class="form-group">
                         <label for="name">Name</label>
                         {{input type="text" value=name class="form-control" id="name"}}
                     </div>
+                </div>
+                <div class="col-xs-4">
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
                         {{input type="text" value=contact_number class="form-control" id="contact_number"}}
@@ -15,12 +18,16 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="address">Address</label>
-                        {{input type="text" value=address class="form-control" id="address"}}
-                    </div>
-                    <div class="form-group">
                         <label for="contact_person">Contact Person</label>
                         {{input type="text" value=contact_person class="form-control" id="contact_person"}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        {{input type="text" value=address class="form-control" id="address"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -28,10 +35,12 @@
                         <label for="post_code">Post Code</label>
                         {{input type="text" value=post_code class="form-control" id="post_code"}}
                     </div>
+                </div>
+                <div class="col-xs-4">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="contact_web">Contact Web</label>
-                            {{input type="text" value=contact_web class="form-control" id="contact_web"}}
+                            <label for="esol_assesment">ESOL assessment</label>
+                            {{input type="text" value=esol_assesment class="form-control" id="esol_assesment"}}
                         </div>
                     </div>
                 </div>
@@ -39,87 +48,116 @@
             <div class="row">
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <div class="form-group">
-                            <label for="contact_mail">Email</label>
-                            {{input type="text" value=contact_email class="form-control" id="contact_email"}}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="courses_acreditated">Courses Acreditated?</label>
-                        {{input type="text" value=courses_acreditated class="form-control" id="courses_acreditated"}}
+                        <label for="contact_web">Contact Web</label>
+                        {{input type="text" value=contact_web class="form-control" id="contact_web"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group">
-                        <label for="tutors_qualified">Tutors Qualified?</label>
-                        {{input type="text" value=tutors_qualified class="form-control" id="tutors_qualified"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="courses_acreditation_condition">Any condition?</label>
-                        {{input type="text" value=courses_acreditation_condition class="form-control" id="courses_acreditation_condition"}}
+                        <label for="contact_mail">Email</label>
+                        {{input type="text" value=contact_email class="form-control" id="contact_email"}}
                     </div>
                 </div>
                 <div class="col-xs-4">
-
-                    <div class="form-group">
-                        <label for="tutors_qualified_condition">Any condition</label>
-                        {{input type="text" value=tutors_qualified_condition class="form-control" id="tutors_qualified_condition"}}
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="how_acreditated">Abou acreditation</label>
-                            {{input type="text" value=how_acreditated class="form-control" id="how_acreditated"}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="core_curriculum">Core curriculum</label>
-                        {{input type="text" value=core_curriculum class="form-control" id="core_curriculum"}}
-                    </div>
                     <div class="form-group">
                         <label for="referral_system">Referral System</label>
                         {{input type="text" value=referral_system class="form-control" id="referral_system"}}
                     </div>
                 </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="core_curriculum_condition">Anu condition?</label>
-                        {{input type="text" value=core_curriculum_condition class="form-control" id="core_curriculum_condition"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="classes_outside_newham">Classes outside Newham?</label>
-                        {{input type="text" value=classes_outside_newham class="form-control" id="classes_outside_newham"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="esol_assesment">ESOL assessment</label>
-                        {{input type="text" value=esol_assesment class="form-control" id="esol_assesment"}}
-                    </div>
-                    <div class="form-group">
-                        <label for="other_information">Other information</label>
-                        {{input type="text" value=other_information class="form-control" id="other_information"}}
-                    </div>
-                </div>
             </div>
-            <hr>
-            </hr>
             <div class="row">
-                <div class="col-xs-6">
-                    <button class="btn btn-primary" {{action "save"}}>Save</button>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="tutors_qualified">Tutors Qualified?</label>
+                        {{view "select"
+                        id="tutors_qualified"
+                        value=tutors_qualified
+                        classNames="form-control"
+                        content=yesNoConditionedOptions
+                        optionLabelPath="content.label"
+                        optionValuePath="content.value"}}
+                    </div>
                 </div>
-            <div class="col-xs-6">
-                <button class="btn btn-danger" {{action "cancel"}}>Cancel</button>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="tutors_qualified_condition">Any condition about tutors</label>
+                        {{textarea disabled=tutorsQualifiedNotConditioned rows="2" type="text" value=tutors_qualified_condition
+                        class="form-control textareaScroll" id="tutors_qualified_condition"}}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="how_acreditated">About acreditation</label>
+                        {{input type="text" value=how_acreditated class="form-control" id="how_acreditated"}}
+                    </div>
+                </div>
             </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="courses_acreditated">Courses Acreditated?</label>
+                    {{view "select"
+                    id="courses_acreditated"
+                    value=courses_acreditated
+                    classNames="form-control"
+                    content=yesNoConditionedOptions
+                    optionLabelPath="content.label"
+                    optionValuePath="content.value"}}
+                </div>
             </div>
-            <hr>
-            </hr>
-        </form>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="courses_acreditation_condition">Any condition about courses accreditation?</label>
+                    {{textarea disabled=coursesAcreditationNotConditioned rows="2" type="text" value=courses_acreditation_condition
+                    class="form-control textareaScroll" id="courses_acreditation_condition"}}
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="classes_outside_newham">Classes outside Newham?</label>
+                    {{input type="text" value=classes_outside_newham class="form-control" id="classes_outside_newham"}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="core_curriculum">Core curriculum</label>
+                    {{view "select"
+                    id="core_curriculum"
+                    value=core_curriculum
+                    classNames="form-control"
+                    content=yesNoConditionedOptions
+                    optionLabelPath="content.label"
+                    optionValuePath="content.value"}}
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="core_curriculum_condition">Any condition about core curriculum?</label>
+                    {{textarea disabled=coreCurriculumNotConditioned rows="2" type="text" value=core_curriculum_condition
+                    class="form-control textareaScroll" id="core_curriculum_condition"}}
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <label for="other_information">Other information</label>
+                {{textarea rows="2" type="text" value=other_information
+                class="form-control textareaScroll" id="other_information"}}
+            </div>
+        </div>
+    </form>
 
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="pull-right rightMargin">
+                <div class="col-xs-8">
+                    <button class="btn btn-danger btn-lg" {{action "cancel"}}>Cancel</button>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-primary btn-lg" {{action "save"}}>Save</button>
+            </div>
+        </div>
     </div>
 </div>
 

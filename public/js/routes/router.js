@@ -11,6 +11,7 @@ Esol.Router.map(function(){
     this.route('deleteCentre',{path: '/deleteCentre/:centre_id'});
     this.route('centre');
     this.route('searchResult',{path: '/result/:course_id'});
+    this.route('administration');
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
@@ -40,7 +41,28 @@ Esol.CourseRoute = Ember.Route.extend({
 
 Esol.EditCourseRoute = Ember.Route.extend({
     model: function(params){
-        return this.store.findRecord("course",params.course_id);
+        var course = this.store.findRecord("course",params.course_id);
+        return course;
+    },
+
+    setupController: function(controller,course){
+        this._super(controller,course);
+
+        var levels = course.get("levels");
+        if(levels != null){
+            var levelsArray = levels.split(",");
+            controller.set("selectedLevels", levelsArray);
+        }
+
+        course.get("organization").then(function(org){
+            controller.set("selectedOrganization",org);
+        });
+
+        course.reload().then(function(c){
+            c.get("centres").then(function(centres){
+                //controller.set("selectedCentres",centres);
+            });
+        });
     }
 
 });
@@ -74,13 +96,8 @@ Esol.SearchResultRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.findRecord('course', params.course_id);
     }
+});
 
-    /*setupController: function(controller, model) {
-        //TODO agregar al controller otros objetos necesarios aqui ...
-        controller.set('model', model);
-       // if(model.cost_free == 'y'){ #cost_free.set('Free');
-       // }
-
-    }*/
+Esol.AdministrationRoute = Ember.Route.extend({
 
 });

@@ -61,11 +61,29 @@ namespace Course\Controller;
         }
         $courseData["centres"] = $centresData;
 
-        return new JsonModel(array("data" => $courseData));
+        return new JsonModel(array("course" => $courseData));
     }
 
     private function convertToJson($course){
-        $courseData = $course->getArrayCopy();
+        $courseData = array();
+        $courseData["id"] = $course->id;
+        $courseData["name"] = $course->name;
+        $courseData["class_type"] = $course->class_type;
+        $courseData["levels"] = $course->levels;
+        $courseData["who_join"] = $course->who_join;
+        $courseData["how_join"] = $course->how_join;
+        $courseData["when_join"] = $course->when_join;
+        $courseData["how_long"] = $course->how_long;
+        $courseData["cost_free"] = $course->cost_free;
+        $courseData["cost_condition"] = $course->cost_condition;
+        $courseData["times"] = $course->times;
+        $courseData["documentation_required"] = $course->documentation_required;
+        $courseData["contact_phone"] = $course->contact_phone;
+        $courseData["contact_email"] = $course->contact_email;
+        $courseData["contact_person"] = $course->contact_person;
+        $courseData["child_care"] = $course->child_care;
+        $courseData["child_condition"] = $course->child_condition;
+        $courseData["other_information"] = $course->other_information;
         $courseData["organization"] = $course->organization_id;
         return $courseData;
     }
@@ -74,7 +92,7 @@ namespace Course\Controller;
     {   // Action used for POST requests
         $course = new Course();
         $this->setCourseData($course,$data);
-        $this->getCourseTable()->saveCourse($course);
+        $this->getCourseTable()->saveCourse($course, $data["course"]["centres"]);
         $data['course']['id']= $course->id;
         return new JsonModel($data);
     }
@@ -84,7 +102,7 @@ namespace Course\Controller;
         $data['course']['id']=$id;
         $course = $this->getCourseTable()->getCourse($id);
         $this->setCourseData($course,$data);
-        $this->getCourseTable()->saveCourse($course);
+        $this->getCourseTable()->saveCourse($course, $data["course"]["centres"]);
 
         return new JsonModel($data);
     }
@@ -107,7 +125,7 @@ namespace Course\Controller;
         $course->contact_person = (!empty($data['course']['contact_person'])) ? $data['course']['contact_person'] : null;
         $course->child_care = (!empty($data['course']['child_care'])) ? $data['course']['child_care'] : null;
         $course->child_condition  = (!empty($data['course']['child_condition'])) ? $data['course']['child_condition'] : null;
-        $course->organization = (!empty($data['course']['organization'])) ? $data['course']['organization'] : null;
+        $course->organization_id = (!empty($data['course']['organization'])) ? $data['course']['organization'] : null;
         $course->other_information = (!empty($data['course']['other_information'])) ? $data['course']['other_information'] : null;
     }
 

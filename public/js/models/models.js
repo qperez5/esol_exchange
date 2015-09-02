@@ -55,7 +55,6 @@ Esol.Centre = DS.Model.extend({
     accebility: attr("string"),
     accebility_condition: attr("string"),
     other_information: attr("string"),
-    courses: hasMany("course",{async: true}),
     fullAddress: function(){
         return this.get("address") + " " + this.get("post_code");
     }.property("post_code","address")

@@ -1,168 +1,179 @@
-<div class="panel panel-primary bs-example">
-    <div class="panel-heading">Edit Course</div>
-    <div class="bs-example">
-        <form>
+<div class="panel">
+    <div class="panel-primary bs-example">
+        <div class="panel-heading">Edit Course</div>
+        <div class="bs-example">
+            <form>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            {{input type="text" value=name class="form-control" id="name"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="class_type">Class type</label>
+                            {{input type="text" value=class_type class="form-control" id="class_type"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="documentation_required">Documentation required</label>
+                            {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="contact_person">Contact person</label>
+                            {{input type="text" value=contact_person class="form-control" id="contact_person"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="contact_phone">Phone</label>
+                            {{input type="text" value=contact_phone class="form-control" id="contact_phone"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="contact_email">Email</label>
+                            {{input type="text" value=contact_email class="form-control" id="contact_email"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="who_join">Who can join?</label>
+                            {{input type="text" value=who_join class="form-control" id="who_join"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="how_join">How to join?</label>
+                            {{input type="text" value=how_join class="form-control" id="how_join"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="when_join">When join?</label>
+                            {{input type="text" value=when_join class="form-control" id="when_join"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="cost_free">Is it for free?</label>
+                            {{view "select" id="cost_free" value=cost_free
+                            classNames="form-control"
+                            content=yesNoConditionedOptions
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="cost_condition">Cost condition</label>
+                                {{textarea disabled=costNotConditioned rows="2" type="text" value=cost_condition
+                                class="form-control textareaScroll" id="cost_condition"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="how_long">How long is it?</label>
+                            {{input type="text" value=how_long class="form-control" id="how_long"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="child_care">Child care facility?</label>
+                            {{view "select" id="child_care" value=child_care
+                            classNames="form-control"
+                            content=yesNoConditionedOptions
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="child_condition">Child care conditions</label>
+                            {{textarea disabled=childNotConditioned rows="2" type="text" value=child_condition
+                            class="form-control textareaScroll" id="child_condition"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="times">Times</label>
+                            {{input type="text" value=times class="form-control" id="times"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="levels">Levels</label>
+                            {{view "select"
+                            content=levelList
+                            classNames="form-control"
+                            multiple="true"
+                            selection=selectedLevels
+                            id="levels"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="centre_id">In which centres?</label>
+                            {{view "select"
+                            content=centres
+                            classNames="form-control"
+                            selection=model.centres
+                            multiple="true"
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            id="centre_id"}}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="organization_id">Organization</label>
+                            {{view "select"
+                                content=organizations
+                                classNames="form-control"
+                                selection=selectedOrganization
+                                optionValuePath="content.id"
+                                optionLabelPath="content.name"
+                                id="organization_id"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="other_information">Other Information</label>
+                            {{textarea type="text" value=other_information class="form-control textareaScroll" id="other_information"}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
             <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        {{input type="text" value=name class="form-control" id="name"}}
+                <div class="pull-right rightMargin">
+                    <div class="col-xs-8">
+                        <button class="btn btn-danger btn-lg" {{action "cancel"}}>Cancel</button>
                     </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="class_type">Class type</label>
-                        {{input type="text" value=class_type class="form-control" id="class_type"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="documentation_required">Documentation required</label>
-                        {{input type="text" value=documentation_required class="form-control" id="documentation_required"}}
+                    <div class="col-xs-4">
+                        <button class="btn btn-primary btn-lg" {{action "save"}}>Save</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="contact_person">Contact person</label>
-                        {{input type="text" value=contact_person class="form-control" id="contact_person"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="contact_phone">Phone</label>
-                        {{input type="text" value=contact_phone class="form-control" id="contact_phone"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="contact_email">Email</label>
-                        {{input type="text" value=contact_email class="form-control" id="contact_email"}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="who_join">Who can join?</label>
-                        {{input type="text" value=who_join class="form-control" id="who_join"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="how_join">How to join?</label>
-                        {{input type="text" value=how_join class="form-control" id="how_join"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="when_join">When join?</label>
-                        {{input type="text" value=when_join class="form-control" id="when_join"}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="cost_free">Is it for free?</label>
-                        {{view "select" id="cost_free" value=cost_free
-                        classNames="form-control"
-                        content=yesNoConditionedOptions
-                        optionLabelPath="content.label"
-                        optionValuePath="content.value"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="cost_condition">Cost condition</label>
-                        {{input type="text" value=cost_condition class="form-control" id="cost_condition"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="how_long">How long is it?</label>
-                        {{input type="text" value=how_long class="form-control" id="how_long"}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="child_care">Child care facility?</label>
-                        {{view "select" id="child_care" value=child_care
-                        classNames="form-control"
-                        content=yesNoConditionedOptions
-                        optionLabelPath="content.label"
-                        optionValuePath="content.value"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="child_condition">Child care conditions</label>
-                        {{input type="text" value=child_condition class="form-control" id="child_condition"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="times">Times</label>
-                        {{input type="text" value=times class="form-control" id="times"}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="levels">Levels</label>{{model.levels}}
-                        {{view "select" content=levelList id="levels" classNames="form-control"
-                        multiple="true" selection=model.levels}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="centre_id">In which centre?</label>
-                        {{view "select" content=centres
-                        classNames="form-control"
-                        multiple="true"
-                        optionValuePath="content.id"
-                        optionLabelPath="content.name"
-                        id="centre_id"}}
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="organization">Organization</label>
-                        {{view "select" content=organizations value=organization.id
-                        classNames="form-control"
-                        optionValuePath="content.id"
-                        optionLabelPath="content.name"
-                        id="organization"}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+        </div>
 
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <label for="other_information">Other Information</label>
-                        {{input type="text" value=other_information class="form-control" id="other_information"}}
-                    </div>
-                </div>
-            </div>
-            <hr>
-            </hr>
-            <div class="row">
-                <div class="col-xs-6">
-                    <button class="btn btn-primary" {{action "save"}}>Save</button>
-                </div>
-                <div class="col-xs-6">
-                    <button class="btn btn-danger" {{action "cancel"}}>Cancel</button>
-                </div>
-            </div>
-            <hr>
-            </hr>
-        </form>
-    </div>
 </div>
 
 

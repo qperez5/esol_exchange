@@ -7,7 +7,7 @@
             <tr>
                 <th class="col-md-5"><p class="text-info">Name</p></th>
                 <th class="col-md-4"><p class="text-info">Address</p></th>
-                <th class="col-md-3"><p class="text-info">Contact Number</p></th>
+                <th class="col-md-3"><p class="text-info">Contact</p></th>
                 <th class="col-md-1">&nbsp;</th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 <td><p class="text-primary">{{organization.contact_person}}<span>, </span> {{organization.contact_number}}</p></td>
                 <td>
 
-                    <p class="label label-warning">{{#link-to "deleteOrganization" organization}}<span class='glyphicon glyphicon-remove'></span>{{/link-to}}</p>
+                    <p class="label label-warning">{{#link-to "deleteOrganization" organization}}<span class='glyphicon glyphicon-remove' title="Delete"></span>{{/link-to}}</p>
                 </td>
         </tr>
 
