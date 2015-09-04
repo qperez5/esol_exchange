@@ -32,35 +32,49 @@ class CourseTable
     }
 
     public function findCourses($free, $disability, $child_care, $level, $area, $postcode){
-        $where = new Where();
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select();
+        //especificar las columnas que queremos en el resultados de las consultas.
+        /*
+         * $select->columns(array("id","name","location" =>
+            new Expression("AsWKT(location)"),"post_code","address","buses","tube","accebility",
+            "accebility_condition","other_information"));
+         */
+        $select->from(array("co" => "course"))
+            ->join(array("cc"=>"course_centre"),"co.id = cc.course_id")
+            ->join(array("ce"=>"centre"),"ce.id = cc.centre_id");
 
+        $where = new Where();
+        //TODO terminar de poner prefijos a las tablas
         if(isset($free)){
             if($free == 'true'){
-                $where->in("cost_free",array("y","c"));
+                $where->in("co.cost_free",array("y","c"));
             } else {
-                $where->equalTo("cost_free","n");
+                $where->equalTo("co.cost_free","n");
             }
         }
 
         if(isset($disability)){
             if($disability == 'true'){
-                $where->in("accebility",array("y","c"));
+                $where->in("ce.accebility",array("y","c"));
             } else {
-                $where->equalTo("accebility","n");
+                $where->equalTo("ce.accebility","n");
             }
         }
 
         if(isset($child_care)){
             if($child_care == 'true'){
-                $where->in("child_care",array("y","c"));
+                $where->in("co.child_care",array("y","c"));
             } else {
-                $where->equalTo("child_care","n");
+                $where->equalTo("co.child_care","n");
             }
         }
 
         //TODO terminar con el resto de los filtros de busqueda
 
-        $rowset = $this->tableGateway->select($where);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $rowset = $statement->execute();
+
         return $rowset;
     }
 

@@ -134,6 +134,12 @@ h1, h2, h3, h4, h5, h6 {
     border: 8px solid #a3a130;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
 #new-cupcakes img {
     border: 8px solid #faf3bc;
     margin: 0 0 20px 0;

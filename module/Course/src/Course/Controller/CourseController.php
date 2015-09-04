@@ -64,7 +64,7 @@ namespace Course\Controller;
         return new JsonModel(array("course" => $courseData));
     }
 
-    private function convertToJson($course){
+    private function convertToJson(Course $course){
         $courseData = array();
         $courseData["id"] = $course->id;
         $courseData["name"] = $course->name;
@@ -85,7 +85,50 @@ namespace Course\Controller;
         $courseData["child_condition"] = $course->child_condition;
         $courseData["other_information"] = $course->other_information;
         $courseData["organization"] = $course->organization_id;
+
         return $courseData;
+    }
+
+    private function extractCourseJson(array $resultRow){
+        $courseData = array();
+        $courseData["id"] = $resultRow["id"];
+        $courseData["name"] = $resultRow["name"];
+        $courseData["class_type"] = $resultRow["class_type"];
+        $courseData["levels"] = $resultRow["levels"];
+        $courseData["who_join"] = $resultRow["who_join"];
+        $courseData["how_join"] = $resultRow["how_join"];
+        $courseData["when_join"] = $resultRow["when_join"];
+        $courseData["how_long"] = $resultRow["how_long"];
+        $courseData["cost_free"] = $resultRow["cost_free"];
+        $courseData["cost_condition"] = $resultRow["cost_condition"];
+        $courseData["times"] = $resultRow["times"];
+        $courseData["documentation_required"] = $resultRow["documentation_required"];
+        $courseData["contact_phone"] = $resultRow["contact_phone"];
+        $courseData["contact_email"] = $resultRow["contact_email"];
+        $courseData["contact_person"] = $resultRow["contact_person"];
+        $courseData["child_care"] = $resultRow["child_care"];
+        $courseData["child_condition"] = $resultRow["child_condition"];
+        $courseData["other_information"] = $resultRow["other_information"];
+        $courseData["organization"] = $resultRow["organization_id"];
+
+        return $courseData;
+    }
+
+    private function extractCentreJson(array $resultRow){
+        //TODO implementar
+        $centreData = array();
+        $centreData["id"] = $resultRow["id"];
+        $centreData["name"] = $resultRow["name"];
+        $centreData["location"] = $resultRow["location"];
+        $centreData["post_code"] = $resultRow["post_code"];
+        $centreData["address"] = $resultRow["address"];
+        $centreData["buses"] = $resultRow["buses"];
+        $centreData["tube"] = $resultRow["tube"];
+        $centreData["accebility"] = $resultRow["accebility"];
+        $centreData["accebility_condition"] = $resultRow["accebility_condition"];
+        $centreData["other_information"] = $resultRow["other_information"];
+
+        return $centreData;
     }
 
     public function create($data)
@@ -138,10 +181,12 @@ namespace Course\Controller;
      private function findCourses() {
          $results = $this->getCourseTable()->findCourses($_GET["free"],$_GET["disability"],$_GET["child_care"],
              $_GET["level"], $_GET["area"], $_GET["postcode"]);
-         $data = array();
+         $courses = array();
+         $centres = array();
          foreach($results as $result) {
-             $data[] = $result;
+             $courses[] = $this->extractCourseJson($result);
+             $centres[] = $this->extractCentreJson($result);
          }
-         return new JsonModel(array("courses" => $data));
+         return new JsonModel(array("courses" => $courses, "centres" => $centres));
      }
  }

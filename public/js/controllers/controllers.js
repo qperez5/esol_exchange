@@ -9,12 +9,18 @@ Esol.OrganizationController = Ember.Controller.extend({
 });
 
 Esol.DeleteOrganizationController = Ember.ObjectController.extend({
+
     actions: {
+
+        courses: function(){
+            return this.store.find("course");
+        }.property(),
 
         delete:function(){
             console.debug("deleting the organization...");
             console.dir(this.get("model"));
             var organization = this.get("model");
+            //if(organization.)
             organization.deleteRecord();
             organization.save();
             this.transitionToRoute('organization');
@@ -107,7 +113,7 @@ Esol.DeleteCourseController = Ember.ObjectController.extend({
 
 Esol.EditCourseController = Ember.ObjectController.extend({
 
-    selectedOrganization: null,
+    //selectedOrganization: null,
 
     organizations: function(){
         return this.store.find("organization");
@@ -197,6 +203,7 @@ Esol.DeleteCentreController = Ember.ObjectController.extend({
             var centre = this.get("model");
             centre.deleteRecord();
             centre.save();
+            this.transitionToRoute('centre');
         },
         cancel:function(){
             console.debug("canceling delete the centre...");
@@ -266,15 +273,35 @@ Esol.MapController = Ember.Controller.extend({
     childCare: false,
     disability: false,
 
+    foundCourses: Ember.A([]),
+
     actions: {
         detailedSearchEnabled: false,
         enableAdvancedSearch: function() {
             var currentlyEnabled = this.get("detailedSearchEnabled");
             this.set("detailedSearchEnabled", !currentlyEnabled);
         },
-        search: function(query){
-            console.debug("Searching...");
-            this.get("model")
+
+        search: function(){
+            var queryParams = {
+                free: this.get("isFree"),
+                child_care: this.get("childCare"),
+                disability: this.get("disability")
+            };
+
+            var controller = this;
+            this.store.find("course",queryParams).then(function(results){
+                this.set("foundCourses",results);
+                //TODO para cada uno de los resultados dibujar un punto en el mapa
+                //Hacer un foreach de foundCourses.
+                //
+                //forEach(foundCourse){
+
+
+                //}
+
+            });
+
         }
     }
 });
