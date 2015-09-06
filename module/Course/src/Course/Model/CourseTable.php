@@ -3,6 +3,7 @@ namespace Course\Model;
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Expression;
 use Zend\Db\TableGateway\TableGateway;
 
 class CourseTable
@@ -31,18 +32,45 @@ class CourseTable
         return $row;
     }
 
-    public function findCourses($free, $disability, $child_care, $level, $area, $postcode){
+    public function findCourses($free, $disability, $child_care, $lat, $lng){
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select();
-        //especificar las columnas que queremos en el resultados de las consultas.
-        /*
-         * $select->columns(array("id","name","location" =>
-            new Expression("AsWKT(location)"),"post_code","address","buses","tube","accebility",
-            "accebility_condition","other_information"));
-         */
+
         $select->from(array("co" => "course"))
             ->join(array("cc"=>"course_centre"),"co.id = cc.course_id")
-            ->join(array("ce"=>"centre"),"ce.id = cc.centre_id");
+            ->join(array("ce"=>"centre"),"ce.id = cc.centre_id",
+                array("centre_id" => "id",
+                      "name",
+                      "location"=>new Expression("AsWKT(location)"),
+                      "post_code",
+                      "address",
+                      "buses",
+                      "tube",
+                      "accebility",
+                      "accebility_condition",
+                      "other_information"));
+
+        //especificar las columnas que queremos en el resultados de las consultas.
+        $select->columns(array(
+            "id",
+            "name",
+            "class_type",
+            "levels",
+            "who_join",
+            "how_join",
+            "when_join",
+            "how_long",
+            "cost_free",
+            "cost_condition",
+            "times",
+            "documentation_required",
+            "contact_phone",
+            "contact_email",
+            "contact_person",
+            "child_care",
+            "child_condition",
+            "organization_id",
+            "other_information"));
 
         $where = new Where();
         //TODO terminar de poner prefijos a las tablas
@@ -70,7 +98,22 @@ class CourseTable
             }
         }
 
+        //hacemos busquedas en 3km a la redonda, se puede convertir en un parametro
+        $R = 6371;//radio de la tierra en km
+        if(isset($lat) && isset($lng)){
+            $maxLat = $lat + rad2deg(3 / $R);
+            $minLat = $lat - rad2deg(3 / $R);
+
+            $maxLng = $lng + rad2deg(3/$R/cos(deg2rad($lat)));
+            $minLng = $lng - rad2deg(3/$R/cos(deg2rad($lat)));
+
+            $where->between(new Expression("X(ce.location)"),$minLat,$maxLat);
+            $where->between(new Expression("y(ce.location)"),$minLng,$maxLng);
+        }
+
         //TODO terminar con el resto de los filtros de busqueda
+
+        $select->where($where);
 
         $statement = $sql->prepareStatementForSqlObject($select);
         $rowset = $statement->execute();

@@ -57,6 +57,19 @@ Esol.Centre = DS.Model.extend({
     other_information: attr("string"),
     fullAddress: function(){
         return this.get("address") + " " + this.get("post_code");
-    }.property("post_code","address")
+    }.property("post_code","address"),
+
+    latLng: function(){
+        var location = this.get("location");
+        if (location!=null) {
+            var wktPattern = /POINT\((\d*\.\d*) (\d*\.\d*)\)/g ;
+            var results = wktPattern.exec(location);
+            return {lat: Number(results[1]), lng: Number(results[2])};
+        }
+        return 0;
+    }.property("location")
+
+
+
 
 });

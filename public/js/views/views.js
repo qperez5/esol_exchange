@@ -7,7 +7,14 @@ Esol.MapView = Ember.View.extend({
             zoom: 14,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        this.get("controller").set("map",map);
+
+        var newhamLayer = new google.maps.KmlLayer({
+            url: "http://mapit.mysociety.org/area/2510.kml",
+            map: map
+        });
+
     }
 });
 

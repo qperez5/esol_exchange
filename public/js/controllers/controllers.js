@@ -242,21 +242,17 @@ Esol.EditCentreController = Ember.ObjectController.extend({
             console.debug("canceling editing the centre...");
             this.transitionToRoute('centre');
         },
+
         search: function () {
-            var geocoder = new google.maps.Geocoder();
-            var controller = this;
-            geocoder.geocode({'address': this.get("fullAddress")}, function(results,status){
-                controller.addressFound(results,status);
-            });
+            geocode(this.get("fullAddress"),this.addressFound, this);
         }
     },
 
-    addressFound: function(results, status){
-        if(status == google.maps.GeocoderStatus.OK){
+    addressFound: function(results){
             var mapVar = this.get("map");
             var geoLocation = results[0].geometry.location;
             var lat = geoLocation.lat();
-            var lng = (results[0].geometry.location.lng());
+            var lng = geoLocation.lng();
             mapVar.setZoom(16);
             mapVar.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -264,16 +260,67 @@ Esol.EditCentreController = Ember.ObjectController.extend({
                 position: results[0].geometry.location
             });
             this.get("model").set("location","POINT(" + lat + " " + lng+")");
-        }
     }
 });
+
+function geocode(address, geocodeCallback, callbackContext){
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address }, function(results,status){
+        if(status == google.maps.GeocoderStatus.OK){
+            geocodeCallback.call(callbackContext,results);
+        }
+    });
+}
 
 Esol.MapController = Ember.Controller.extend({
     isFree: false,
     childCare: false,
     disability: false,
-
+    postCode: null,
+    map: null,
     foundCourses: Ember.A([]),
+
+    mapMarkers: Ember.A([]),
+
+    executeSearch: function (queryParams) {
+        var controller = this;
+        this.clearMarkers();
+
+        this.store.find("course", queryParams).then(function (results) {
+            controller.set("foundCourses", results);
+            controller.get("foundCourses").forEach(function (foundCourse) {
+                //logica para dibujar el punto
+                foundCourse.get("centres").forEach(function (centre) {
+                    var mapVar = controller.get("map");
+                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + foundCourse.get("contact_phone") + "</span>";
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentWindow
+                    });
+
+                    var marker = new google.maps.Marker({
+                        map: mapVar,
+                        position: centre.get("latLng"),
+                        title: foundCourse.get("name")
+
+                    });
+
+                    marker.addListener('click', function() {
+                        infowindow.open(mapVar, marker);
+                    });
+
+                    controller.get("mapMarkers").pushObject(marker);
+                });
+            });
+
+        });
+    },
+
+    clearMarkers: function(){
+        this.get("mapMarkers").forEach(function(marker){
+            marker.setMap(null);
+        });
+        this.get("mapMarkers").clear();
+    },
 
     actions: {
         detailedSearchEnabled: false,
@@ -289,19 +336,20 @@ Esol.MapController = Ember.Controller.extend({
                 disability: this.get("disability")
             };
 
+            var postCodeSearch = this.get("postCode");
             var controller = this;
-            this.store.find("course",queryParams).then(function(results){
-                this.set("foundCourses",results);
-                //TODO para cada uno de los resultados dibujar un punto en el mapa
-                //Hacer un foreach de foundCourses.
-                //
-                //forEach(foundCourse){
 
+            if(postCodeSearch!=null && postCodeSearch!=""){
+                geocode(postCodeSearch,function(results){
+                    var geoLocation = results[0].geometry.location;
+                    queryParams.lat = geoLocation.lat();
+                    queryParams.lng = geoLocation.lng();
 
-                //}
-
-            });
-
+                    this.executeSearch(queryParams);
+                },controller);
+            } else {
+                this.executeSearch(queryParams);
+            }
         }
     }
 });

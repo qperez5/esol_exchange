@@ -36,7 +36,8 @@ namespace Course\Controller;
 
     public function hasFilterParameters(){
         return isset($_GET["free"]) || isset($_GET["disability"]) || isset($_GET["child_care"])
-            || isset($_GET["level"]) || isset($_GET["postcode"]) || isset($_GET["area"]);
+            || isset($_GET["level"]) || isset($_GET["postcode"]) || isset($_GET["area"])
+            || isset($_GET["lat"]) || isset($_GET["lon"]);
     }
 
     private function allCourses(){
@@ -110,14 +111,14 @@ namespace Course\Controller;
         $courseData["child_condition"] = $resultRow["child_condition"];
         $courseData["other_information"] = $resultRow["other_information"];
         $courseData["organization"] = $resultRow["organization_id"];
-
+        $courseData["centres"] = array();
         return $courseData;
     }
 
     private function extractCentreJson(array $resultRow){
         //TODO implementar
         $centreData = array();
-        $centreData["id"] = $resultRow["id"];
+        $centreData["id"] = $resultRow["centre_id"];
         $centreData["name"] = $resultRow["name"];
         $centreData["location"] = $resultRow["location"];
         $centreData["post_code"] = $resultRow["post_code"];
@@ -179,14 +180,37 @@ namespace Course\Controller;
     }
 
      private function findCourses() {
-         $results = $this->getCourseTable()->findCourses($_GET["free"],$_GET["disability"],$_GET["child_care"],
-             $_GET["level"], $_GET["area"], $_GET["postcode"]);
+         $results = $this->getCourseTable()->findCourses(
+             $_GET["free"],$_GET["disability"],$_GET["child_care"],
+             $_GET["lat"], $_GET["lng"]
+             //,$_GET["level"], $_GET["area"], $_GET["postcode"]
+         );
          $courses = array();
+         $coursesMap = array();
          $centres = array();
+         $centresMap = array();
+
          foreach($results as $result) {
-             $courses[] = $this->extractCourseJson($result);
-             $centres[] = $this->extractCentreJson($result);
+             $courseId = $result["id"];
+             if(!array_key_exists($courseId,$coursesMap)){
+                 $coursesMap[$courseId] = $this->extractCourseJson($result);
+             }
+             $centreId = $result["centre_id"];
+             $coursesMap[$courseId]["centres"][] = $centreId;
+
+             if(!array_key_exists($centreId,$centresMap)){
+                 $centresMap[$centreId] = $this->extractCentreJson($result);
+             }
          }
+
+         foreach($coursesMap as $course){
+             $courses[] = $course;
+         }
+
+         foreach($centresMap as $centre){
+             $centres[] = $centre;
+         }
+
          return new JsonModel(array("courses" => $courses, "centres" => $centres));
      }
  }

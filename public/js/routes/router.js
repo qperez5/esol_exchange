@@ -2,7 +2,7 @@ Esol.Router.map(function(){
     this.route('organization');
     this.route('editOrganization',{path: '/editOrganization/:organization_id'});
     this.route('deleteOrganization',{path: '/deleteOrganization/:organization_id'});
-    this.route('map');
+    this.route('map', {path: '/'});
     this.route('course');
     this.route('editCourse',{path: '/editCourse/:course_id'});
     this.route('deleteCourse',{path: '/deleteCourse/:course_id'});
