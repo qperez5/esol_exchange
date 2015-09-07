@@ -1,9 +1,9 @@
 <div>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
 
             <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="e.g. English class for beginner" aria-describedby="sizing-addon1"></input>
+                {{input class="form-control" type="text" value=postCode placeholder=" English Class Locator. Search by Town or Postcode" aria-describedby="sizing-addon2"}}
                 <span class="input-group-addon" id="sizing-addon1">
                    <span class="glyphicon glyphicon-search" aria-hidden="true" {{action 'search'}}></span>
                 </span>
@@ -11,9 +11,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
             <button class="btn btn-info" {{action 'enableAdvancedSearch'}}>
-                <span class="label label-info">Detailed search</span>
+                <span class="label ">Detailed search</span>
                     {{#if detailedSearchEnabled}}
                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
                     {{else}}
@@ -41,8 +41,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="input-group">
-                            {{input type="text" value=postCode class="form-control" id="postCode" placeholder="Post code" aria-describedby="sizing-addon2"}}
-                            <span class="input-group-addon" id="postCode">Post Code</span>
+                            {{input type="text" value=postCode class="form-control"  placeholder="Post code" aria-describedby="sizing-addon2"}}
+                            <span class="input-group-addon" id="postCode">Postcode</span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -76,18 +76,11 @@
                         <div class="input-group">
                             <input type="text" class="form-control" aria-label="..."></input>
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Level <span class="caret"></span></button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Type <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <li><a href="#">Stratford</a></li>
-                                    <li><a href="#">East Ham</a></li>
-                                    <li><a href="#">North Woolwich</a></li>
-                                    <li><a href="#">Playstow</a></li>
-                                    <li><a href="#">West Ham</a></li>
-                                    <li><a href="#">Forest Gate</a></li>
-                                    <li><a href="#">Beckton</a></li>
-                                    <li><a href="#">Prince Regent</a></li>
-                                    <li><a href="#">Britanian Village</a></li>
-                                    <li><a href="#">Upton Park</a></li>
+                                    <li><a href="#">Formal</a></li>
+                                    <li><a href="#">Informal</a></li>
+                                    <li><a href="#">Conversation</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
                                 </ul>
@@ -104,9 +97,12 @@
                     </div>
             </div><!-- /. end detailedSearch-->
         {{/if}}
-    <div class="panel panel-default">
-        <div class="row col-md-12">
-            <div id="map-canvas" class="mapSize"></div>
+    <div class="panel ">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="map-canvas" class="mapSize"></div>
+            </div>
+
         </div>
     </div>
 </div>

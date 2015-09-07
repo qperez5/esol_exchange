@@ -40,7 +40,8 @@ body {
 
 .bs-example{
     margin: 20px;
-    background-color: #57a900;
+    background-color:  #00485D;
+   /* background-color: #57a900;*/
 }
 
 .btn-success {
@@ -74,10 +75,15 @@ div.container a.brand {
 
 body {
     font-family: Helvetica,'Helvetica Neue','Nunito', sans-serif,'Nunito', sans-serif;
-    color: #faf3bc;
-    background: #a3a130;
+    /*color: #faf3bc;*/
+    color:  white;
+    background: #00485D;
 }
 
+.headerMargin{
+    margin: 0 30px 20px 20px;
+
+}
 .nav {
     margin-top: 100px;
 }
@@ -140,7 +146,8 @@ ul {
     margin: 0px;
 }
 .windowInfo{
-    color: red;
+    background-color: inherit;
+    color: midnightblue;
     font-family: Helvetica;
 }
 

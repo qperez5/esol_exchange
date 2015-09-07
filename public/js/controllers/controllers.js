@@ -17,16 +17,12 @@ Esol.DeleteOrganizationController = Ember.ObjectController.extend({
         }.property(),
 
         delete:function(){
-            console.debug("deleting the organization...");
-            console.dir(this.get("model"));
             var organization = this.get("model");
-            //if(organization.)
             organization.deleteRecord();
             organization.save();
             this.transitionToRoute('organization');
         },
         cancel:function(){
-            console.debug("canceling delete the org...");
             this.transitionToRoute('organization');
         }
     }
@@ -279,7 +275,6 @@ Esol.MapController = Ember.Controller.extend({
     postCode: null,
     map: null,
     foundCourses: Ember.A([]),
-
     mapMarkers: Ember.A([]),
 
     executeSearch: function (queryParams) {
@@ -292,7 +287,7 @@ Esol.MapController = Ember.Controller.extend({
                 //logica para dibujar el punto
                 foundCourse.get("centres").forEach(function (centre) {
                     var mapVar = controller.get("map");
-                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + foundCourse.get("contact_phone") + "</span>";
+                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + "Contact:" + "&nbsp;" + foundCourse.get("contact_person") + "<br/>" + foundCourse.get("contact_phone") + "</span>";
                     var infowindow = new google.maps.InfoWindow({
                         content: contentWindow
                     });
