@@ -36,8 +36,8 @@ namespace Course\Controller;
 
     public function hasFilterParameters(){
         return isset($_GET["free"]) || isset($_GET["disability"]) || isset($_GET["child_care"])
-            || isset($_GET["level"]) || isset($_GET["postcode"]) || isset($_GET["area"])
-            || isset($_GET["lat"]) || isset($_GET["lon"]);
+            || isset($_GET["level"]) || isset($_GET["postcode"]) || isset($_GET["classType"]) || isset($_GET["town"])
+            || isset($_GET["lat"]) || isset($_GET["lng"]);
     }
 
     private function allCourses(){
@@ -182,8 +182,7 @@ namespace Course\Controller;
      private function findCourses() {
          $results = $this->getCourseTable()->findCourses(
              $_GET["free"],$_GET["disability"],$_GET["child_care"],
-             $_GET["lat"], $_GET["lng"]
-             //,$_GET["level"], $_GET["area"], $_GET["postcode"]
+             $_GET["lat"], $_GET["lng"],$_GET["level"], $_GET["town"], $_GET["postcode"], $_GET["classType"]
          );
          $courses = array();
          $coursesMap = array();

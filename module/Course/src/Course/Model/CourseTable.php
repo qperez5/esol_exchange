@@ -5,6 +5,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class CourseTable
 {
@@ -17,7 +18,9 @@ class CourseTable
 
     public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select();
+        $resultSet = $this->tableGateway->select(function(Select $select){
+            $select->order('name ASC');
+        });
         return $resultSet;
     }
 
@@ -96,6 +99,14 @@ class CourseTable
             } else {
                 $where->equalTo("co.child_care","n");
             }
+        }
+
+        if(isset($level)){
+            $where->in("co.levels",$level);
+        }
+
+        if(isset($classType)){
+            $where->in("co.levels",$classType);
         }
 
         //hacemos busquedas en 3km a la redonda, se puede convertir en un parametro

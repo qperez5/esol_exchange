@@ -8,6 +8,13 @@ body {
 
 }
 
+.has-error{
+    color: #a94442;
+    border: red;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+}
+
 .mapSize{
     margin: 5px;
     height: 600px;

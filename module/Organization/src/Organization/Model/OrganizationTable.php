@@ -2,6 +2,7 @@
 namespace Organization\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class OrganizationTable
 {
@@ -14,7 +15,10 @@ class OrganizationTable
 
     public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select();
+        //TODO replicar logica de ordenacion en los otros
+        $resultSet = $this->tableGateway->select(function(Select $select){
+            $select->order('name ASC');
+        });
         return $resultSet;
     }
 

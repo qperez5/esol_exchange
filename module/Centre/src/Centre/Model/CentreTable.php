@@ -4,6 +4,7 @@ namespace Centre\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 
 class CentreTable
 {
@@ -17,7 +18,7 @@ class CentreTable
     public function fetchAll()
     {
         $sql = new Sql($this->tableGateway->getAdapter());
-        $select = $sql->select("centre");
+        $select = $sql->select("centre")->order('name ASC');
         $select->columns(array("id","name","location" =>
             new Expression("AsWKT(location)"),"post_code","address","buses","tube","accebility",
             "accebility_condition","other_information"));
@@ -40,8 +41,6 @@ class CentreTable
 
         $statement = $sql->prepareStatementForSqlObject($select);
         $rowset = $statement->execute();
-
-
 
         $row = $rowset->current();
         if (!$row) {

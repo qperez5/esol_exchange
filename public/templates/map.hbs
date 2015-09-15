@@ -1,7 +1,6 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-
             <div class="input-group input-group-lg">
                 {{input class="form-control" type="text" value=postCode placeholder=" English Class Locator. Search by Town or Postcode" aria-describedby="sizing-addon2"}}
                 <span class="input-group-addon" id="sizing-addon1">
@@ -24,85 +23,101 @@
         </div>
     </div>
         {{#if detailedSearchEnabled}}
-            <div class="panel panel-default" id="detailedSearch">
+            <div id="detailedSearch">
                 <div class="row">
-                    <div class="col-md-5">
-                        <label class="checkbox-inline">
-                            {{input type="checkbox" id="inlineCheckbox1" checked=isFree}}<p class="text-primary"> Free </p>
-                        </label>
-                        <label class="checkbox-inline">
-                            {{input type="checkbox" id="inlineCheckbox2" checked=childCare}}<p class="text-primary"> Child Care </p>
-                        </label>
-                        <label class="checkbox-inline">
-                            {{input type="checkbox" id="inlineCheckbox3" checked=disability}}<p class="text-primary"> Disability </p>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            {{input type="text" value=postCode class="form-control"  placeholder="Post code" aria-describedby="sizing-addon2"}}
-                            <span class="input-group-addon" id="postCode">Postcode</span>
+                    <div class="panel">
+
+                        <div class="col-lg-pull-6">
+
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" id="inlineCheckbox1" checked=isFree}}<p class="text-primary"> Free </p>
+                                </label>
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" id="inlineCheckbox2" checked=childCare}}<p class="text-primary"> Child Care </p>
+                                </label>
+                                <label class="checkbox-inline">
+                                    {{input type="checkbox" id="inlineCheckbox3" checked=disability}}<p class="text-primary"> Disability </p>
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    {{input type="text" value=postCode class="form-control"  placeholder="Postcode" aria-describedby="sizing-addon2"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-pull-8">
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    {{input type="text"
+                                    value=selectedLevel
+                                    class="form-control"
+                                    placeholder="Level"
+                                    aria-describedby="sizing-addon2"}}
+                                    <div class="input-group-btn">
+                                        {{view "select"
+                                        content=levelList
+                                        classNames="form-control"
+                                        selection=selectedLevel
+                                        type="button"
+                                        id="levels"}}
+                                    </div>
+                                </div>
+                            </div><!-- /.col-lg-6 -->
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    {{input type="text"
+                                    value=selectedClassType
+                                    class="form-control"
+                                    placeholder="Class Type"
+                                    aria-describedby="sizing-addon2"}}
+                                    <div class="input-group-btn">
+                                        {{view "select"
+                                        content=classTypeList
+                                        classNames="form-control"
+                                        selection=selectedClassType
+                                        type="button"
+                                        id="classType"}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    {{input type="text"
+                                    value=selectedTown
+                                    class="form-control"
+                                    placeholder="Place or Town"
+                                    aria-describedby="sizing-addon2"}}
+                                    <div class="input-group-btn">
+                                        {{view "select"
+                                        content=townList
+                                        classNames="form-control"
+                                        selection=selectedTown
+                                        type="button"
+                                        id="town"}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" aria-label="..."></input>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Level <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <li><a href="#">Formal course</a></li>
-                                    <li><a href="#">Informal classes</a></li>
-                                    <li><a href="#">Conversation / speaking only</a></li>
-                                    <li><a href="#">ESOL with IT</a></li>
-                                    <li><a href="#">ESOL with sewing</a></li>
-                                    <li><a href="#">Women only</a></li>
-                                    <li><a href="#">ESOL for Citizenship</a></li>
-                                    <li><a href="#">ESOL for Employment</a></li>
-                                    <li><a href="#">Beginners/pre-literate</a></li>
-                                    <li><a href="#">Pre-entry</a></li>
-                                    <li><a href="#">Entry 1</a></li>
-                                    <li><a href="#">Entry 2</a></li>
-                                    <li><a href="#">Entry 3</a></li>
-                                    <li><a href="#">Level 1</a></li>
-                                    <li><a href="#">Level 2</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div><!-- /btn-group -->
-                    </div><!-- /.col-lg-6 -->
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" aria-label="..."></input>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Type <span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <li><a href="#">Formal</a></li>
-                                    <li><a href="#">Informal</a></li>
-                                    <li><a href="#">Conversation</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div><!-- /btn-group -->
-                    </div><!-- /.col-lg-6 -->
-                </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="input-group">
-                            <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
+                                <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
+                            </div>
                         </div>
                     </div>
-                    </div>
-            </div><!-- /. end detailedSearch-->
-        {{/if}}
-    <div class="panel ">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="map-canvas" class="mapSize"></div>
-            </div>
+                </div>
+            {{/if}}
+        </div> <!-- /. end detailedSearch-->
 
-        </div>
-    </div>
+            <div class="panel ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map-canvas" class="mapSize"></div>
+                    </div>
+
+                </div>
+            </div>
 </div>

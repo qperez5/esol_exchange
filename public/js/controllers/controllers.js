@@ -1,9 +1,10 @@
-Esol.OrganizationController = Ember.Controller.extend({
-    actions: {
+Esol.OrganizationController = Ember.ArrayController.extend({
+    sortProperties: ['name'],
+    sortAscending: true,
+    actions:    {
         add:function(){
             console.log("adding a new organization");
-            var newOrg = this.store.createRecord('organization');
-            this.transitionToRoute('editOrganization',newOrg);
+            this.transitionToRoute('editOrganization',0);
         }
     }
 });
@@ -28,13 +29,39 @@ Esol.DeleteOrganizationController = Ember.ObjectController.extend({
     }
 });
 
-Esol.EditOrganizationController = Ember.ObjectController.extend({
+Esol.EditOrganizationController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
+
+    validations: {
+       "name": {
+            presence: true,
+            presence:{ message: "  Name is required" }
+       },
+        "contact_number": {
+            presence: true,
+            presence:{ message: "  Contact number is required" }
+        },
+        "post_code": {
+            presence: true,
+            presence:{ message: ", Postcode is required" }
+
+        },
+        "address": {
+            presence: true,
+            presence:{ message: ", Address is required" }
+
+        },
+        "contact_email": {
+            presence: true,
+            presence:{ message: ", Email is required" }
+
+        }
+    },
 
     yesNoConditionedOptions: function(){
-    return [
-        {"value": "y", "label": "Yes"},
-        {"value": "n", "label": "No"},
-        {"value": "c", "label": "Conditioned"}
+        return [
+            {"value": "y", "label": "Yes"},
+            {"value": "n", "label": "No"},
+            {"value": "c", "label": "Conditioned"}
         ];
     }.property(),
 
@@ -70,8 +97,11 @@ Esol.EditOrganizationController = Ember.ObjectController.extend({
 
     actions: {
         save: function(){
-            this.get("model").save();
-            this.transitionToRoute('organization');
+            var organization = this.get("model");
+            if(this.get("isValid")){
+                organization.save();
+                this.transitionToRoute('organization');
+            }
         },
         cancel: function(){
             this.transitionToRoute('organization');
@@ -83,8 +113,7 @@ Esol.CourseController = Ember.Controller.extend({
     actions: {
         add:function(){
             console.log("adding a new course");
-            var newCourse = this.store.createRecord('course');
-            this.transitionToRoute('editCourse',newCourse);
+            this.transitionToRoute('editCourse',0); //TODO para las otras
         }
     }
 });
@@ -150,9 +179,8 @@ Esol.EditCourseController = Ember.ObjectController.extend({
 
     levelList: function(){
         return [
-            'Entry 1','Entry 2','Entry 3','Formal course','Informal classes','Conversation speaking only',
-            'ESOL with IT','ESOL with sewing','Women only','ESOL for Citizenship','ESOL for Employment',
-            'Beginners pre-literate','Pre-entry'
+            'Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
+            'A1', 'A2', 'B1', 'B2','C1', 'C2'
         ];
     }.property(),
 
@@ -177,7 +205,6 @@ Esol.EditCourseController = Ember.ObjectController.extend({
             this.transitionToRoute('course');
         }
     }
-
 });
 
 Esol.CentreController = Ember.Controller.extend({
@@ -185,8 +212,8 @@ Esol.CentreController = Ember.Controller.extend({
     actions: {
         add:function(){
             console.log("adding a new centre");
-            var newCentre = this.store.createRecord('centre');
-            this.transitionToRoute('editCentre',newCentre);
+            //var newCentre = this.store.createRecord('centre');
+            this.transitionToRoute('editCentre',0);
         }
     }
 });
@@ -208,7 +235,7 @@ Esol.DeleteCentreController = Ember.ObjectController.extend({
     }
 });
 
-Esol.EditCentreController = Ember.ObjectController.extend({
+Esol.EditCentreController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
     map: null,
 
@@ -219,6 +246,26 @@ Esol.EditCentreController = Ember.ObjectController.extend({
             {"value": "c", "label": "Conditioned"}
         ];
     }.property(),
+
+
+    validations: {
+
+        "name": {
+            presence: true,
+            presence:{ message:" Name is required"},
+
+        },
+        "post_code": {
+            presence: true,
+            presence:{ message: ", Postcode is required" }
+
+        },
+        "address": {
+            presence: true,
+            presence:{ message: ", Address is required" }
+
+        }
+    },
 
     accecibilityNotConditioned: function(){
         return this.get("model.accebility") != "c";
@@ -233,6 +280,7 @@ Esol.EditCentreController = Ember.ObjectController.extend({
     actions: {
         save: function(){
             this.get("model").save();
+            this.transitionToRoute('centre');
         },
         cancel:function(){
             console.debug("canceling editing the centre...");
@@ -269,10 +317,13 @@ function geocode(address, geocodeCallback, callbackContext){
 }
 
 Esol.MapController = Ember.Controller.extend({
-    isFree: false,
-    childCare: false,
-    disability: false,
+    isFree: true,
+    childCare: true,
+    disability: true,
     postCode: null,
+    classType:null,
+    town: null,
+    level: null,
     map: null,
     foundCourses: Ember.A([]),
     mapMarkers: Ember.A([]),
@@ -287,7 +338,7 @@ Esol.MapController = Ember.Controller.extend({
                 //logica para dibujar el punto
                 foundCourse.get("centres").forEach(function (centre) {
                     var mapVar = controller.get("map");
-                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + "Contact:" + "&nbsp;" + foundCourse.get("contact_person") + "<br/>" + foundCourse.get("contact_phone") + "</span>";
+                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + "Contact:" + "&nbsp;" + foundCourse.get("contact_person") + "<br/>" + foundCourse.get("contact_phone") + "<br/>"+ "{{#link-to 'searchResult' foundCourse}}}" +"Details"+ "{{{/link-to}}" + "</span>";
                     var infowindow = new google.maps.InfoWindow({
                         content: contentWindow
                     });
@@ -295,7 +346,7 @@ Esol.MapController = Ember.Controller.extend({
                     var marker = new google.maps.Marker({
                         map: mapVar,
                         position: centre.get("latLng"),
-                        title: foundCourse.get("name")
+                        title: centre.get("name")
 
                     });
 
@@ -317,6 +368,27 @@ Esol.MapController = Ember.Controller.extend({
         this.get("mapMarkers").clear();
     },
 
+    levelList: function(){
+        return [
+            'Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
+            'A1', 'A2', 'B1', 'B2','C1', 'C2'
+        ];
+    }.property(),
+
+    townList: function(){
+        return [
+            'Canning Town','Plaistow','East Ham','Stratford','Forest Gate','Beckton', 'Custom House',
+            'Manor Park', 'West Ham', 'Upton Park', 'North Woolwich','Silvertown'
+        ];
+    }.property(),
+
+    classTypeList: function(){
+        return [
+            'Formal course','Informal classes','Conversation / speaking only','ESOL with IT','ESOL with sewing',
+            'Women only', 'ESOL for Citizenship','ESOL for Employment'
+        ];
+    }.property(),
+
     actions: {
         detailedSearchEnabled: false,
         enableAdvancedSearch: function() {
@@ -325,14 +397,20 @@ Esol.MapController = Ember.Controller.extend({
         },
 
         search: function(){
+            var postCodeSearch = this.get("postCode");
+            var controller = this;
+            var selectedLevel = this.get("selectedLevel");
+            var selectedClassType = this.get("selectedClassType");
+            var selectedTown = this.get("selectedTown");
+
             var queryParams = {
                 free: this.get("isFree"),
                 child_care: this.get("childCare"),
-                disability: this.get("disability")
-            };
+                disability: this.get("disability"),
+                level: this.get("selectedLevel"),
+                classType: this.get("selectedClassType")
 
-            var postCodeSearch = this.get("postCode");
-            var controller = this;
+            };
 
             if(postCodeSearch!=null && postCodeSearch!=""){
                 geocode(postCodeSearch,function(results){
@@ -343,11 +421,21 @@ Esol.MapController = Ember.Controller.extend({
                     this.executeSearch(queryParams);
                 },controller);
             } else {
+                if(selectedTown!=null && selectedTown!=""){
+                    geocode(selectedTown,function(results){
+                        var geoLocation = results[0].geometry.location;
+                        queryParams.lat = geoLocation.lat();
+                        queryParams.lng = geoLocation.lng();
+                        this.executeSearch(queryParams);
+                    },controller);
+                } else {
+                    this.executeSearch(queryParams);
+                }
+            }
                 this.executeSearch(queryParams);
             }
         }
-    }
-});
+    });
 
 Esol.SearchResultController = Ember.ObjectController.extend({
 

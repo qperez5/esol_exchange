@@ -1,12 +1,28 @@
 <div class="panel panel-primary bs-example">
-    <div class="panel-heading">Edit Centre</div>
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-4">
+                <label> Edit Centre </label>
+            </div>
+           <div class="col-xs-8 has-error">
+               <ul class="pull-right">
+                   <li><li/>
+               </ul>
+           </div>
+        </div>
+    </div>
     <div class="bs-example">
+        <div class="row">
+            <p class="has-error pull-right"> {{errors.name}} {{errors.address}}{{errors.post_code}} </p>
+        </div>
         <form>
                 <div class="row">
                     <div class="col-xs-4">
-                        <div class="form-group">
+                        <div {{bind-attr class="form-group errors.name:has-error errors.name:has-feedback"}}>
                             <label for="name">Name</label>
-                            {{input type="text" value=name class="form-control" id="name"}}
+                            <span  class=" glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputError2Status" class="sr-only"></span>
+                            {{input type="text" value=name class="form-control" id="name"  aria-describedby="inputError2Status"}}
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -53,15 +69,26 @@
                 </hr>
                 <div class="row">
                     <div class="col-xs-3">
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            {{input type="text" value=address class="form-control" id="address"}}
+                        <div class="col-xs-12">
+                            <div {{bind-attr class="form-group errors.address:has-error errors.address:has-feedback"}}>
+                                <label class="control-label" for="address">Address</label>
+                                <span  class=" glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span id="inputErrorAddressStatus" class="sr-only"></span>
+                                {{input type="text" value=address class="form-control" id="address" aria-describedby="inputErrorAddressStatus"}}
+                            </div>
+                        <br></br>
                         </div>
-                        <div class="form-group">
-                            <label for="contact_person">post_code</label>
-                            {{input type="text" value=post_code class="form-control" id="post_code"}}
+                        <div class="col-xs-12">
+                            <div {{bind-attr class="form-group errors.post_code:has-error errors.post_code:has-feedback"}}>
+                                <label class="control-label"  for="post_code">Postcode</label>
+                                <span  class=" glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span id="inputErrorPostcodeStatus" class="sr-only"></span>
+                                {{input type="text" value=post_code class="form-control" id="post_code" aria-describedy="inputErrorPostcodeStatus"}}
+                            </div>
+                            <button class="btn btn-primary" {{action "search"}}>See on map</button>
                         </div>
-                        <button class="btn btn-primary" {{action "search"}}>See on map</button>
+
+
                     </div>
                     <div class="col-xs-8">
                         <div class="form-group">

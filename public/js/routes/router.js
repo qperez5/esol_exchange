@@ -15,16 +15,22 @@ Esol.Router.map(function(){
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
-   setupController: function(controller){
-      var listControl = 10;
-      controller.set('orgs',this.store.find('organization'));
+   model: function(){
+       return this.store.find('organization');
    }
 });
 
 Esol.EditOrganizationRoute = Ember.Route.extend({
     model: function(params){
-        return this.store.findRecord("organization",params.organization_id);
-    }
+        //TODO en las otra.
+        var organization;
+        if(params.organization_id == 0){
+            organization = this.store.createRecord('organization');
+        } else {
+            organization = this.store.findRecord("organization", params.organization_id);
+        }
+        return organization;
+    },
 });
 
 Esol.DeleteOrganizationRoute = Ember.Route.extend({
@@ -41,13 +47,21 @@ Esol.CourseRoute = Ember.Route.extend({
 
 Esol.EditCourseRoute = Ember.Route.extend({
     model: function(params){
-        var course = this.store.findRecord("course",params.course_id);
+        //TODO en las otra.
+        var course;
+        if(params.course_id == 0){
+            course = this.store.createRecord('course');
+        } else {
+            course = this.store.findRecord("course", params.course_id);
+        }
         return course;
     },
 
     setupController: function(controller,course){
         this._super(controller,course);
-
+        if(course.get("isNew")){
+            return;
+        }
         var levels = course.get("levels");
         if(levels != null){
             var levelsArray = levels.split(",");
@@ -82,7 +96,13 @@ Esol.CentreRoute = Ember.Route.extend({
 Esol.EditCentreRoute = Ember.Route.extend({
 
     model: function(params){
-        return this.store.findRecord("centre",params.centre_id);
+        var centre;
+        if(params.centre_id == 0){
+            centre = this.store.createRecord('centre');
+        } else {
+            centre = this.store.findRecord("centre", params.centre_id);
+        }
+        return centre;
     }
 });
 
