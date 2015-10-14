@@ -13,7 +13,6 @@ return array(
                      ),
                  ),
              ),
-
         ),
     ),
     'controllers' => array(

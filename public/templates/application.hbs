@@ -1,53 +1,68 @@
-<header class="list-group-item-heading ">
-    <div class="headerMargin">
-        <div class="row">
-            <div class="col-md-2">
-                <a href="#"> <img class="img-rounded img-responsive" src="img/esol1.jpg" alt="Esol Exchange">  </img></a>
-            </div>
-            <div class="col-md-9 ">
-                <ul class="nav nav-pills navbar-right navbar-static-top">
-                    <li ><a href="#"><p class="text-primary">About</p></a></li>
-                    <li >{{#link-to 'administration'}}<p class="text-primary">System</p>{{/link-to}}</li>
-                    <li class="">{{#link-to 'map'}}<p class="text-primary">Map{{/link-to}}</p></li>
-                    <li><a href="#"><p class="text-primary">Contact Us</p></a></li>
-                </ul>
-            </div>
+<!--
+ <nav class="navbar navbar-default navbar-fixed-top">
+    <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Poducts</a></li>
+        <li class=""><a href="#">Gallery</a></li>
+    </ul>
+</nav>
+ -->
+
+<header class="headerMargin bodyFormat">
+    <div class="row navbar navbar-default navbar-fixed-top">
+        <div class="col-sm-2">
+            <a href="#"><img class=" main-logo img-rounded img-responsive" src="img/ESOLLogo.jpg" alt="Esol Exchange"></img></a>
         </div>
-        <div class="row">
-            <div class="col-md-12 ">
-                <h2 class="text-info centered-text">If you live in Newham and want to improve your English, this website is for you.  More than xxx courses to choose from. <abbr class="initialism" title="English for Speakers of Other Languages.">ESOL</abbr> </h2>
-            </div>
+        <div class="col-sm-4">
+            <h1></h1>
+        </div>
+        <div class="col-sm-5">
+            <nav class="">
+                <ul class="nav navbar-nav nav-pills navbarPadding navbar-right">
+                    <li  class="text-primary menuFormat" role="presentation">
+                        {{#link-to 'about'}}About{{/link-to}}
+                    </li>
+                    <li class="text-primary menuFormat hidden" role="presentation">{{#link-to 'administration'}}System{{/link-to}}</li>
+                    <li class="text-primary menuFormat " role="presentation">{{#link-to 'map'}}Home{{/link-to}}</li>
+                    <li class="text-primary menuFormat" role="presentation">{{#link-to 'help'}}Resources{{/link-to}}</li>
+                </ul>
+            </nav>
         </div>
     </div>
 </header>
+<body class="container">
+    {{outlet}}
+</body>
+        <!-- Footer -->
+<footer class="main-footer">
+<div class="row">
+    <div class="col-sm-4">
+        <a class="footImages" target='_blank' href="http://www.aston-mansfield.org.uk/newhamesolexchange"><img  class="th-logo img-rounded" src="img/aston-mansfield_logo.jpg" alt="Aston logo"></img></a>
+        <a class="footImages" target='_blank' href="https://www.newham.gov.uk/"><img class="th-logo img-rounded" src="img/newham_logo.jpg" alt="Newham logo"></a>
+        <p class="copyright">&copy; 2015 Newham ESOL Exchange.</p>
+    </div>
+    <div class="col-sm-3 col-sm-offset-1 col-md-offset-2">
+        <ul class="link-list">
+            <li class="heading"><a href="#">What level am I? &rarr;</a></li>
+            <li>
+                {{#link-to 'whatLevel'}}Which Level is right for me?{{/link-to}}
+            </li>
+        </ul>
+    </div>
 
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body ">
-            <div class="row">
-                <div class="col-md-12">
-                    {{outlet}}
-                </div>
-            </div>
-        </div>
+    <div class="col-sm-3">
+        <ul class="link-list">
+            <li class="heading"><a href="#">Get in touch &rarr;</a></li>
+            <li>Anne Crisp</li>
+            <li><a href="mailto:anne.crisp@aston-mansfield.org.uk">anne.crisp@aston-mansfield.org.uk</a></li>
+            <li>020 3740 8122</li>
+        </ul>
     </div>
 </div>
+<div class="row">
+<div class="col-sm-4">
+    <p class="copyright"></p>
+</div>
 
-<footer>
-    <div class="row headerMargin">
-        <div class="row">
-           <p class="text-muted centered-text col-md-12">
-               Copyright © 2015 Esol Exchange. Registered Charity Number: 220085. Company limited by guarantee Number: ENG 48350. All rights reserved.
-               Legal Disclaimer & Copyright    Site map    Accessibility
-           </p>
-            <p class="text-muted centered-text col-md-12">Call us: <span>1-800-987654</span> <br></br>
-                Email us: <a href="mailto:#">someone@somewhere.com</a></p>
-        </div>
-    </div>
-</footer>
-
-
-
-
-
-
+</div>
+</footer><!-- End footer -->

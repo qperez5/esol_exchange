@@ -1,35 +1,36 @@
-<button class="btn btn-primary" {{action 'add'}}>Add new course</button>
-
-<div class="panel panel-default">
-    <table class="table table-bordered container table-hover">
-        <thead>
-            <tr>
-                <th><p class="text-info">Name</p></th>
-                <th><p class="text-info">Contact Phone</p></th>
-                <th><p class="text-info">Contact Email</p></th>
-                <th><p class="text-info">Contact Person</p></th>
-
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-
-        {{#each course in courses}}
-        <tbody>
-            <tr>
-                <td>{{#link-to "editCourse" course.id}}<p class="text-primary">{{course.name}}{{/link-to}}</p></td>
-                <td><p class="text-primary">{{course.contact_phone}}</p></td>
-                <td><p class="text-primary">{{course.contact_email}}</p></td>
-                <td><p class="text-primary">{{course.contact_person}}</p></td>
-
-                <td>
-                    {{#link-to "searchResult" course}}Result{{/link-to}}
-                    {{#link-to "deleteCourse" course title="Delete"}}Delete{{/link-to}}
-            </td>
-            </tr>
-        </tbody>
-
-        {{/each}}
-    </table>
-
+<div class="panel panel-primary bs-example">
+    <div class="panelTitleBackground">
+        <p class="panel-title text-info text-center"> List of courses </p>
+    </div>
+    <div class="panel-heading">
+        <button class="btn btn-primary" {{action 'add'}}>Add new course</button>
+    </div>
+    <div class="panel-body ">
+        <table class="table table-bordered container table-hover">
+            <thead>
+                <tr>
+                    <th><p class="text-info">Name</p></th>
+                    <th><p class="text-info">Contact Phone</p></th>
+                    <th><p class="text-info">Contact Email</p></th>
+                    <th><p class="text-info">Contact Person</p></th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            {{#each course in courses}}
+            <tbody>
+                <tr>
+                    <td>{{#link-to "editCourse" course.id}}<p class="text-primary">{{course.name}}{{/link-to}}</p></td>
+                    <td><p class="text-primary">{{course.contact_phone}}</p></td>
+                    <td><p class="text-primary">{{course.contact_email}}</p></td>
+                    <td><p class="text-primary">{{course.contact_person}}</p></td>
+                    <td>
+                        {{#link-to "searchResult" course}}Result{{/link-to}}
+                        {{#link-to "deleteCourse" course title="Delete"}}Delete{{/link-to}}
+                </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
 </div>
 

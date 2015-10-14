@@ -207,7 +207,23 @@ class CourseTable
 
     public function deleteCourse($id)
     {
-        $this->tableGateway->delete(array('id' => (int) $id));
+
+        try {
+            $this->beginTransaction();
+            $sql = new Sql($this->tableGateway->getAdapter());
+
+            //borrar relaciones antiguas entre cursos y centros
+            //delete from course_centre where course_id = :idCurso
+            $delete = $sql->delete("course_centre");
+            $delete->where(array("course_id" => $id));
+            $statement = $sql->prepareStatementForSqlObject($delete);
+            $statement->execute();
+
+            $this->tableGateway->delete(array('id' => (int)$id));
+            $this->commitTransaction();
+        } catch (Exception $e) {
+            $this->rollbackTransaction();
+        }
     }
 
     private function beginTransaction()

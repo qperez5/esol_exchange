@@ -22,6 +22,7 @@ Esol.EditCentreView = Ember.View.extend({
     templateName: "editCentre",
     didInsertElement: function(){
         var mapCanvas = document.getElementById('map-canvas');
+        var context = mapCanvas.getContext("2d");
         var mapOptions = {
             center: new google.maps.LatLng(51.548222, 0.01500),
             zoom: 16,

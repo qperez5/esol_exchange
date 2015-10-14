@@ -3,6 +3,8 @@ Esol.Router.map(function(){
     this.route('editOrganization',{path: '/editOrganization/:organization_id'});
     this.route('deleteOrganization',{path: '/deleteOrganization/:organization_id'});
     this.route('map', {path: '/'});
+    this.route('about');
+    this.route('help');
     this.route('course');
     this.route('editCourse',{path: '/editCourse/:course_id'});
     this.route('deleteCourse',{path: '/deleteCourse/:course_id'});
@@ -12,6 +14,7 @@ Esol.Router.map(function(){
     this.route('centre');
     this.route('searchResult',{path: '/result/:course_id'});
     this.route('administration');
+    this.route('whatLevel',{path: 'Which_level_is_right_for_me'});
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
@@ -120,4 +123,15 @@ Esol.SearchResultRoute = Ember.Route.extend({
 
 Esol.AdministrationRoute = Ember.Route.extend({
 
+});
+
+Esol.WhatLevelRoute = Ember.Route.extend({
+
+});
+
+Esol.MapRoute = Ember.Route.extend({
+
+    setupController: function(controller){
+        controller.executeSearch({all: true});
+    }
 });

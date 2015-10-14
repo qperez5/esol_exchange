@@ -23,7 +23,7 @@ namespace Course\Controller;
     public function getList()
     {   
 
-        if($this->hasFilterParameters()){
+        if($this->hasFilterParameters() || $this->seeAllCourses()){
             //filter results
             $results = $this->findCourses();
             return $results;
@@ -31,7 +31,6 @@ namespace Course\Controller;
             //all results
             return $this->allCourses();
         }
-
     }
 
     public function hasFilterParameters(){
@@ -211,5 +210,10 @@ namespace Course\Controller;
          }
 
          return new JsonModel(array("courses" => $courses, "centres" => $centres));
+     }
+
+     private function seeAllCourses()
+     {
+         return isset($_GET["all"]);
      }
  }

@@ -1,13 +1,17 @@
-<div class="panel">
-    <div class="panel-primary bs-example">
-        <div class="panel-heading">Edit Course</div>
+<div class="panel panel-primary bs-example">
+        <div class="panel-heading text-info text-center">Edit Course</div>
         <div class="bs-example">
+            <div class="row">
+                <p class="has-error pull-right"> {{errors.name}} {{errors.times}}</p>
+            </div>
             <form>
                 <div class="row">
                     <div class="col-xs-4">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            {{input type="text" value=name class="form-control" id="name"}}
+                        <div {{bind-attr class="form-group errors.name:has-error errors.name:has-feedback"}}>
+                            <label class="control-label " for="name">Name</label>
+                            <span  class=" glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputErrorNameStatus" class="sr-only"></span>
+                            {{input type="text" value=name class="form-control" id="name" aria-describedby="inputErrorNameStatus"}}
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -107,9 +111,11 @@
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <div class="form-group">
-                            <label for="times">Times</label>
-                            {{input type="text" value=times class="form-control" id="times"}}
+                        <div {{bind-attr class="form-group errors.times:has-error errors.times:has-feedback"}}>
+                            <label class="control-label " for="times">Times</label>
+                            <span  class=" glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputErrorTimesStatus" class="sr-only"></span>
+                            {{input type="text" value=times class="form-control" id="times" aria-describedby="inputErrorTimesStatus"}}
                         </div>
                     </div>
                 </div>
@@ -173,10 +179,4 @@
                 </div>
             </div>
         </div>
-
 </div>
-
-
-
-
-

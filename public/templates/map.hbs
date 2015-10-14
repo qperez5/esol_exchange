@@ -1,123 +1,115 @@
-<div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="input-group input-group-lg">
-                {{input class="form-control" type="text" value=postCode placeholder=" English Class Locator. Search by Town or Postcode" aria-describedby="sizing-addon2"}}
-                <span class="input-group-addon" id="sizing-addon1">
-                   <span class="glyphicon glyphicon-search" aria-hidden="true" {{action 'search'}}></span>
-                </span>
+
+    <div class="mapSearchOptionBackground">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group input-group-lg">
+                    {{input class="form-control" type="text" value=generalSearch key-up="generalSearchChanged"
+                            placeholder="Find an English class. Search by postcode or area."
+                            aria-describedby="sizing-addon2"}}
+                    <span class="input-group-addon" id="sizing-addon1">
+                       <span class="glyphicon glyphicon-search" aria-hidden="true" {{action 'search'}}></span>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <button class="btn btn-info" {{action 'enableAdvancedSearch'}}>
-                <span class="label ">Detailed search</span>
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-info" {{action 'enableAdvancedSearch'}}>
+                    <span class="label ">Detailed search</span>
                     {{#if detailedSearchEnabled}}
                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
                     {{else}}
                         <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     {{/if}}
-
-            </button>
+                </button>
+            </div>
         </div>
-    </div>
-        {{#if detailedSearchEnabled}}
-            <div id="detailedSearch">
-                <div class="row">
-                    <div class="panel">
-
-                        <div class="col-lg-pull-6">
-
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline">
-                                    {{input type="checkbox" id="inlineCheckbox1" checked=isFree}}<p class="text-primary"> Free </p>
-                                </label>
-                                <label class="checkbox-inline">
-                                    {{input type="checkbox" id="inlineCheckbox2" checked=childCare}}<p class="text-primary"> Child Care </p>
-                                </label>
-                                <label class="checkbox-inline">
-                                    {{input type="checkbox" id="inlineCheckbox3" checked=disability}}<p class="text-primary"> Disability </p>
-                                </label>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="input-group">
-                                    {{input type="text" value=postCode class="form-control"  placeholder="Postcode" aria-describedby="sizing-addon2"}}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-pull-8">
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    {{input type="text"
-                                    value=selectedLevel
-                                    class="form-control"
-                                    placeholder="Level"
-                                    aria-describedby="sizing-addon2"}}
-                                    <div class="input-group-btn">
-                                        {{view "select"
-                                        content=levelList
-                                        classNames="form-control"
-                                        selection=selectedLevel
-                                        type="button"
-                                        id="levels"}}
-                                    </div>
-                                </div>
-                            </div><!-- /.col-lg-6 -->
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    {{input type="text"
-                                    value=selectedClassType
-                                    class="form-control"
-                                    placeholder="Class Type"
-                                    aria-describedby="sizing-addon2"}}
-                                    <div class="input-group-btn">
-                                        {{view "select"
-                                        content=classTypeList
-                                        classNames="form-control"
-                                        selection=selectedClassType
-                                        type="button"
-                                        id="classType"}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    {{input type="text"
-                                    value=selectedTown
-                                    class="form-control"
-                                    placeholder="Place or Town"
-                                    aria-describedby="sizing-addon2"}}
-                                    <div class="input-group-btn">
-                                        {{view "select"
-                                        content=townList
-                                        classNames="form-control"
-                                        selection=selectedTown
-                                        type="button"
-                                        id="town"}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            {{#if detailedSearchEnabled}}
+                <div id="detailedSearch">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
+                        <div class="">
+                            <div class="col-lg-pull-6">
+                                <div class="col-sm-3">
+                                    <label class="checkbox-inline">
+                                        {{input type="checkbox" id="inlineCheckbox1" checked=isFree}}<p class="text-primary"> Free </p>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        {{input type="checkbox" id="inlineCheckbox2" checked=childCare}}<p class="text-primary"> Child Care </p>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        {{input type="checkbox" id="inlineCheckbox3" checked=disability}}<p class="text-primary"> Disabled Access </p>
+                                    </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group hidden">
+                                        {{input type="text" value=postCode class="form-control"  placeholder="Postcode" aria-describedby="sizing-addon2"}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-pull-8">
+                                <div class="col-md-2">
+                                    <div class="input-group hidden">
+                                        {{input type="text"
+                                        value=selectedLevel
+                                        class="form-control"
+                                        placeholder="Level"
+                                        aria-describedby="sizing-addon2"}}
+                                        <div class="input-group-btn hidden">
+                                            {{view "select"
+                                            content=levelList
+                                            classNames="form-control"
+                                            selection=selectedLevel
+                                            type="button"
+                                            id="levels"}}
+                                        </div>
+                                    </div>
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-md-2">
+                                    <div class="input-group hidden">
+                                        {{input type="text"
+                                        value=selectedClassType
+                                        class="form-control"
+                                        placeholder="Class Type"
+                                        aria-describedby="sizing-addon2"}}
+                                        <div class="input-group-btn hidden">
+                                            {{view "select"
+                                            content=classTypeList
+                                            classNames="form-control"
+                                            selection=selectedClassType
+                                            type="button"
+                                            id="classType"}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group hidden">
+                                        {{input type="text"
+                                        value=selectedTown
+                                        class="form-control"
+                                        placeholder="Place or Town"
+                                        aria-describedby="sizing-addon2"}}
+                                        <div class="input-group-btn">
+                                            {{view "select"
+                                            content=townList
+                                            classNames="form-control"
+                                            selection=selectedTown
+                                            type="button"
+                                            id="town"}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="">
+                                <div class="input-group hidden">
+                                    <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             {{/if}}
-        </div> <!-- /. end detailedSearch-->
-
-            <div class="panel ">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="map-canvas" class="mapSize"></div>
-                    </div>
-
-                </div>
-            </div>
-</div>
+            </div> <!-- /. end detailedSearch-->
+        </div>
+    <div id="map-canvas" class="mapSearchOptionBackground panel"></div>

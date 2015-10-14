@@ -1,31 +1,36 @@
-
-
-    <button class="btn btn-primary" {{action 'add'}}> Add new organization </button>
-    <div class="panel panel-default" id="pag">
-    <table id="example" class=" table table-bordered container table-hover">
-        <thead>
-            <tr>
-                <th class="col-md-5"><p class="text-info">Name</p></th>
-                <th class="col-md-4"><p class="text-info">Address</p></th>
-                <th class="col-md-3"><p class="text-info">Contact</p></th>
-                <th class="col-md-1">&nbsp;</th>
-            </tr>
-        </thead>
-
-        {{#each organization in content}}
-        <tbody>
-            <tr>
-                <td>{{#link-to "editOrganization" organization}}<p class="text-primary"> {{organization.name}} </p>{{/link-to}}</td>
-                <td><p class="text-primary">{{organization.address}}<span>. </span>{{organization.post_code}}</p></td>
-                <td><p class="text-primary">{{organization.contact_person}}<span>, </span> {{organization.contact_number}}</p></td>
-                <td>
-
-                    <p class="label label-warning">{{#link-to "deleteOrganization" organization}}<span class='glyphicon glyphicon-remove' title="Delete"></span>{{/link-to}}</p>
-                </td>
-        </tr>
-
-        </tbody>
-
-        {{/each}}
-    </table>
+<div class="panel panel-primary bs-example">
+    <div class="panelTitleBackground">
+        <p class="panel-title text-info text-center"> List of Organizations</p>
+    </div>
+    <div class="panel-heading">
+        <button class="btn btn-primary" {{action 'add'}}> Add new organization </button>
+    </div>
+    <div class="panel-body tableBackground">
+        <table id="" class=" table table-bordered container table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-5"><p class="text-info tableText">Name</p></th>
+                    <th class="col-md-4"><p class="text-info tableText">Address</p></th>
+                    <th class="col-md-3"><p class="text-info tableText">Contact</p></th>
+                    <th class="col-md-1">&nbsp;</th>
+                </tr>
+            </thead>
+            {{#each organization in content}}
+                <tbody>
+                    <tr>
+                        <td>{{#link-to "editOrganization" organization}}<p class="text-primary tableText"> {{organization.name}} </p>{{/link-to}}</td>
+                        <td><p class="text-primary tableText">{{organization.address}}<span>. </span>{{organization.post_code}}</p></td>
+                        <td><p class="text-primary tableText">{{organization.contact_person}}<span>, </span> {{organization.contact_number}}</p></td>
+                        <td>
+                            <p class="label label-warning">{{#link-to "deleteOrganization" organization}}<span class='glyphicon glyphicon-remove' title="Delete"></span>{{/link-to}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            {{/each}}
+        </table>
+    </div>
+    <div class="panel-footer">
+        <p class="text-info"> Something here about the list of organizations </p>
+    </div>
 </div>
+

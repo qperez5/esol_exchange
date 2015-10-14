@@ -18,10 +18,13 @@ Esol.DeleteOrganizationController = Ember.ObjectController.extend({
         }.property(),
 
         delete:function(){
+
             var organization = this.get("model");
+            var controller = this;
             organization.deleteRecord();
-            organization.save();
-            this.transitionToRoute('organization');
+            organization.save().then(function(){
+                controller.transitionToRoute('organization');
+            });
         },
         cancel:function(){
             this.transitionToRoute('organization');
@@ -113,7 +116,7 @@ Esol.CourseController = Ember.Controller.extend({
     actions: {
         add:function(){
             console.log("adding a new course");
-            this.transitionToRoute('editCourse',0); //TODO para las otras
+            this.transitionToRoute('editCourse',0);
         }
     }
 });
@@ -124,10 +127,12 @@ Esol.DeleteCourseController = Ember.ObjectController.extend({
         delete:function(){
             console.debug("deleting the course...");
             console.dir(this.get("model"));
+            var controller = this;
             var course = this.get("model");
             course.deleteRecord();
-            course.save();
-            this.transitionToRoute('centre');
+            course.save().then(function(){
+                controller.transitionToRoute('course');
+            });
         },
         cancel:function(){
             console.debug("canceling delete the course...");
@@ -136,9 +141,20 @@ Esol.DeleteCourseController = Ember.ObjectController.extend({
     }
 });
 
-Esol.EditCourseController = Ember.ObjectController.extend({
+Esol.EditCourseController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
     //selectedOrganization: null,
+
+    validations: {
+        "name": {
+            presence: true,
+            presence:{ message: "  Name is required" }
+        },
+        "times": {
+            presence: true,
+            presence:{ message: "  Time is required" }
+        }
+    },
 
     organizations: function(){
         return this.store.find("organization");
@@ -158,11 +174,12 @@ Esol.EditCourseController = Ember.ObjectController.extend({
     }.property(),
 
     costNotConditioned: function(){
-        return this.get("model.cost_free") != "c";
+        var result = this.get("model.cost_free") != "c" && this.get("model.cost_free") != "n";
+        return result;
     }.property("model.cost_free"),
 
     clearCostCondition: function(){
-        if(this.get("model.cost_free")!= "c"){
+        if(this.get("model.cost_free") == "y"){
             this.set("model.cost_condition","");
         }
     }.observes("model.cost_free"),
@@ -180,7 +197,7 @@ Esol.EditCourseController = Ember.ObjectController.extend({
     levelList: function(){
         return [
             'Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
-            'A1', 'A2', 'B1', 'B2','C1', 'C2'
+            'A1', 'A2', 'B1', 'B2','C1', 'C2', 'Mixed', 'Non-literate', 'Any'
         ];
     }.property(),
 
@@ -223,10 +240,12 @@ Esol.DeleteCentreController = Ember.ObjectController.extend({
         delete:function(){
             console.debug("deleting the centre...");
             console.dir(this.get("model"));
+            var controller = this;
             var centre = this.get("model");
             centre.deleteRecord();
-            centre.save();
-            this.transitionToRoute('centre');
+            centre.save().then(function(){
+                controller.transitionToRoute('centre');
+            });
         },
         cancel:function(){
             console.debug("canceling delete the centre...");
@@ -257,14 +276,16 @@ Esol.EditCentreController = Ember.ObjectController.extend(Ember.Validations.Mixi
         },
         "post_code": {
             presence: true,
-            presence:{ message: ", Postcode is required" }
+            presence:{ message: ", Postcode is required" },
 
         },
+
         "address": {
             presence: true,
             presence:{ message: ", Address is required" }
 
         }
+
     },
 
     accecibilityNotConditioned: function(){
@@ -297,11 +318,15 @@ Esol.EditCentreController = Ember.ObjectController.extend(Ember.Validations.Mixi
             var geoLocation = results[0].geometry.location;
             var lat = geoLocation.lat();
             var lng = geoLocation.lng();
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var labelIndex = 0;
             mapVar.setZoom(16);
             mapVar.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
+
                 map: mapVar,
                 position: results[0].geometry.location
+
             });
             this.get("model").set("location","POINT(" + lat + " " + lng+")");
     }
@@ -316,7 +341,29 @@ function geocode(address, geocodeCallback, callbackContext){
     });
 }
 
+Esol.SearchParameterExtractor = Ember.Object.extend({
+    extractParameter: function(mapController){
+        //TODO all extractors must extend this class
+    }
+});
+
+Esol.AddressExtractor = Esol.SearchParameterExtractor.extend({
+
+    extractParameter: function(mapController){
+        var addressRegex = /(.+)|at (.+)/g ;
+        var results = addressRegex.exec(mapController.get("generalSearch"));
+        if(results!=null && results[1]!=null){
+            mapController.set("postCode",results[1]);
+        }else if(results!=null && results[2]!=null){
+            mapController.set("postCode",results[2]);
+        } else {
+            mapController.set("postCode","");
+        }
+    }
+});
+
 Esol.MapController = Ember.Controller.extend({
+    generalSearch: '',
     isFree: true,
     childCare: true,
     disability: true,
@@ -327,6 +374,9 @@ Esol.MapController = Ember.Controller.extend({
     map: null,
     foundCourses: Ember.A([]),
     mapMarkers: Ember.A([]),
+    parameterExtractors: Ember.A([
+        Esol.AddressExtractor.create()
+    ]),
 
     executeSearch: function (queryParams) {
         var controller = this;
@@ -334,18 +384,25 @@ Esol.MapController = Ember.Controller.extend({
 
         this.store.find("course", queryParams).then(function (results) {
             controller.set("foundCourses", results);
+            //var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var labelIndex = 0;
             controller.get("foundCourses").forEach(function (foundCourse) {
                 //logica para dibujar el punto
+
                 foundCourse.get("centres").forEach(function (centre) {
                     var mapVar = controller.get("map");
-                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + "Contact:" + "&nbsp;" + foundCourse.get("contact_person") + "<br/>" + foundCourse.get("contact_phone") + "<br/>"+ "{{#link-to 'searchResult' foundCourse}}}" +"Details"+ "{{{/link-to}}" + "</span>";
+                    labelIndex = labelIndex + 1;
+
+                    var contentWindow = "<span class='windowInfo'>" + centre.get("name") + "<br/>" + "Contact:" + "&nbsp;" + foundCourse.get("contact_person") + "<br/>" + foundCourse.get("contact_phone") + "<br/>"  + "</span>";
                     var infowindow = new google.maps.InfoWindow({
                         content: contentWindow
                     });
 
                     var marker = new google.maps.Marker({
+
                         map: mapVar,
                         position: centre.get("latLng"),
+                        label: (labelIndex).toString(), // labels[labelIndex++ % labels.length],
                         title: centre.get("name")
 
                     });
@@ -370,30 +427,38 @@ Esol.MapController = Ember.Controller.extend({
 
     levelList: function(){
         return [
-            'Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
-            'A1', 'A2', 'B1', 'B2','C1', 'C2'
+            ' ','Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
+            'A1', 'A2', 'B1', 'B2','C1', 'C2', 'Mixed', 'Non-literate', 'Any'
         ];
     }.property(),
 
     townList: function(){
         return [
-            'Canning Town','Plaistow','East Ham','Stratford','Forest Gate','Beckton', 'Custom House',
+            ' ','Canning Town','Plaistow','East Ham','Stratford','Forest Gate','Beckton', 'Custom House',
             'Manor Park', 'West Ham', 'Upton Park', 'North Woolwich','Silvertown'
         ];
     }.property(),
 
     classTypeList: function(){
         return [
-            'Formal course','Informal classes','Conversation / speaking only','ESOL with IT','ESOL with sewing',
+            ' ','Formal course','Informal classes','Conversation / speaking only','ESOL with IT','ESOL with sewing',
             'Women only', 'ESOL for Citizenship','ESOL for Employment'
         ];
     }.property(),
 
     actions: {
         detailedSearchEnabled: false,
+
         enableAdvancedSearch: function() {
             var currentlyEnabled = this.get("detailedSearchEnabled");
             this.set("detailedSearchEnabled", !currentlyEnabled);
+        },
+
+        generalSearchChanged: function(){
+            var controller = this;
+            this.get("parameterExtractors").forEach(function(paramExtractor){
+                paramExtractor.extractParameter(controller);
+            });
         },
 
         search: function(){
@@ -409,9 +474,8 @@ Esol.MapController = Ember.Controller.extend({
                 disability: this.get("disability"),
                 level: this.get("selectedLevel"),
                 classType: this.get("selectedClassType")
-
+                //postcode: this.get("post_code")
             };
-
             if(postCodeSearch!=null && postCodeSearch!=""){
                 geocode(postCodeSearch,function(results){
                     var geoLocation = results[0].geometry.location;
@@ -444,3 +508,17 @@ Esol.SearchResultController = Ember.ObjectController.extend({
     }
 
 });
+
+Esol.ApplicationController = Ember.ObjectController.extend({
+
+    actions: {
+        activeOption: function() {
+            var currentlyEnabled = this.get("detailedSearchEnabled");
+            this.set("detailedSearchEnabled", !currentlyEnabled);
+        }
+
+    }
+
+});
+
+
