@@ -37,11 +37,12 @@
                 <div class="col-xs-5">
                     <h3 class="text-error">How much does it cost?</h3>
                     <p class="text-error" id="cost_free">
-                        {{#if cost_free}}
-                            <span> It is for free </span>
-                            {{cost_condition}}
+                        {{#if costFree}}
+                            <span> It is for free. </span>
+                            {{costFree}}
                         {{else}}
-                             &nbsp; <span>{{cost_condition}}</span>
+                            <span> It course has a charge. </span>
+                             &nbsp; <span>{{cost_free}}</span>
                         {{/if}}
                     </p>
                 </div>
