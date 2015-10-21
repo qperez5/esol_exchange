@@ -9,7 +9,6 @@ Esol.MapView = Ember.View.extend({
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
         this.get("controller").set("map",map);
-
         var newhamLayer = new google.maps.KmlLayer({
             url: "http://mapit.mysociety.org/area/2510.kml",
             map: map
@@ -51,5 +50,13 @@ Esol.OrganizationView = Ember.View.extend({
     didInsertElement: function(){
         var pagination = document.getElementById('pag');
         pagination.bs_pagination;
+    }
+});
+
+Esol.InfoWindowComponent = Ember.Component.extend({
+    classNames: ['info-window-container'],
+
+    attachTo: function ($el) {
+        this.$().detach().appendTo($el);
     }
 });

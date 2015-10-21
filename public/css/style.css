@@ -59,7 +59,7 @@
 
 .darkBluSubTitle{
     color: #00485D;
-    padding: 10px 0 0 20px;
+    padding: 10px 0 0 ;
     font-weight: 600;
 }
 
@@ -90,6 +90,16 @@ div.container a.brand {
     background: url("../img/zf2-logo.png") no-repeat scroll transparent;
     margin-left: 0;
     padding: 8px 20px 12px 40px;
+}
+/* popupFormat */
+.popupFormat{
+    font-family: 'Helvetica Neue','Nunito', sans-serif,'Nunito', sans-serif;
+    /*color: #faf3bc;*/
+    color:  black;
+    list-style-type: decimal;
+    margin-left: 5px;
+    padding-left: 15px;
+    background: rgba(214, 165, 113, 0.1);
 }
 
 body {

@@ -378,55 +378,73 @@ Esol.MapController = Ember.Controller.extend({
         Esol.AddressExtractor.create()
     ]),
 
-        executeSearch: function (queryParams) {
-            var controller = this;
-            this.clearMarkers();
+    templateToString1: function (center,courses) {
+        var markerDiv = $("#marker").clone(true);
+        markerDiv.find(".name").html(center.get("name"));
+    //otras cosas podrian setearse aqui ...
 
+        return markerDiv.html();
+    },
+    templateToString:function  (center,courses) {
+    var markerDiv = $("#marker").clone(true);
+    markerDiv.find(".name").html(center.get("name"));
+    //otras cosas podrian setearse aqui ...
+    var list = markerDiv.find(".list");
+    courses.forEach(function(course){
+        list.append("<li>" + "<a href='searchResult'>" + course.get("name") + ", " + course.get("contact_phone") +  "</a>" + "</li>");
+    });
+    return markerDiv.html();
+},
 
+    executeSearch: function (queryParams) {
+        var controller = this;
+        this.clearMarkers();
+        this.store.find("course", queryParams).then(function (results) {
+            controller.set("foundCourses", results);
+            var centres = Ember.Set.create(); //aqui guardaremos los centros encontrados, en un Set se guardan sin repeticiones ...
+            var coursesMap = Ember.Map.create();//aqui en este mapa pondremos para cada centro la lista de cursos ...
 
+            controller.get("foundCourses").forEach(function (foundCourse) {
+                foundCourse.get("centres").forEach(function (centre) {
+                    centres.add(centre);
+                    if(coursesMap[centre.get("id")] == undefined){
+                        coursesMap[centre.get("id")] = Ember.Set.create();
+                    }
+                    coursesMap[centre.get("id")].add(foundCourse);
+                });
+            });
 
-            this.store.find("course", queryParams).then(function (results) {
-                controller.set("foundCourses", results);
-                var centres = Ember.Set.create(); //aqui guardaremos los centros encontrados, en un Set se guardan sin repeticiones ...
-                var coursesMap = Ember.Map.create();//aqui en este mapa pondremos para cada centro la lista de cursos ...
+            var mapVar = controller.get("map");
+            //var contentWindowTemplate = Ember.Handlebars.compile("<span class='windowInfo'>{{centre.name}}<br/> Courses: <ul>{{#each course in courses}}<li>{{course.name}}</li>{{/each}}</ul></span>");
 
-                controller.get("foundCourses").forEach(function (foundCourse) {
-                    foundCourse.get("centres").forEach(function (centre) {
-                        centres.add(centre);
-                        if(coursesMap[centre.get("id")] == undefined){
-                            coursesMap[centre.get("id")] = Ember.Set.create();
-                        }
-                        coursesMap[centre.get("id")].add(foundCourse);
+            //centres.forEach(function(centre){
+             //   var courses = coursesMap[centre.get("id")];
+                //var infoWindow = new google.maps.InfoWindow({
+                 //   content: contentWindowTemplate(centre,courses)
+               // });
+
+                centres.forEach(function(centre){
+                    var courses = coursesMap[centre.get("id")];
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: controller.templateToString(centre,courses)
                     });
+
+                var marker = new google.maps.Marker({
+                    map: mapVar,
+                    position: centre.get("latLng"),
+                    label: courses.length.toString(),
+                    title: centre.get("name")
                 });
 
-                var mapVar = controller.get("map");
-                centres.forEach(function(centre){
-                    var contentWindowTemplate = Handlebars.compile("<span class='windowInfo'> {{centre.name}}<br/> Courses: <ul>{{#each courses as course}}<li>{{course.name}}</li>{{/each}}</ul>");
-                    var courses = coursesMap[centre.get("id")];
-                    var infowindow = new google.maps.InfoWindow({
-                        content: contentWindowTemplate({centre: centre, courses: courses})
-                    });
+                marker.addListener('click', function() {
+                    infoWindow.open(mapVar, marker);
+                });
 
+                controller.get("mapMarkers").pushObject(marker);
+            })
 
-                    var marker = new google.maps.Marker({
-
-                        map: mapVar,
-                        position: centre.get("latLng"),
-                        label: courses.length.toString(),
-                        title: centre.get("name")
-
-                    });
-
-                    marker.addListener('click', function() {
-                        infowindow.open(mapVar, marker);
-                    });
-
-                    controller.get("mapMarkers").pushObject(marker);
-                })
-
-            });
-        },
+        });
+    },
 
     clearMarkers: function(){
         this.get("mapMarkers").forEach(function(marker){
@@ -517,10 +535,9 @@ Esol.SearchResultController = Ember.ObjectController.extend({
 
     },
 
-    cost_free: 'n',
-    costFree: function(){
-        return this.get('cost_free');
-    }.property('cost_free')
+    isFree: function(){
+        return this.get('model.cost_free') == "y";
+    }.property('model.cost_free')
 
 });
 

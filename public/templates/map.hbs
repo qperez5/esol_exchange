@@ -112,4 +112,19 @@
             {{/if}}
             </div> <!-- /. end detailedSearch-->
         </div>
-    <div id="map-canvas" class="mapSearchOptionBackground panel"></div>
+    <div class="">
+        <div class="">
+            <div id="map-canvas" class="mapSearchOptionBackground panel"></div>
+            {{info-window isVisible=false viewName='marker'}}
+        </div>
+            <!-- Algo sobre el marker -->
+        <div id="marker" class="hide">
+            <h4 class="text-center text-danger name">center.name</h4>
+            <h5 class="" >Courses:</h5>
+
+            <ul class="popupFormat text-success list">
+
+            </ul>
+        </div>
+    </div>
+

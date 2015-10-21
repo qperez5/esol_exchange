@@ -37,12 +37,12 @@
                 <div class="col-xs-5">
                     <h3 class="text-error">How much does it cost?</h3>
                     <p class="text-error" id="cost_free">
-                        {{#if costFree}}
+                        {{#if isFree}}
                             <span> It is for free. </span>
-                            {{costFree}}
+                            &nbsp; <span>{{cost_condition}}</span>
                         {{else}}
                             <span> It course has a charge. </span>
-                             &nbsp; <span>{{cost_free}}</span>
+                            &nbsp; <span>{{cost_condition}}</span>
                         {{/if}}
                     </p>
                 </div>
@@ -61,11 +61,13 @@
             </div>
             <hr></hr>
             <div class="row">
-                <h3 class="text-error">Notes:</h3>
-                <div class="col-xs-12">
-                    <p class="text-error">About accecibility: </p>
-                    <p class="text-error">About chilscare service:{{child_care_condition}} </p>
-                    <p class="text-error">Other information: {{other_information}}</p>
+                <div class="col-xs-11">
+                    <h3 class="text-error">Notes:</h3>
+                    <div class="col-xs-12">
+                        <p class="text-error">About accecibility: </p>
+                        <p class="text-error">About chilscare service:{{child_care_condition}} </p>
+                        <p class="text-error">Other information: {{other_information}}</p>
+                    </div>
                 </div>
             </div>
         </form>
