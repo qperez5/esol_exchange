@@ -43,7 +43,7 @@ class CourseTable
             ->join(array("cc"=>"course_centre"),"co.id = cc.course_id")
             ->join(array("ce"=>"centre"),"ce.id = cc.centre_id",
                 array("centre_id" => "id",
-                      "name",
+                      "centreName" => "name",
                       "location"=>new Expression("AsWKT(location)"),
                       "post_code",
                       "address",
@@ -56,7 +56,7 @@ class CourseTable
         //especificar las columnas que queremos en el resultados de las consultas.
         $select->columns(array(
             "id",
-            "name",
+            "courseName" => "name",
             "class_type",
             "levels",
             "who_join",
@@ -78,45 +78,37 @@ class CourseTable
         $where = new Where();
         //TODO terminar de poner prefijos a las tablas
         if(isset($free)){
-            if($free == 'true'){
+            if($free == 'Yes'){
                 $where->in("co.cost_free",array("y","c"));
-            } else {
+            } else if($free == 'No')  {
                 $where->equalTo("co.cost_free","n");
             }
         }
 
         if(isset($disability)){
-            if($disability == 'true'){
+            if($disability == 'Yes'){
                 $where->in("ce.accebility",array("y","c"));
-            } else {
+            } else if($disability == 'No') {
                 $where->equalTo("ce.accebility","n");
             }
         }
 
         if(isset($child_care)){
-            if($child_care == 'true'){
+            if($child_care == 'Yes'){
                 $where->in("co.child_care",array("y","c"));
-            } else {
+            } else if($child_care == 'No') {
                 $where->equalTo("co.child_care","n");
             }
-        }
-
-        if(isset($level)){
-            $where->in("co.levels",$level);
-        }
-
-        if(isset($classType)){
-            $where->in("co.levels",$classType);
         }
 
         //hacemos busquedas en 3km a la redonda, se puede convertir en un parametro
         $R = 6371;//radio de la tierra en km
         if(isset($lat) && isset($lng)){
-            $maxLat = $lat + rad2deg(3 / $R);
-            $minLat = $lat - rad2deg(3 / $R);
+            $maxLat = $lat + rad2deg(1 / $R);
+            $minLat = $lat - rad2deg(1 / $R);
 
-            $maxLng = $lng + rad2deg(3/$R/cos(deg2rad($lat)));
-            $minLng = $lng - rad2deg(3/$R/cos(deg2rad($lat)));
+            $maxLng = $lng + rad2deg(1/$R/cos(deg2rad($lat)));
+            $minLng = $lng - rad2deg(1/$R/cos(deg2rad($lat)));
 
             $where->between(new Expression("X(ce.location)"),$minLat,$maxLat);
             $where->between(new Expression("y(ce.location)"),$minLng,$maxLng);

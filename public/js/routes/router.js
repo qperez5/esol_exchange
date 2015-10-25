@@ -6,15 +6,15 @@ Esol.Router.map(function(){
     this.route('about');
     this.route('help');
     this.route('course');
-    this.route('editCourse',{path: '/editCourse/:course_id'});
-    this.route('deleteCourse',{path: '/deleteCourse/:course_id'});
+    this.route('editCourse',{path: '/edit_course/:course_id'});
+    this.route('deleteCourse',{path: '/delete_course/:course_id'});
     this.route('centre');
-    this.route('editCentre',{path: '/editCentre/:centre_id'});
-    this.route('deleteCentre',{path: '/deleteCentre/:centre_id'});
+    this.route('editCentre',{path: '/edit_centre/:centre_id'});
+    this.route('deleteCentre',{path: '/delete_centre/:centre_id'});
     this.route('centre');
-    this.route('searchResult',{path: '/result/:course_id'});
+    this.route('searchResult',{path: '/result/:course_id/:centre_id'});
     this.route('administration');
-    this.route('whatLevel',{path: 'Which_level_is_right_for_me'});
+    this.route('whatLevel',{path: 'right_level'});
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
@@ -116,10 +116,20 @@ Esol.DeleteCentreRoute = Ember.Route.extend({
 });
 
 Esol.SearchResultRoute = Ember.Route.extend({
+
+    centreId: 0,
+
     model: function(params) {
+        this.set("centreId", params.centre_id);
         return this.store.findRecord('course', params.course_id);
+    },
+
+    setupController: function(controller, model){
+        this._super(controller,model);
+        controller.set("centreId",this.get("centreId"));
     }
 });
+
 
 Esol.AdministrationRoute = Ember.Route.extend({
 

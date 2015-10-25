@@ -21,7 +21,7 @@ Esol.EditCentreView = Ember.View.extend({
     templateName: "editCentre",
     didInsertElement: function(){
         var mapCanvas = document.getElementById('map-canvas');
-        var context = mapCanvas.getContext("2d");
+        //var context = mapCanvas.getContext("2d");
         var mapOptions = {
             center: new google.maps.LatLng(51.548222, 0.01500),
             zoom: 16,
@@ -38,10 +38,11 @@ Esol.SearchResultView = Ember.View.extend({
         var mapCanvas = document.getElementById('map-canvas-small');
         var mapOptions = {
             center: new google.maps.LatLng(51.548222, 0.01500),
-            zoom: 15,
+            zoom: 14,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
+        this.get("controller").set("map",map);
     }
 });
 

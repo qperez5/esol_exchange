@@ -34,9 +34,8 @@ namespace Course\Controller;
     }
 
     public function hasFilterParameters(){
-        return isset($_GET["free"]) || isset($_GET["disability"]) || isset($_GET["child_care"])
-            || isset($_GET["level"]) || isset($_GET["postcode"]) || isset($_GET["classType"]) || isset($_GET["town"])
-            || isset($_GET["lat"]) || isset($_GET["lng"]);
+        return isset($_GET["free"]) || isset($_GET["disability"]) || isset($_GET["childCare"])
+            || isset($_GET["postCode"]) || isset($_GET["lat"]) || isset($_GET["lng"]);
     }
 
     private function allCourses(){
@@ -92,7 +91,7 @@ namespace Course\Controller;
     private function extractCourseJson(array $resultRow){
         $courseData = array();
         $courseData["id"] = $resultRow["id"];
-        $courseData["name"] = $resultRow["name"];
+        $courseData["name"] = $resultRow["courseName"];
         $courseData["class_type"] = $resultRow["class_type"];
         $courseData["levels"] = $resultRow["levels"];
         $courseData["who_join"] = $resultRow["who_join"];
@@ -118,7 +117,7 @@ namespace Course\Controller;
         //TODO implementar
         $centreData = array();
         $centreData["id"] = $resultRow["centre_id"];
-        $centreData["name"] = $resultRow["name"];
+        $centreData["name"] = $resultRow["centreName"];
         $centreData["location"] = $resultRow["location"];
         $centreData["post_code"] = $resultRow["post_code"];
         $centreData["address"] = $resultRow["address"];
@@ -180,8 +179,8 @@ namespace Course\Controller;
 
      private function findCourses() {
          $results = $this->getCourseTable()->findCourses(
-             $_GET["free"],$_GET["disability"],$_GET["child_care"],
-             $_GET["lat"], $_GET["lng"],$_GET["level"], $_GET["town"], $_GET["postcode"], $_GET["classType"]
+             $_GET["free"],$_GET["disability"],$_GET["childCare"],
+             $_GET["lat"], $_GET["lng"]
          );
          $courses = array();
          $coursesMap = array();

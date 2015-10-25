@@ -35,10 +35,10 @@ Esol.DeleteOrganizationController = Ember.ObjectController.extend({
 Esol.EditOrganizationController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
     validations: {
-       "name": {
+        "name": {
             presence: true,
             presence:{ message: "  Name is required" }
-       },
+        },
         "contact_number": {
             presence: true,
             presence:{ message: "  Contact number is required" }
@@ -89,13 +89,13 @@ Esol.EditOrganizationController = Ember.ObjectController.extend(Ember.Validation
     }.observes("model.tutors_qualified"),
 
     coursesAcreditationNotConditioned: function(){
-    return this.get("model.courses_acreditated") != "c";
+        return this.get("model.courses_acreditated") != "c";
     }.property("model.courses_acreditated"),
 
     clearCoursesAcreditationCondition: function(){
-    if(this.get("model.courses_acreditated")!= "c"){
-        this.set("model.courses_acreditation_condition","");
-    }
+        if(this.get("model.courses_acreditated")!= "c"){
+            this.set("model.courses_acreditation_condition","");
+        }
     }.observes("model.courses_acreditated"),
 
     actions: {
@@ -201,6 +201,12 @@ Esol.EditCourseController = Ember.ObjectController.extend(Ember.Validations.Mixi
         ];
     }.property(),
 
+    yesNotConditionList: function(){
+        return [
+            'Yes', 'No', 'Any'
+        ];
+    }.property(),
+
     actions: {
         save: function(){
             var selectedOrganization = this.get("selectedOrganization");
@@ -208,7 +214,7 @@ Esol.EditCourseController = Ember.ObjectController.extend(Ember.Validations.Mixi
             var selectedLevels = this.get("selectedLevels");
 
             if(selectedOrganization!=null){
-               this.get("model").set("organization",selectedOrganization);
+                this.get("model").set("organization",selectedOrganization);
             }
 
             if(selectedLevels!=null){
@@ -314,21 +320,19 @@ Esol.EditCentreController = Ember.ObjectController.extend(Ember.Validations.Mixi
     },
 
     addressFound: function(results){
-            var mapVar = this.get("map");
-            var geoLocation = results[0].geometry.location;
-            var lat = geoLocation.lat();
-            var lng = geoLocation.lng();
-            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            var labelIndex = 0;
-            mapVar.setZoom(16);
-            mapVar.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+        var mapVar = this.get("map");
+        var geoLocation = results[0].geometry.location;
+        var lat = geoLocation.lat();
+        var lng = geoLocation.lng();
+        mapVar.setZoom(16);
+        mapVar.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
 
-                map: mapVar,
-                position: results[0].geometry.location
+            map: mapVar,
+            position: results[0].geometry.location
 
-            });
-            this.get("model").set("location","POINT(" + lat + " " + lng+")");
+        });
+        this.get("model").set("location","POINT(" + lat + " " + lng+")");
     }
 });
 
@@ -364,13 +368,10 @@ Esol.AddressExtractor = Esol.SearchParameterExtractor.extend({
 
 Esol.MapController = Ember.Controller.extend({
     generalSearch: '',
-    isFree: true,
-    childCare: true,
-    disability: true,
+    free: 'Any',
+    childCare: 'Any',
+    disability: 'Any',
     postCode: null,
-    classType:null,
-    town: null,
-    level: null,
     map: null,
     foundCourses: Ember.A([]),
     mapMarkers: Ember.A([]),
@@ -378,23 +379,16 @@ Esol.MapController = Ember.Controller.extend({
         Esol.AddressExtractor.create()
     ]),
 
-    templateToString1: function (center,courses) {
-        var markerDiv = $("#marker").clone(true);
-        markerDiv.find(".name").html(center.get("name"));
-    //otras cosas podrian setearse aqui ...
-
+    templateToString:function  (center,courses) {
+        var markerDiv = $("#markerContent").clone(true);
+        markerDiv.find(".centerName").html(center.get("name"));
+        //otras cosas podrian setearse aqui ...
+        var list = markerDiv.find(".list");
+        courses.forEach(function(course){
+            list.append("<li class=''><a href='#/result/" + course.get("id") + "/" + center.get("id") +"'  data-placement='left' data-toggle='popover'>" + course.get("name") +  "</a>" + "</li>");
+        });
         return markerDiv.html();
     },
-    templateToString:function  (center,courses) {
-    var markerDiv = $("#marker").clone(true);
-    markerDiv.find(".name").html(center.get("name"));
-    //otras cosas podrian setearse aqui ...
-    var list = markerDiv.find(".list");
-    courses.forEach(function(course){
-        list.append("<li>" + "<a href='searchResult'>" + course.get("name") + ", " + course.get("contact_phone") +  "</a>" + "</li>");
-    });
-    return markerDiv.html();
-},
 
     executeSearch: function (queryParams) {
         var controller = this;
@@ -415,19 +409,12 @@ Esol.MapController = Ember.Controller.extend({
             });
 
             var mapVar = controller.get("map");
-            //var contentWindowTemplate = Ember.Handlebars.compile("<span class='windowInfo'>{{centre.name}}<br/> Courses: <ul>{{#each course in courses}}<li>{{course.name}}</li>{{/each}}</ul></span>");
 
-            //centres.forEach(function(centre){
-             //   var courses = coursesMap[centre.get("id")];
-                //var infoWindow = new google.maps.InfoWindow({
-                 //   content: contentWindowTemplate(centre,courses)
-               // });
-
-                centres.forEach(function(centre){
-                    var courses = coursesMap[centre.get("id")];
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: controller.templateToString(centre,courses)
-                    });
+            centres.forEach(function(centre){
+                var courses = coursesMap[centre.get("id")];
+                var infoWindow = new google.maps.InfoWindow({
+                    content: controller.templateToString(centre,courses)
+                });
 
                 var marker = new google.maps.Marker({
                     map: mapVar,
@@ -460,6 +447,12 @@ Esol.MapController = Ember.Controller.extend({
         ];
     }.property(),
 
+    yesNotConditionList: function(){
+        return [
+            'Yes', 'No', 'Any'
+        ];
+    }.property(),
+
     townList: function(){
         return [
             ' ','Canning Town','Plaistow','East Ham','Stratford','Forest Gate','Beckton', 'Custom House',
@@ -483,25 +476,22 @@ Esol.MapController = Ember.Controller.extend({
         },
 
         generalSearchChanged: function(){
-            var controller = this;
+          /*  var controller = this;
             this.get("parameterExtractors").forEach(function(paramExtractor){
                 paramExtractor.extractParameter(controller);
-            });
+            });*/
         },
 
         search: function(){
             var postCodeSearch = this.get("postCode");
             var controller = this;
-            var selectedLevel = this.get("selectedLevel");
-            var selectedClassType = this.get("selectedClassType");
-            var selectedTown = this.get("selectedTown");
 
             var queryParams = {
-                free: this.get("isFree"),
-                child_care: this.get("childCare"),
-                disability: this.get("disability"),
-                level: this.get("selectedLevel"),
-                classType: this.get("selectedClassType")
+                free: this.get("free"),
+                childCare: this.get("childCare"),
+                disability: this.get("disability")
+                //level: this.get("selectedLevel"),
+                //classType: this.get("selectedClassType")
                 //postcode: this.get("post_code")
             };
             if(postCodeSearch!=null && postCodeSearch!=""){
@@ -512,7 +502,8 @@ Esol.MapController = Ember.Controller.extend({
 
                     this.executeSearch(queryParams);
                 },controller);
-            } else {
+            }
+             /* else {
                 if(selectedTown!=null && selectedTown!=""){
                     geocode(selectedTown,function(results){
                         var geoLocation = results[0].geometry.location;
@@ -524,12 +515,17 @@ Esol.MapController = Ember.Controller.extend({
                     this.executeSearch(queryParams);
                 }
             }
-                this.executeSearch(queryParams);
-            }
-        }
-    });
 
-Esol.SearchResultController = Ember.ObjectController.extend({
+              this.executeSearch(queryParams);*/
+
+        }
+    }
+});
+
+Esol.SearchResultController = Ember.Controller.extend({
+
+    centreId: 0,
+    map: null,
 
     actions: {
 
@@ -537,7 +533,48 @@ Esol.SearchResultController = Ember.ObjectController.extend({
 
     isFree: function(){
         return this.get('model.cost_free') == "y";
-    }.property('model.cost_free')
+    }.property('model.cost_free'),
+
+    hasAccessibility: function(){
+        return this.get('centre.accessibility') == "y";
+    }.property('centre.accessibility'),
+
+    hasChildCare: function(){
+    return this.get('model.child_care') == "y";
+    }.property('model.child_care'),
+
+    centre: function(){
+        var centreId = this.get("centreId");
+        if(this.get("model")!=null){
+            return this.get("model.centres").find(function(centre){
+                return centre.get("id") == centreId;
+            });
+        }
+        return null;
+    }.property("centreId","model"),
+
+    actions: {
+        search: function () {
+            geocode(this.get("centre.fullAddress"),this.addressFound, this);
+        }
+
+    },
+
+    addressFound: function(results){
+        var mapVar = this.get("map");
+        var geoLocation = results[0].geometry.location;
+        var lat = geoLocation.lat();
+        var lng = geoLocation.lng();
+        mapVar.setZoom(14);
+        mapVar.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+
+            map: mapVar,
+            position: results[0].geometry.location
+
+        });
+        this.get("model").set("location","POINT(" + lat + " " + lng+")");
+    }
 
 });
 
@@ -552,5 +589,3 @@ Esol.ApplicationController = Ember.ObjectController.extend({
     }
 
 });
-
-
