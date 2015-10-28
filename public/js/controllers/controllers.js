@@ -196,8 +196,8 @@ Esol.EditCourseController = Ember.ObjectController.extend(Ember.Validations.Mixi
 
     levelList: function(){
         return [
-            'Beginners pre-literate','Pre-entry','Entry level 1','Entry level 2','Entry level 3','Level  1', 'Level  2',
-            'A1', 'A2', 'B1', 'B2','C1', 'C2', 'Mixed', 'Non-literate', 'Any'
+            'Beginners pre-literate', 'Pre-entry', 'Entry level 1', 'Entry level 2', 'Entry level 3', 'Level  1', 'Level  2',
+            'A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Mixed', 'Non-literate', 'Any'
         ];
     }.property(),
 
@@ -338,7 +338,7 @@ Esol.EditCentreController = Ember.ObjectController.extend(Ember.Validations.Mixi
 
 function geocode(address, geocodeCallback, callbackContext){
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': address }, function(results,status){
+    geocoder.geocode({'address': address, 'componentRestrictions': {"country":"GB", 'administrativeArea':'Newham', 'locality':"London"} }, function(results,status){
         if(status == google.maps.GeocoderStatus.OK){
             geocodeCallback.call(callbackContext,results);
         }
@@ -349,6 +349,13 @@ Esol.SearchParameterExtractor = Ember.Object.extend({
     extractParameter: function(mapController){
         //TODO all extractors must extend this class
     }
+});
+
+$(function() {
+    $('#nav li a').click(function() {
+        $('#nav li').removeClass('active');
+        $($(this).attr('link-to')).addClass('active');
+    });
 });
 
 Esol.AddressExtractor = Esol.SearchParameterExtractor.extend({
@@ -433,6 +440,51 @@ Esol.MapController = Ember.Controller.extend({
         });
     },
 
+    extractGeoParams: function(results){
+        var geoParams = {
+           lat:0,
+           lng:0
+        };
+
+        var geoLocation = null;
+        var controller = this;
+
+        results.forEach(function(result){
+            //if(controller.isValidResult(result)){
+                geoLocation = result.geometry.location;
+            //}
+        });
+
+        if(geoLocation != null){
+            geoParams.lat = geoLocation.lat();
+            geoParams.lng = geoLocation.lng();
+            return geoParams;
+        } else {
+            return null;
+        }
+    },
+    /*
+    isValidResult: function(result){
+        var isValid = false;
+        result.address_components.forEach(function(component){
+            if(component.short_name == "GB"){
+                component.types.forEach(function(comp_type){
+                    if(comp_type == "country"){
+                        isValid = true;
+                        return ;
+                    }
+                });
+
+                if (isValid){
+                    return;
+                }
+            }
+        });
+
+        return isValid;
+    }, */
+
+
     clearMarkers: function(){
         this.get("mapMarkers").forEach(function(marker){
             marker.setMap(null);
@@ -494,13 +546,19 @@ Esol.MapController = Ember.Controller.extend({
                 //classType: this.get("selectedClassType")
                 //postcode: this.get("post_code")
             };
+
             if(postCodeSearch!=null && postCodeSearch!=""){
                 geocode(postCodeSearch,function(results){
-                    var geoLocation = results[0].geometry.location;
-                    queryParams.lat = geoLocation.lat();
-                    queryParams.lng = geoLocation.lng();
+                        var geoParams = this.extractGeoParams(results);
+                        if (geoParams!=null) {
+                            queryParams.lat = geoParams.lat;
+                            queryParams.lng = geoParams.lng;
+                            this.executeSearch(queryParams);
+                        } else {
+                           //TODO alertNoResults
+                        }
 
-                    this.executeSearch(queryParams);
+
                 },controller);
             }
              /* else {

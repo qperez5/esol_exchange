@@ -9,26 +9,35 @@
  -->
 
 <header class="headerMargin">
-    <div class="row navbar navbar-default navbar-fixed-top">
-        <div class="col-sm-2">
-            <a href="#"><img class=" main-logo img-rounded img-responsive" src="img/ESOLLogo.jpg" alt="Esol Exchange"></img></a>
-        </div>
-        <div class="col-sm-4">
-            <h1 class="text-danger text-center"> This page is under development</h1>
-        </div>
-        <div class="col-sm-5">
-            <nav class="">
-                <ul class="nav nav-tabs navbar-nav nav-pills navbarPadding navbar-right">
-                    <li  class="text-primary menuFormat" role="presentation">
-                        {{#link-to 'about'}}About{{/link-to}}
-                    </li>
-                    <li class="text-primary menuFormat hidden" role="presentation">{{#link-to 'administration'}}System{{/link-to}}</li>
-                    <li class="text-primary menuFormat " role="presentation">{{#link-to 'map'}}Home{{/link-to}}</li>
-                    <li class="text-primary menuFormat" role="presentation">{{#link-to 'help'}}Resources{{/link-to}}</li>
-                </ul>
-            </nav>
+    <div class="row">
+        <div class="navbar-fixed-top">
+            <div class="col-sm-2">
+                <a href="#"><img class=" main-logo img-rounded img-responsive" src="img/ESOLLogo.jpg" alt="Esol Exchange"></img></a>
+            </div>
+            <div class="col-sm-4 ">
+                <h1 class="text-danger text-center hide"> This page is under development</h1>
+            </div>
+            <div class="col-sm-5">
+                <div class="">
+                    <ul class="nav nav-tabs navbarPadding navbar-right" id="nav">
+                        <li  class="menuFormat " role="presentation">
+                            {{#link-to 'about' classNames="t"}}About{{/link-to}}
+                        </li>
+                        <li class="menuFormat hidden" role="presentation">
+                            {{#link-to 'administration'}}System{{/link-to}}
+                        </li>
+                        <li class="menuFormat" role="presentation">
+                            {{#link-to 'map'}}Home{{/link-to}}
+                        </li>
+                        <li class="menuFormat" role="presentation">
+                            {{#link-to 'help'}}Resources{{/link-to}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+
 </header>
 <body class="container">
     {{outlet}}

@@ -29,69 +29,59 @@
             {{#if detailedSearchEnabled}}
                 <div id="detailedSearch">
                     <div class="row">
-                        <div class="form-group">
+                        <form class="">
                             <div class="col-md-2">
-                                <div class="btn-group">
-                                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Large button <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        ...
-                                    </ul>
+                                <div class="input-group" >
+                                    <h5>Free: </h5>
+                                    <div class=" bottonFormat">
+                                        {{view "select"
+                                        content=yesNotConditionList
+                                        classNames="form-control dropdown-menu"
+                                        type="button"
+                                        selection=free
+                                        id="free"
+                                        aria-describedby="sizing-addon2"}}
+                                    </div>
                                 </div>
                             </div>
-                        <div class="col-md-2">
-                            <div class="input-group formFormat" >
-                                <h5>Free: </h5>
-                                <div class="input-group-btn">
-                                    {{view "select"
-                                    content=yesNotConditionList
-                                    classNames="form-control dropdown-menu"
-                                    type="button"
-                                    selection=free
-                                    id="free"
-                                    aria-describedby="sizing-addon2"}}
+                            <div class="col-md-2">
+                                <div class="input-group" >
+                                    <h5 class="">Child care: </h5>
+                                    <div class="bottonFormat">
+                                        {{view "select"
+                                        content=yesNotConditionList
+                                        classNames="form-control dropdown-menu"
+                                        type="button"
+                                        id="childcare"
+                                        selection=childCare
+                                        aria-describedby="sizing-addon2"}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group formFormat" >
-                                <h5 class="childcareBottonFormat">Child care: </h5>
-                                <div class="input-group-btn">
-                                    {{view "select"
-                                    content=yesNotConditionList
-                                    classNames="form-control dropdown-menu"
-                                    type="button"
-                                    id="childcare"
-                                    selection=childCare
-                                    aria-describedby="sizing-addon2"}}
+                            <div class="col-md-2">
+                                <div class="input-group" >
+                                    <h5 class="">Disability: </h5>
+                                    <div class="bottonFormat">
+                                        {{view "select"
+                                        content=yesNotConditionList
+                                        classNames="form-control dropdown-menu"
+                                        type="button"
+                                        id="disability"
+                                        selection=disability
+                                        aria-describedby="sizing-addon2"}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group formFormat" >
-                                <h5 class="">Disability: </h5>
-                                <div class="input-group-btn">
-                                    {{view "select"
-                                    content=yesNotConditionList
-                                    classNames="form-control dropdown-menu"
-                                    type="button"
-                                    id="disability"
-                                    selection=disability
-                                    aria-describedby="sizing-addon2"}}
+                            <div class="col-md-2">
+                                <div class="searchBottonFormat input-group">
+                                    <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="searchBottonFormat col-md-2">
-                            <div class="">
-                                <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-                {{/if}}
-            </div> <!-- /. end detailedSearch-->
-        </div>
+            {{/if}}
+        </div> <!-- /. end detailedSearch-->
     <div class="">
         <div class="">
             <div id="map-canvas" class="mapSearchOptionBackground panel"></div>

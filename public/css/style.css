@@ -115,7 +115,6 @@ body {
 
 .menuFormat{
     font-family: 'futura-pt',Arial, sans-serif;
-    font-weight: bold;
     color: white;
     font-size: x-large;
 }
@@ -141,23 +140,11 @@ body {
     margin-top: 10px;
 }
 
-.nav li a:hover{
-    background: none;
-    font-style: normal;
+.navbar #nav > .active > .t {
+    color: #f3a130;
 }
 
-/*
-
-*/
-
-/*
------------------------------------------------------------
-            Bootstrap Overrides
------------------------------------------------------------
-
-*/
-
-.navbar-default
+.navbar-fixed-top
 {
     background-color: rgba(0, 72, 93, 0.97) ;
     background-image: none;
@@ -165,6 +152,26 @@ body {
     font-family: 'MenuFont';
 
 }
+
+.nav-tabs{
+    border:none;
+}
+
+/*
+.nav li a:hover{
+    background: none;
+    font-style: normal;
+}
+*/
+
+/*
+-----------------------------------------------------------
+            Bootstrap Overrides
+-----------------------------------------------------------
+
+
+
+
 
 .navbar-default .navbar-brand {
     color: #ffffff;
@@ -177,13 +184,7 @@ body {
     color: #FF9100;
 
 }
-/* background del menu activo....*/
-.navbar-default .navbar-nav > .active  {
-    color: #FF9100;
-    background: transparent;
-    border-style: dashed;
-    border-color: white;
-}
+
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
@@ -228,6 +229,15 @@ body {
     margin-bottom: 15px;
 }
 
+/* background del menu activo....
+.navbar-default .navbar-nav > .active  {
+    color: #FF9100;
+    background: green;
+    border-style: dashed;
+    border-color: white;
+}*/
+
+
 .squarAbout{
     margin: 30px 60px 30px 30px;
 }
@@ -245,7 +255,17 @@ body {
 
 #free{
     background-color: transparent;
-    border-radius: 2px;
+    border-radius: 5px;
+}
+
+#childcare{
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+#disability{
+    background-color: transparent;
+    border-radius: 5px;
 }
 
 .small {
@@ -257,7 +277,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Verdana, Helvetica,'Helvetica Neue','Nunito', sans-serif;
 }
 
-h5{
+.blackColor{
     color: black;
 }
 
@@ -270,7 +290,15 @@ h5{
 }
 
 .childcareBottonFormat{
-    width: 82px;
+    width: 90px;
+}
+
+.searchBottonFormat{
+    padding-top: 35px;
+}
+
+.bottonFormat{
+    width: 20px;
 }
 
 .marginTop {

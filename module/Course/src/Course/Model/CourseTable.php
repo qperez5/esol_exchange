@@ -104,11 +104,11 @@ class CourseTable
         //hacemos busquedas en 3km a la redonda, se puede convertir en un parametro
         $R = 6371;//radio de la tierra en km
         if(isset($lat) && isset($lng)){
-            $maxLat = $lat + rad2deg(1 / $R);
-            $minLat = $lat - rad2deg(1 / $R);
+            $maxLat = $lat + rad2deg(1.5 / $R);
+            $minLat = $lat - rad2deg(1.5 / $R);
 
-            $maxLng = $lng + rad2deg(1/$R/cos(deg2rad($lat)));
-            $minLng = $lng - rad2deg(1/$R/cos(deg2rad($lat)));
+            $maxLng = $lng + rad2deg(1.5/$R/cos(deg2rad($lat)));
+            $minLng = $lng - rad2deg(1.5/$R/cos(deg2rad($lat)));
 
             $where->between(new Expression("X(ce.location)"),$minLat,$maxLat);
             $where->between(new Expression("y(ce.location)"),$minLng,$maxLng);
