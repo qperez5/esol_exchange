@@ -354,7 +354,7 @@ Esol.SearchParameterExtractor = Ember.Object.extend({
 $(function() {
     $('#nav li a').click(function() {
         $('#nav li').removeClass('active');
-        $($(this).attr('link-to')).addClass('active');
+        $($(this).tagName('a')).addClass('active');
     });
 });
 
@@ -378,6 +378,7 @@ Esol.MapController = Ember.Controller.extend({
     free: 'Any',
     childCare: 'Any',
     disability: 'Any',
+
     postCode: null,
     map: null,
     foundCourses: Ember.A([]),
@@ -519,6 +520,10 @@ Esol.MapController = Ember.Controller.extend({
         ];
     }.property(),
 
+    isYesSelected: function(){
+        return this.get("disability") == "Yes";
+    }.property("disability"),
+
     actions: {
         detailedSearchEnabled: false,
 
@@ -532,6 +537,18 @@ Esol.MapController = Ember.Controller.extend({
             this.get("parameterExtractors").forEach(function(paramExtractor){
                 paramExtractor.extractParameter(controller);
             });*/
+        },
+
+        yesSelected: function(){
+            this.set("disability","Yes");
+        },
+
+        noSelected: function(){
+            this.set("disability","No");
+        },
+
+        anySelected: function(){
+            this.set("disability","Any");
         },
 
         search: function(){

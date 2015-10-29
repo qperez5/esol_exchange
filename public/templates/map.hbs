@@ -77,6 +77,18 @@
                                     <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+
+                                <form class="searchBottonFormat input-group">
+                                    <h5>Class for free: </h5>
+                                    <button id="yesActive1" type="button" class="btn btn-default" aria-haspopup="true" aria-expanded="false" {{action 'yesActived'}}><span class="">Yes</span></button>
+                                    <button id="noActive" type="button" class="btn btn-default" aria-haspopup="true" aria-expanded="false" {{action 'noActived'}}> <span class="">No</span></button>
+                                    <button id="anyActive" type="button" class="btn btn-default active" aria-haspopup="true" aria-expanded="false" {{action 'anyActived'}}><span class="active">All</span></button>
+                                    <button id="yesActive" type="button" class="btn btn-default {{isYesSelected}}" aria-haspopup="true" aria-expanded="false" {{action 'yesSelected'}}>
+                                        <span class="{{isYesSelected}}">Yes</span>
+                                    </button>
+                                </form>
+                            </div>
                         </form>
                     </div>
                 </div>
