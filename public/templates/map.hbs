@@ -29,8 +29,8 @@
             {{#if detailedSearchEnabled}}
                 <div id="detailedSearch">
                     <div class="row">
-                        <form class="">
-                            <div class="col-md-2">
+                        <form class="advenceSeachBorde">
+                            <div class="col-md-2 hide">
                                 <div class="input-group" >
                                     <h5>Free: </h5>
                                     <div class=" bottonFormat">
@@ -44,9 +44,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 hide">
                                 <div class="input-group" >
-                                    <h5 class="">Child care: </h5>
+                                    <h5 class="">Child care facilities: </h5>
                                     <div class="bottonFormat">
                                         {{view "select"
                                         content=yesNotConditionList
@@ -58,9 +58,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 hide">
                                 <div class="input-group" >
-                                    <h5 class="">Disability: </h5>
+                                    <h5 class="">Disability access: </h5>
                                     <div class="bottonFormat">
                                         {{view "select"
                                         content=yesNotConditionList
@@ -72,22 +72,41 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-2">
+                                <form class="input-group">
+                                    <h5 class="AdvanceSearchHeader">Class for free:</h5>
+                                    <button id="yesFreeActive" type="button"  {{bind-attr class="freeYesSelected"}} {{action 'freeActivateYes'}}>Yes
+                                    <button id="noFreeActive" type="button"  {{bind-attr class="freeNoSelected"}} {{action 'freeActivateNo'}}>No
+                                    <button id="anyFreeActive" type="button"  {{bind-attr class="freeAnySelected"}} {{action 'freeActivateAny'}}>Any
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form class="input-group">
+                                    <h5 class="AdvanceSearchHeader">Disability access:</h5>
+                                    <button id="yesDisabilityActive" type="button"  {{bind-attr class="disabilityYesSelected"}} {{action 'disabilityActivateYes'}}>Yes
+                                    <button id="noDisabilityActive" type="button"  {{bind-attr class="disabilityNoSelected"}} {{action 'disabilityActivateNo'}}>No
+                                    <button id="anyDisabilityActive" type="button"  {{bind-attr class="disabilityAnySelected"}} {{action 'disabilityActivateAny'}}>Any
+                                    <!--
+
+                                    -->
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form class="input-group">
+                                    <h5 class="AdvanceSearchHeader">Child care facilities:</h5>
+                                    <button id="yesChildcareActive" type="button"  {{bind-attr class="childcareYesSelected"}} {{action 'childcareActivateYes'}}>Yes
+                                    <button id="noChildcareActive" type="button"  {{bind-attr class="childcareNoSelected"}} {{action 'childcareActivateNo'}}>No
+                                    <button id="anyChildcareActive" type="button"  {{bind-attr class="childcareAnySelected"}} {{action 'childcareActivateAny'}}>Any
+                                    <!--
+
+                                    -->
+                                </form>
+                            </div>
                             <div class="col-md-2">
                                 <div class="searchBottonFormat input-group">
                                     <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-
-                                <form class="searchBottonFormat input-group">
-                                    <h5>Class for free: </h5>
-                                    <button id="yesActive1" type="button" class="btn btn-default" aria-haspopup="true" aria-expanded="false" {{action 'yesActived'}}><span class="">Yes</span></button>
-                                    <button id="noActive" type="button" class="btn btn-default" aria-haspopup="true" aria-expanded="false" {{action 'noActived'}}> <span class="">No</span></button>
-                                    <button id="anyActive" type="button" class="btn btn-default active" aria-haspopup="true" aria-expanded="false" {{action 'anyActived'}}><span class="active">All</span></button>
-                                    <button id="yesActive" type="button" class="btn btn-default {{isYesSelected}}" aria-haspopup="true" aria-expanded="false" {{action 'yesSelected'}}>
-                                        <span class="{{isYesSelected}}">Yes</span>
-                                    </button>
-                                </form>
                             </div>
                         </form>
                     </div>

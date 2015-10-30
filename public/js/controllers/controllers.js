@@ -387,6 +387,79 @@ Esol.MapController = Ember.Controller.extend({
         Esol.AddressExtractor.create()
     ]),
 
+    freeYesSelected: function(){
+        if(this.get("free") == "Yes"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("free"),
+
+    freeNoSelected: function(){
+        if(this.get("free") == "No"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("free"),
+
+    freeAnySelected: function(){
+        if(this.get("free") == "Any"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("free"),
+
+
+    disabilityYesSelected: function(){
+        if(this.get("disability") == "Yes"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("disability"),
+
+    disabilityNoSelected: function(){
+        if(this.get("disability") == "No"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("disability"),
+
+    disabilityAnySelected: function(){
+        if(this.get("disability") == "Any"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("disability"),
+
+    childcareYesSelected: function(){
+        if(this.get("childCare") == "Yes"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("childCare"),
+
+    childcareNoSelected: function(){
+        if(this.get("childCare") == "No"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("childCare"),
+
+    childcareAnySelected: function(){
+        if(this.get("childCare") == "Any"){
+            return "btn btn-default active";
+        } else {
+            return "btn btn-default";
+        }
+    }.property("childCare"),
+
     templateToString:function  (center,courses) {
         var markerDiv = $("#markerContent").clone(true);
         markerDiv.find(".centerName").html(center.get("name"));
@@ -520,12 +593,45 @@ Esol.MapController = Ember.Controller.extend({
         ];
     }.property(),
 
-    isYesSelected: function(){
-        return this.get("disability") == "Yes";
-    }.property("disability"),
 
     actions: {
         detailedSearchEnabled: false,
+
+        freeActivateYes: function(){
+            this.set("free","Yes");
+        },
+
+        freeActivateNo: function(){
+            this.set("free","No");
+        },
+
+        freeActivateAny: function(){
+            this.set("free","Any");
+        },
+
+        disabilityActivateYes: function(){
+            this.set("disability","Yes");
+        },
+
+        disabilityActivateNo: function(){
+            this.set("disability","No");
+        },
+
+        disabilityActivateAny: function(){
+            this.set("disability","Any");
+        },
+
+        childcareActivateYes: function(){
+            this.set("childCare","Yes");
+        },
+
+        childcareActivateNo: function(){
+            this.set("childCare","No");
+        },
+
+        childcareActivateAny: function(){
+            this.set("childCare","Any");
+        },
 
         enableAdvancedSearch: function() {
             var currentlyEnabled = this.get("detailedSearchEnabled");
@@ -539,17 +645,7 @@ Esol.MapController = Ember.Controller.extend({
             });*/
         },
 
-        yesSelected: function(){
-            this.set("disability","Yes");
-        },
 
-        noSelected: function(){
-            this.set("disability","No");
-        },
-
-        anySelected: function(){
-            this.set("disability","Any");
-        },
 
         search: function(){
             var postCodeSearch = this.get("postCode");

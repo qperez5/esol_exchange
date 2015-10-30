@@ -236,40 +236,189 @@ body {
     border-style: dashed;
     border-color: white;
 }*/
+.AdvanceSearchHeader{
+    font-style: oblique;
+    font-weight: 200 ;
+    color: #245269;
+}
 
-#yesActive{
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    border: 2px solid green;
+.advenceSeachBorde{
+    border: double;
+    border: darkgrey;
+    margin-left: 20px;
+}
+
+#yesFreeActive{
+    width: 45px;
+    border-radius: 4px 0 0 4px;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 0 solid transparent;
     text-align: center;
     font-size: 12px;
 }
-#noActive{
+#noFreeActive{
     width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    border: 2px solid red;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
     text-align: center;
     font-size: 12px;
 }
-#anyActive {
-
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    border: 2px solid #b9def0;
+#anyFreeActive {
+    width: 45px;
+    border-radius: 0 4px 4px 0;
+    border-left: 0 solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
     text-align: center;
     font-size: 12px;
 }
 
-#anyActive:active {
-    -webkit-box-shadow: 0px 2px 0px #b9def0;
-    -moz-box-shadow: 0px 2px 0px #b9def0;
-    box-shadow: 0px 2px 0px #b9def0;
+#yesFreeActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
     position:relative;
-    top:2px;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
     }
+#anyFreeActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
+#noFreeActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
+#yesDisabilityActive{
+    width: 45px;
+    border-radius: 4px 0 0 4px;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 0 solid transparent;
+    text-align: center;
+    font-size: 12px;
+}
+#noDisabilityActive{
+    width: 40px;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    text-align: center;
+    font-size: 12px;
+}
+#anyDisabilityActive {
+    width: 45px;
+    border-radius: 0 4px 4px 0;
+    border-left: 0 solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    font-size: 12px;
+}
+
+#yesDisabilityActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+#anyDisabilityActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
+#noDisabilityActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
+#yesChildcareActive{
+    width: 45px;
+    border-radius: 4px 0 0 4px;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 0 solid transparent;
+    text-align: center;
+    font-size: 12px;
+}
+#noChildcareActive{
+    width: 40px;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    text-align: center;
+    font-size: 12px;
+}
+#anyChildcareActive {
+    width: 45px;
+    border-radius: 0 4px 4px 0;
+    border-left: 0 solid transparent;
+    border-right: 2px solid transparent;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    font-size: 12px;
+}
+
+#yesChildcareActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+#anyChildcareActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
+#noChildcareActive.active {
+    -webkit-box-shadow:1px 2px 2px 1px #22445d;
+    -moz-box-shadow: 0px 1px 0px #22445d;
+    box-shadow: 1px 2px 2px 1px #22445d;
+    position:relative;
+    top:0px;
+    background-color: rgba(198, 189, 197, 0.17); !important
+}
+
 
 .squarAbout{
     margin: 30px 60px 30px 30px;
