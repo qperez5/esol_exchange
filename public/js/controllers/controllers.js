@@ -351,13 +351,6 @@ Esol.SearchParameterExtractor = Ember.Object.extend({
     }
 });
 
-$(function() {
-    $('#nav li a').click(function() {
-        $('#nav li').removeClass('active');
-        $($(this).tagName('a')).addClass('active');
-    });
-});
-
 Esol.AddressExtractor = Esol.SearchParameterExtractor.extend({
 
     extractParameter: function(mapController){
@@ -381,8 +374,13 @@ Esol.MapController = Ember.Controller.extend({
 
     postCode: null,
     map: null,
-    foundCourses: Ember.A([]),
-    mapMarkers: Ember.A([]),
+
+    centres: Ember.Set.create(),
+    coursesMap: Ember.Map.create(),
+
+    seeAll: false,
+
+
     parameterExtractors: Ember.A([
         Esol.AddressExtractor.create()
     ]),
@@ -473,13 +471,12 @@ Esol.MapController = Ember.Controller.extend({
 
     executeSearch: function (queryParams) {
         var controller = this;
-        this.clearMarkers();
-        this.store.find("course", queryParams).then(function (results) {
-            controller.set("foundCourses", results);
-            var centres = Ember.Set.create(); //aqui guardaremos los centros encontrados, en un Set se guardan sin repeticiones ...
-            var coursesMap = Ember.Map.create();//aqui en este mapa pondremos para cada centro la lista de cursos ...
 
-            controller.get("foundCourses").forEach(function (foundCourse) {
+        this.store.find("course", queryParams).then(function (results) {
+            var centres = Ember.Set.create();
+            var coursesMap = Ember.Map.create();
+
+            results.forEach(function (foundCourse) {
                 foundCourse.get("centres").forEach(function (centre) {
                     centres.add(centre);
                     if(coursesMap[centre.get("id")] == undefined){
@@ -489,28 +486,8 @@ Esol.MapController = Ember.Controller.extend({
                 });
             });
 
-            var mapVar = controller.get("map");
-
-            centres.forEach(function(centre){
-                var courses = coursesMap[centre.get("id")];
-                var infoWindow = new google.maps.InfoWindow({
-                    content: controller.templateToString(centre,courses)
-                });
-
-                var marker = new google.maps.Marker({
-                    map: mapVar,
-                    position: centre.get("latLng"),
-                    label: courses.length.toString(),
-                    title: centre.get("name")
-                });
-
-                marker.addListener('click', function() {
-                    infoWindow.open(mapVar, marker);
-                });
-
-                controller.get("mapMarkers").pushObject(marker);
-            })
-
+            controller.set("coursesMap",coursesMap);//aqui en este mapa pondremos para cada centro la lista de cursos ...
+            controller.set("centres",centres); //aqui guardaremos los centros encontrados, en un Set se guardan sin repeticiones ...
         });
     },
 
@@ -558,13 +535,6 @@ Esol.MapController = Ember.Controller.extend({
         return isValid;
     }, */
 
-
-    clearMarkers: function(){
-        this.get("mapMarkers").forEach(function(marker){
-            marker.setMap(null);
-        });
-        this.get("mapMarkers").clear();
-    },
 
     levelList: function(){
         return [
@@ -633,6 +603,15 @@ Esol.MapController = Ember.Controller.extend({
             this.set("childCare","Any");
         },
 
+        seeAllCourses: function(){
+            this.set("seeAll",true);
+            this.set("free","Any");
+            this.set("childCare","Any");
+            this.set("disability","Any");
+            this.set("postCode",null);
+            this.executeSearch({all: true});
+        },
+
         enableAdvancedSearch: function() {
             var currentlyEnabled = this.get("detailedSearchEnabled");
             this.set("detailedSearchEnabled", !currentlyEnabled);
@@ -698,21 +677,69 @@ Esol.SearchResultController = Ember.Controller.extend({
     centreId: 0,
     map: null,
 
-    actions: {
+    facebookLink: function(){
+        return "https://www.facebook.com/sharer/sharer.php?u=http%3A//www.newhamesolexchange.org.uk/%23/result/" +this.get("model.id") +"/"+this.get("centreId");
+    }.property("model", "centreId"),
 
-    },
+    twitterLink: function(){
+    return "https://twitter.com/home?status=http%3A//www.newhamesolexchange.org.uk/%23/result/" +this.get("model.id") +"/"+this.get("centreId");
+
+    }.property("model", "centreId"),
+
+    googleplusLink: function(){
+    return "https://plus.google.com/share?url=http%3A//www.newhamesolexchange.org.uk/%23/result" +this.get("model.id") +"/"+this.get("centreId");
+        }.property("model", "centreId"),
 
     isFree: function(){
         return this.get('model.cost_free') == "y";
     }.property('model.cost_free'),
 
     hasAccessibility: function(){
-        return this.get('centre.accessibility') == "y";
-    }.property('centre.accessibility'),
+        return this.get('centre.accebility') == "y";
+    }.property('centre.accebility'),
 
     hasChildCare: function(){
-    return this.get('model.child_care') == "y";
+        if(this.get('model.child_care') == "y"){
+            return true;
+        }
     }.property('model.child_care'),
+
+    noCostFree: function(){
+        if(this.get('model.cost_free') == "n"){
+            return true;
+        }
+    }.property('model.cost_free'),
+
+    noDisability: function(){
+        if(this.get('centre.accebility') == "n"){
+            return true;
+        }
+    }.property('centre.accebility'),
+
+    noChildCare: function(){
+        if(this.get('model.child_care') == "n"){
+            return true;
+        }
+    }.property('model.child_care'),
+
+    hasChildCondition: function(){
+        return this.get('model.child_care') == "c";
+    }.property('model.child_care'),
+
+
+    hasAccessCondition: function(){
+         if(this.get('centre.accebility')== "c") {
+             return true;
+         }
+    }.property('centre.accebility'),
+
+    hasCostCondition: function(){
+        return this.get('model.cost_free') == "c";
+    }.property('model.cost_free'),
+
+    hasOtherInfo: function(){
+        return this.get('model.other_information') != null;
+    }.property('model.other_information'),
 
     centre: function(){
         var centreId = this.get("centreId");
@@ -727,8 +754,11 @@ Esol.SearchResultController = Ember.Controller.extend({
     actions: {
         search: function () {
             geocode(this.get("centre.fullAddress"),this.addressFound, this);
-        }
+        },
 
+        backToMap: function(){
+            this.transitionToRoute("map");
+        }
     },
 
     addressFound: function(results){
@@ -752,9 +782,10 @@ Esol.SearchResultController = Ember.Controller.extend({
 Esol.ApplicationController = Ember.ObjectController.extend({
 
     actions: {
-        activeOption: function() {
-            var currentlyEnabled = this.get("detailedSearchEnabled");
-            this.set("detailedSearchEnabled", !currentlyEnabled);
+
+        seeAll: function(){
+            this.controllerFor("map").set("seeAll",true);
+            this.transitionToRoute("map");
         }
 
     }

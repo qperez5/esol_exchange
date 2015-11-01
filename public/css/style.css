@@ -237,8 +237,8 @@ body {
     border-color: white;
 }*/
 .AdvanceSearchHeader{
-    font-style: oblique;
-    font-weight: 200 ;
+    font-style: normal;
+    font-weight: 300 ;
     color: #245269;
 }
 
@@ -280,29 +280,29 @@ body {
 }
 
 #yesFreeActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
     }
 #anyFreeActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 #noFreeActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 #yesDisabilityActive{
@@ -337,29 +337,29 @@ body {
 }
 
 #yesDisabilityActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 #anyDisabilityActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 #noDisabilityActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 #yesChildcareActive{
@@ -394,29 +394,29 @@ body {
 }
 
 #yesChildcareActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 #anyChildcareActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 #noChildcareActive.active {
-    -webkit-box-shadow:1px 2px 2px 1px #22445d;
-    -moz-box-shadow: 0px 1px 0px #22445d;
-    box-shadow: 1px 2px 2px 1px #22445d;
+    border-style:inset;
+    border-width:2px;
     position:relative;
     top:0px;
-    background-color: rgba(198, 189, 197, 0.17); !important
+    border-color: rgba(172, 172, 172, 0.9);
+    background-color: rgba(27, 21, 26, 0.17); !important
 }
 
 
@@ -441,6 +441,22 @@ body {
 }
 
 #childcare{
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.backToMap{
+    margin: 20px 0px 10px 900px;
+}
+.separateSpace{
+    margin-top: 10px;
+}
+
+.socialNetworkFormat{
+    margin: 10px 0 0 0;
+}
+
+#otherInf{
     background-color: transparent;
     border-radius: 5px;
 }

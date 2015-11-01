@@ -25,6 +25,11 @@
                     {{/if}}
                 </button>
             </div>
+            <div class="col-md-2">
+                <button class="btn btn-info" {{action 'seeAllCourses'}}>
+                    <span class="label ">See all courses in Newham</span>
+                </button>
+            </div>
         </div>
             {{#if detailedSearchEnabled}}
                 <div id="detailedSearch">
@@ -72,17 +77,16 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-2">
-                                <form class="input-group">
+                                <div class="input-group">
                                     <h5 class="AdvanceSearchHeader">Class for free:</h5>
                                     <button id="yesFreeActive" type="button"  {{bind-attr class="freeYesSelected"}} {{action 'freeActivateYes'}}>Yes
                                     <button id="noFreeActive" type="button"  {{bind-attr class="freeNoSelected"}} {{action 'freeActivateNo'}}>No
                                     <button id="anyFreeActive" type="button"  {{bind-attr class="freeAnySelected"}} {{action 'freeActivateAny'}}>Any
-                                </form>
+                                </div>
                             </div>
                             <div class="col-md-2">
-                                <form class="input-group">
+                                <div class="input-group">
                                     <h5 class="AdvanceSearchHeader">Disability access:</h5>
                                     <button id="yesDisabilityActive" type="button"  {{bind-attr class="disabilityYesSelected"}} {{action 'disabilityActivateYes'}}>Yes
                                     <button id="noDisabilityActive" type="button"  {{bind-attr class="disabilityNoSelected"}} {{action 'disabilityActivateNo'}}>No
@@ -90,18 +94,15 @@
                                     <!--
 
                                     -->
-                                </form>
+                                </div>
                             </div>
                             <div class="col-md-2">
-                                <form class="input-group">
+                                <div class="input-group">
                                     <h5 class="AdvanceSearchHeader">Child care facilities:</h5>
                                     <button id="yesChildcareActive" type="button"  {{bind-attr class="childcareYesSelected"}} {{action 'childcareActivateYes'}}>Yes
                                     <button id="noChildcareActive" type="button"  {{bind-attr class="childcareNoSelected"}} {{action 'childcareActivateNo'}}>No
                                     <button id="anyChildcareActive" type="button"  {{bind-attr class="childcareAnySelected"}} {{action 'childcareActivateAny'}}>Any
-                                    <!--
-
-                                    -->
-                                </form>
+                                </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="searchBottonFormat input-group">

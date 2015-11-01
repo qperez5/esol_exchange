@@ -7,9 +7,18 @@
                 <div class=""><h4> <strong>{{model.class_type}}:</strong>  {{model.levels}}</h4></div>
                 <div class=""><strong>Contact:</strong> &nbsp; {{model.contact_person}}&nbsp; &nbsp; {{model.contact_phone}} &nbsp; {{contact_email}}</div>
                 <div class=""><button class="btn btn-info" {{action "search"}}>See on map</button></div>
+
             </div>
+
+
             <div class="col-md-4 ">
                 <div id="map-canvas-small" class=""></div>
+                <div class="socialNetworkFormat">
+                    <a {{bind-attr href="facebookLink"}} target='_blank'><img  class="" src="img/facebookShare.png" alt="Share in Facebook"></img></a>
+                    <a {{bind-attr href="twitterLink"}} target='_blank'><img  class="" src="img/twitter.png" alt="Share in Twitter"></img></a>
+                    <a {{bind-attr href="googleplusLink"}} target='_blank'><img  class="" src="img/googleplus.png" alt="Share in Googleplus"></img></a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -18,12 +27,12 @@
         <form>
             <div class="row">
                 <div class="col-xs-5">
-                    <h3 class="text-error">How can join?</h3>
+                    <h3 class="text-error">How can I join?</h3>
                     <p class="text-error">{{model.how_join}}</p>
                 </div>
             <div class="col-xs-1"></div>
                 <div class="col-xs-5">
-                    <h3 class="text-error">Who can I join?</h3>
+                    <h3 class="text-error">Who can join?</h3>
                     <p class="text-error">{{model.who_join}}</p>
                 </div>
             </div>
@@ -38,11 +47,14 @@
                     <h3 class="text-error">How much does it cost?</h3>
                     <p class="text-error" id="cost_free">
                         {{#if isFree}}
-                            <span> It is for free. </span>
-                            &nbsp; <span>{{model.cost_condition}}</span>
+                                <span> It is for free. </span>
+                            &nbsp;
                         {{else}}
-                            <span> It course has a charge. </span>
-                            &nbsp; <span>{{model.cost_condition}}</span>
+                            {{#if hasCostCondition}}
+                                <span>{{model.cost_condition}}</span>
+                            {{else}}
+                                <span>It course has a charge. </span>
+                            {{/if}}
                         {{/if}}
                     </p>
                 </div>
@@ -55,44 +67,70 @@
                 </div>
                 <div class="col-xs-1"></div>
                 <div class="col-xs-5">
-                    <h3 class="text-error">What document do I need for join?</h3>
+                    <h3 class="text-error">What documents do I need for joining?</h3>
                     <p class="text-error">{{model.documentation_required}}</p>
                 </div>
             </div>
             <hr></hr>
             <div class="row">
-                <div class="col-xs-11">
-                    <h3 class="text-error">Notes:</h3>
-                    <div class="col-xs-12">
-                        <p class="text-error" id="accessibility">
-                            {{#if hasAccessibility}}
-                            <span> This centre has accessibility.</span>
-                            &nbsp; <span>{{centre.accebility_condition}}</span>
-                            {{else}}
-                            <span> This centre do not has accessibility. </span>
-                            &nbsp; <span>{{centre.accebility_condition}}</span>
-                            {{/if}}
-                        </p>
-
-                        <p class="text-error" id="childCare">
-                            {{#if hasChildCare}}
-                                <span> This course has childcare facilities.</span>
-                                &nbsp; <span>{{model.child_care_condition}}</span>
-                            {{else}}
-                                <span> This course do not has childcare facilities. </span>
-                                &nbsp; <span>{{model.child_care_condition}}</span>
-                            {{/if}}
-                        </p>
-
-                        <p class="text-error"> {{model.other_information}}</p>
+                <div class="col-xs-6">
+                    <h3 class="text-error">Facilities:</h3>
+                    <div class="row">
+                        <div class="col-xs-1">
+                             <img  class="" src="img/desability1.png" alt=""></img>
+                        </div>
+                        <div class="col-xs-8">
+                            <p class="text-error" id="accessibility">
+                                {{#if hasAccessCondition}}
+                                <span class="">{{centre.accebility_condition}}</span>
+                                {{/if}}
+                                {{#if hasAccessibility}}
+                                <span class="">This centre has disability facilities.</span>
+                                {{/if}}
+                                {{#if noDisability}}
+                                <span class="">No disability facilities.</span>
+                                {{/if}}
+                            </p>
+                        </div>
                     </div>
+                    <div class="row separateSpace">
+                        <div class="col-md-1">
+                             <img  class="" src="img/childcare1.png" alt=""></img>
+                        </div>
+                        <div class="col-xs-8">
+                            <p class="text-error" id="childCare">
+                                {{#if hasChildCondition}}
+                                    <span>{{model.child_condition}}</span>
+                                {{/if}}
+                                {{#if hasChildCare}}
+                                    <span class="">This course has childcare facilities.</span>
+                                {{/if}}
+                                {{#if noChildCare  }}
+                                    <span class="">No child care.</span>
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    {{#if hasOtherInfo}}
+                    <h3 class="text-error">Notes:</h3>
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            <img  class="" src="img/info.png" alt=""></img>
+                        </div>
+                        <div class="col-md-11">
+                            <p  class=""> <span>{{model.other_information}}</span> </p>
+                        </div>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
         </form>
-    </div>
+        <div class="panel-footer">
+            <div class="backToMap">
+                <div class="text-right"><button {{action "backToMap"}} class="btn btn-info">Back to map</button></div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-

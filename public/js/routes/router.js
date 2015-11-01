@@ -142,6 +142,10 @@ Esol.WhatLevelRoute = Ember.Route.extend({
 Esol.MapRoute = Ember.Route.extend({
 
     setupController: function(controller){
-        controller.executeSearch({all: true});
+        this._super(controller);
+        if(controller.get("centres").length == 0 || controller.seeAll){
+            controller.executeSearch({all: true});
+            controller.set("seeAll",false);
+        }
     }
 });
