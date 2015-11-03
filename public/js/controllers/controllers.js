@@ -652,6 +652,8 @@ Esol.MapController = Ember.Controller.extend({
 
 
                 },controller);
+            } else {
+                this.executeSearch(queryParams);
             }
              /* else {
                 if(selectedTown!=null && selectedTown!=""){
