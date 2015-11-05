@@ -29,6 +29,9 @@ Esol.MapView = Ember.View.extend({
 
         controller.get("centres").forEach(function(centre){
             var courses = coursesMap[centre.get("id")];
+            var coursesCount = courses.length.toString();
+            var courseLevel = "";
+            if(coursesCount > 1){courseLevel = "courses"}else{courseLevel = "course"}
             var infoWindow = new google.maps.InfoWindow({
                 content: controller.templateToString(centre,courses)
             });
@@ -36,8 +39,9 @@ Esol.MapView = Ember.View.extend({
             var marker = new google.maps.Marker({
                 map: mapVar,
                 position: centre.get("latLng"),
-                label: courses.length.toString(),
-                title: centre.get("name")
+                //label: courses.length.toString(),
+                icon:'img/marker.png',
+                title: courses.length.toString() + " " + courseLevel
             });
 
             marker.addListener('click', function() {

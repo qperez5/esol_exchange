@@ -464,7 +464,7 @@ Esol.MapController = Ember.Controller.extend({
         //otras cosas podrian setearse aqui ...
         var list = markerDiv.find(".list");
         courses.forEach(function(course){
-            list.append("<li class=''><a href='#/result/" + course.get("id") + "/" + center.get("id") +"'  data-placement='left' data-toggle='popover'>" + course.get("name") +  "</a>" + "</li>");
+            list.append("<li class='markerFormat'><a href='#/result/" + course.get("id") + "/" + center.get("id") +"'  data-placement='left' data-toggle='popover'>" + course.get("name") +  "</a>" + "</li>");
         });
         return markerDiv.html();
     },
@@ -568,11 +568,19 @@ Esol.MapController = Ember.Controller.extend({
         detailedSearchEnabled: false,
 
         freeActivateYes: function(){
-            this.set("free","Yes");
+            if(this.get("free") == "Yes"){
+                this.set("free","Any");
+            } else {
+                this.set("free","Yes");
+            }
         },
 
         freeActivateNo: function(){
-            this.set("free","No");
+            if(this.get("free") == "No"){
+                this.set("free","Any");
+            }else{
+                this.set("free","No");
+            }
         },
 
         freeActivateAny: function(){

@@ -93,8 +93,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row separateSpace">
-                        <div class="col-md-1">
+                    <div class="row">
+                        <div class="col-xs-1">
                              <img  class="" src="img/childcare1.png" alt="childcare"></img>
                         </div>
                         <div class="col-xs-8">
@@ -112,25 +112,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5">
-                    {{#if hasOtherInfo}}
-                    <h3 class="text-error">Notes:</h3>
-                    <div class="col-md-12">
-                        <div class="col-md-1">
-                            <img class="" src="img/info.png" alt="Other Info"></img>
+                <div class="row">
+                    <div class="col-xs-5">
+                        {{#if hasOtherInfo}}
+                        <h3 class="text-error">Notes:</h3>
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <img  class="" src="img/info.png" alt="Other Info"></img>
+                            </div>
+                            <div class="col-xs-8">
+                                <p  class="text-error">
+                                    <span> &nbsp;  </span>
+                                    <span> {{model.other_information}} </span>
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-md-11">
-                            <p  class=""> <span>{{model.other_information}}</span> </p>
-                        </div>
+                        {{/if}}
                     </div>
-                    {{/if}}
                 </div>
             </div>
         </form>
         <div class="panel-footer">
-            <div class="backToMap">
-                <div class="text-right"><button {{action "backToMap"}} class="btn btn-info">Back to map</button></div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class=" text-right" {{action "backToMap"}}>
+                        <span class="btn btn-success">Back to map</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
