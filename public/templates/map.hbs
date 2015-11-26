@@ -1,10 +1,11 @@
     <div class="mapSearchOptionBackground">
         <div class="row">
             <div class="col-md-12">
-                <div class="input-group input-group-lg">
+                <div class="input-group input-group-lg" {{action 'searchEnter'}}>
                     {{input class="form-control"
                     type="text"
                     value=postCode
+                    action="search"
                     placeholder="Find an English class. Search by postcode or area."
                     aria-describedby="sizing-addon2"}}
                     <span class="input-group-addon" id="sizing-addon1">
@@ -88,9 +89,7 @@
                                     <h5 class="AdvanceSearchHeader">Disability access:</h5>
                                     <button id="yesDisabilityActive" type="button"  {{bind-attr class="disabilityYesSelected"}} {{action 'disabilityActivateYes'}}>Yes
                                     <button id="noDisabilityActive" type="button"  {{bind-attr class="disabilityNoSelected"}} {{action 'disabilityActivateNo'}}>No
-                                    <button id="anyDisabilityActive" type="button"  {{bind-attr class="disabilityAnySelected"}} {{action 'disabilityActivateAny'}}>Any
                                     <!--
-
                                     -->
                                 </div>
                             </div>
@@ -99,10 +98,9 @@
                                     <h5 class="AdvanceSearchHeader">Child care facilities:</h5>
                                     <button id="yesChildcareActive" type="button"  {{bind-attr class="childcareYesSelected"}} {{action 'childcareActivateYes'}}>Yes
                                     <button id="noChildcareActive" type="button"  {{bind-attr class="childcareNoSelected"}} {{action 'childcareActivateNo'}}>No
-                                    <button id="anyChildcareActive" type="button"  {{bind-attr class="childcareAnySelected"}} {{action 'childcareActivateAny'}}>Any
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 hide">
                                 <div class="searchBottonFormat input-group">
                                     <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false" {{action 'search'}}>Search</button>
                                 </div>

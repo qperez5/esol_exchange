@@ -64,6 +64,7 @@
 
 .darkBluSubTitle{
     color: #00485D;
+    font-size: 16px;
     padding: 10px 0 0 ;
     font-weight: 600;
 }
@@ -269,7 +270,7 @@ body {
     border-right: 0 solid transparent;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
-    border-radius: 0;
+    border-radius: 0px 4px 4px 0px;
     text-align: center;
     font-size: 12px;
 }
@@ -292,14 +293,6 @@ body {
     border-color: rgba(172, 172, 172, 0.9);
     background-color: rgba(27, 21, 26, 0.17); !important
     }
-#anyFreeActive.active {
-    border-style:inset;
-    border-width:2px;
-    position:relative;
-    top:0px;
-    border-color: rgba(172, 172, 172, 0.9);
-    background-color: rgba(27, 21, 26, 0.17); !important
-}
 
 #noFreeActive.active {
     border-style:inset;
@@ -322,19 +315,9 @@ body {
 }
 #noDisabilityActive{
     width: 40px;
+    border-radius: 0px 4px 4px 0px;
     border-left: 0 solid transparent;
     border-right: 0 solid transparent;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    border-radius: 0;
-    text-align: center;
-    font-size: 12px;
-}
-#anyDisabilityActive {
-    width: 45px;
-    border-radius: 0 4px 4px 0;
-    border-left: 0 solid transparent;
-    border-right: 2px solid transparent;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
     text-align: center;
@@ -349,21 +332,13 @@ body {
     border-color: rgba(172, 172, 172, 0.9);
     background-color: rgba(27, 21, 26, 0.17); !important
 }
-#anyDisabilityActive.active {
-    border-style:inset;
-    border-width:2px;
-    position:relative;
-    top:0px;
-    border-color: rgba(172, 172, 172, 0.9);
-    background-color: rgba(27, 21, 26, 0.17); !important
-}
 
 #noDisabilityActive.active {
     border-style:inset;
     border-width:2px;
     position:relative;
     top:0px;
-    border-color: rgba(172, 172, 172, 0.9);
+    border-color: white;
     background-color: rgba(27, 21, 26, 0.17); !important
 }
 
@@ -383,30 +358,12 @@ body {
     border-right: 0 solid transparent;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
-    border-radius: 0;
-    text-align: center;
-    font-size: 12px;
-}
-#anyChildcareActive {
-    width: 45px;
-    border-radius: 0 4px 4px 0;
-    border-left: 0 solid transparent;
-    border-right: 2px solid transparent;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
+    border-radius: 0px 4px 4px 0px;
     text-align: center;
     font-size: 12px;
 }
 
 #yesChildcareActive.active {
-    border-style:inset;
-    border-width:2px;
-    position:relative;
-    top:0px;
-    border-color: rgba(172, 172, 172, 0.9);
-    background-color: rgba(27, 21, 26, 0.17); !important
-}
-#anyChildcareActive.active {
     border-style:inset;
     border-width:2px;
     position:relative;
@@ -436,7 +393,7 @@ body {
 }
 
 .squarHelp{
-    padding: 0 60px 0 80px;
+    padding: 20px 60px 0 80px;
 
 }
 
@@ -482,6 +439,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .blackColor{
     color: black;
+    font-size: 12px;
 }
 
 .formFormat{
@@ -545,11 +503,11 @@ h1, h2, h3, h4, h5, h6 {
     margin: 50px 0 0 0;
     font-size: .95em;
     padding-left: 40px;
-    color: #a6afb2;
+    color: white;
 }
 
 .main-footer a {
-    color: #a6afb2;
+    color: white;
     font-style: normal;
 }
 
@@ -559,7 +517,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .th-logo {
     width: 130px;
-    height: 50px;
+    height: 90px;
     margin: -.75em 0 .95em 0;
 }
 
@@ -583,6 +541,13 @@ ul {
     list-style-type: circle;
     padding-left: 30px;
     margin: 2px;
+    font-size: 14px;
+}
+
+.helpUlContact{
+    list-style-type: circle;
+    margin: 2px;
+    font-size: 14px;
 }
 
 .windowInfo{
@@ -654,6 +619,13 @@ ul {
     background: rgba(0, 72, 93, 0.04);
     padding: 0 5px 5px 5px;
     border-radius: 9px;
+}
+
+.backgroundColourGrayPadding{
+
+    /*background-color: rgba(0, 72, 93, 1, ) ;
+    background: #f3a130;*/
+    padding: 40px 5px 5px 5px;
 }
 
 .textareaScroll{

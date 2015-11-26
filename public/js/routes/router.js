@@ -15,6 +15,7 @@ Esol.Router.map(function(){
     this.route('searchResult',{path: '/result/:course_id/:centre_id'});
     this.route('administration');
     this.route('whatLevel',{path: 'right_level'});
+    this.route('newhamFamilyInfo',{path: 'newham_family_info'});
 });
 
 Esol.OrganizationRoute = Ember.Route.extend({
@@ -136,6 +137,10 @@ Esol.AdministrationRoute = Ember.Route.extend({
 });
 
 Esol.WhatLevelRoute = Ember.Route.extend({
+
+});
+
+Esol.NewhamFamilyInfoRoute = Ember.Route.extend({
 
 });
 

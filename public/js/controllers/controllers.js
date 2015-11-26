@@ -567,48 +567,67 @@ Esol.MapController = Ember.Controller.extend({
     actions: {
         detailedSearchEnabled: false,
 
+
+
         freeActivateYes: function(){
+
             if(this.get("free") == "Yes"){
                 this.set("free","Any");
+                this.send('search');
             } else {
                 this.set("free","Yes");
+                this.send('search');
             }
         },
 
         freeActivateNo: function(){
             if(this.get("free") == "No"){
                 this.set("free","Any");
+                this.send('search');
             }else{
                 this.set("free","No");
+                this.send('search');
             }
         },
 
-        freeActivateAny: function(){
-            this.set("free","Any");
-        },
-
         disabilityActivateYes: function(){
-            this.set("disability","Yes");
+            if(this.get("disability") == "Yes"){
+                this.set("disability","Any");
+                this.send('search');
+            }else{
+                this.set("disability","Yes");
+                this.send('search');
+            }
         },
 
         disabilityActivateNo: function(){
-            this.set("disability","No");
-        },
-
-        disabilityActivateAny: function(){
-            this.set("disability","Any");
+            if(this.get("disability") == "No"){
+                this.set("disability","Any");
+                this.send('search');
+            }else{
+                this.set("disability","No");
+                this.send('search');
+            }
         },
 
         childcareActivateYes: function(){
-            this.set("childCare","Yes");
+            if(this.get("childCare") == "Yes"){
+                this.set("childCare","Any");
+                this.send('search');
+            }else{
+                this.set("childCare","Yes");
+                this.send('search');
+            }
         },
 
         childcareActivateNo: function(){
-            this.set("childCare","No");
-        },
-
-        childcareActivateAny: function(){
-            this.set("childCare","Any");
+            if(this.get("childCare") == "No"){
+                this.set("childCare","Any");
+                this.send('search');
+            }else{
+                this.set("childCare","No");
+                this.send('search');
+            }
         },
 
         seeAllCourses: function(){
@@ -631,8 +650,6 @@ Esol.MapController = Ember.Controller.extend({
                 paramExtractor.extractParameter(controller);
             });*/
         },
-
-
 
         search: function(){
             var postCodeSearch = this.get("postCode");
