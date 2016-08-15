@@ -1,63 +1,54 @@
-<!--
- <nav class="navbar navbar-default navbar-fixed-top">
-    <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Poducts</a></li>
-        <li class=""><a href="#">Gallery</a></li>
-    </ul>
-</nav>
- -->
-
-<header class="headerMargin">
+<header class="">
     <div class="row">
-        <div class="navbar-fixed-top">
+        <div class="navbar-static-top">
             <div class="col-sm-2">
                 <a href="#"><img class=" main-logo img-rounded img-responsive" src="img/ESOLLogo.jpg" alt="Esol Exchange"></img></a>
             </div>
-            <div class="col-sm-4 ">
-                <h1 class="text-danger text-center"> This page is under development</h1>
+            <div class="col-sm-4">
+                <h1 class="text-danger text-center"> </h1>
             </div>
             <div class="col-sm-5">
                 <div class="">
                     <ul class="nav nav-tabs navbarPadding navbar-right" id="nav">
-                        <li  class="menuFormat " role="presentation">
+                        <li {{bind-attr class="aboutClassName"}} role="presentation">
                             {{#link-to 'about' tagName="a"}}About{{/link-to}}
                         </li>
-                        <li class="menuFormat hidden" role="presentation">
+                        <li class="hide" {{bind-attr class="administrationClassName"}} role="presentation">
                             {{#link-to 'administration'}}System{{/link-to}}
                         </li>
-                        <li class="menuFormat" role="presentation">
-                            <a href="#" {{action 'seeAll'}}>Home</a>
+                        <li {{bind-attr class="mapClassName"}} role="presentation">
+                            <a href="#" {{action 'seeAll'}}>ESOL Map</a>
                         </li>
-                        <li class="menuFormat" role="presentation">
+                        <li {{bind-attr class="helpClassName"}} role="presentation">
                             {{#link-to 'help'}}Resources{{/link-to}}
+                        </li>
+                        <li {{bind-attr class="levelsClassName"}} role="presentation">
+                            {{#link-to 'whatLevel'}}ESOL Levels{{/link-to}}
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
 </header>
-<body class="container">
+
     {{outlet}}
-</body>
+
         <!-- Footer -->
 <footer class="main-footer">
 <div class="row">
-    <div class="col-sm-4">
-        <a class="footImages" target='_blank' href="http://www.aston-mansfield.org.uk/newhamesolexchange"><img  class="th-logo img-rounded" src="img/aston-mansfield_logo.jpg" alt="Aston logo"></img></a>
+    <div class="col-sm-4 footImages">
+        <a class="" target='_blank' href="http://www.aston-mansfield.org.uk/newhamesolexchange">
+            <img  class="th-logo img-rounded" src="img/aston-mansfield_logo.jpg" alt="Aston logo"></img>
+        </a>
         <!-- <a class="footImages" target='_blank' href="https://www.newham.gov.uk/"><img class="th-logo img-rounded" src="img/newham_logo.jpg" alt="Newham logo"></a> -->
-        <p class="copyright">&copy; 2015 Newham ESOL Exchange.</p>
+        <p class="copyright">&copy; 2016 Newham ESOL Exchange.</p>
     </div>
     <div class="col-sm-3 col-sm-offset-1 col-md-offset-2">
         <ul class="link-list">
             <li class="heading"><p>Info &rarr;</p></li>
             <li>
-                {{#link-to 'whatLevel'}}Which Level is right for me?{{/link-to}}
-            </li>
-            <li>
-                {{#link-to 'newhamFamilyInfo'}}Newham Family ESOL classes{{/link-to}}
+                {{#link-to 'newhamFamilyInfo'}}Do you have a child in School?{{/link-to}}
             </li>
         </ul>
     </div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a81edb08-bc0d-449d-98c3-801105ab5a4d" name="newhamesolexchange.org.uk" url="http://ftp.newhamesolexchange.org.uk">
+        <fileTransfer host="ftp.newhamesolexchange.org.uk" port="21" password="df9adf93df9cdfd9dfe4df9bdfcedfd8dfc1dfe1" username="caroli65@newhamesolexchange.org.uk">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

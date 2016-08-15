@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="ftp.newhamesolexchange.org.uk">
+  <component name="PublishConfigData" serverName="newhamesolexchange.org.uk">
     <serverData>
-      <paths name="ftp.newhamesolexchange.org.uk">
+      <paths name="newhamesolexchange.org.uk">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
             <mapping deploy="/public_html" local="$PROJECT_DIR$/public" web="/" />
           </mappings>
         </serverdata>

@@ -1,30 +1,54 @@
 Esol.Router.map(function(){
+    //this.route('protected');
+    //protected by password
+    this.route('administration');
     this.route('organization');
     this.route('editOrganization',{path: '/editOrganization/:organization_id'});
     this.route('deleteOrganization',{path: '/deleteOrganization/:organization_id'});
-    this.route('map', {path: '/'});
-    this.route('about');
-    this.route('help');
     this.route('course');
     this.route('editCourse',{path: '/edit_course/:course_id'});
     this.route('deleteCourse',{path: '/delete_course/:course_id'});
     this.route('centre');
     this.route('editCentre',{path: '/edit_centre/:centre_id'});
     this.route('deleteCentre',{path: '/delete_centre/:centre_id'});
-    this.route('centre');
+
+    // no protected. Free access
     this.route('searchResult',{path: '/result/:course_id/:centre_id'});
-    this.route('administration');
     this.route('whatLevel',{path: 'right_level'});
     this.route('newhamFamilyInfo',{path: 'newham_family_info'});
+    this.route('map', {path: '/'});
+    this.route('about');
+    this.route('help');
+    this.route('login');
 });
 
-Esol.OrganizationRoute = Ember.Route.extend({
+Esol.LoginRoute = Ember.Route.extend({
+
+});
+
+Esol.ProtectedRoute = Ember.Route.extend({
+
+    beforeModel: function(transition) {
+        if(!this.controllerFor("application").get("isAuthenticated")){
+            this.transitionTo("login");
+        }
+        console.log("entering protected route ...");
+    }
+});
+
+// protected route starts ...
+
+Esol.AdministrationRoute = Esol.ProtectedRoute.extend({
+
+});
+
+Esol.OrganizationRoute = Esol.ProtectedRoute.extend({
    model: function(){
        return this.store.find('organization');
    }
 });
 
-Esol.EditOrganizationRoute = Ember.Route.extend({
+Esol.EditOrganizationRoute = Esol.ProtectedRoute.extend({
     model: function(params){
         //TODO en las otra.
         var organization;
@@ -37,19 +61,19 @@ Esol.EditOrganizationRoute = Ember.Route.extend({
     },
 });
 
-Esol.DeleteOrganizationRoute = Ember.Route.extend({
+Esol.DeleteOrganizationRoute = Esol.ProtectedRoute.extend({
     model: function(params){
         return this.store.findRecord("organization",params.organization_id);
     }
 });
 
-Esol.CourseRoute = Ember.Route.extend({
+Esol.CourseRoute = Esol.ProtectedRoute.extend({
     setupController: function(controller){
         controller.set('courses',this.store.find('course'));
     }
 });
 
-Esol.EditCourseRoute = Ember.Route.extend({
+Esol.EditCourseRoute = Esol.ProtectedRoute.extend({
     model: function(params){
         //TODO en las otra.
         var course;
@@ -85,19 +109,19 @@ Esol.EditCourseRoute = Ember.Route.extend({
 
 });
 
-Esol.DeleteCourseRoute = Ember.Route.extend({
+Esol.DeleteCourseRoute = Esol.ProtectedRoute.extend({
     model: function(params){
         return this.store.findRecord("course",params.course_id);
     }
 });
 
-Esol.CentreRoute = Ember.Route.extend({
+Esol.CentreRoute = Esol.ProtectedRoute.extend({
     setupController: function(controller){
         controller.set('centres',this.store.find('centre'));
     }
 });
 
-Esol.EditCentreRoute = Ember.Route.extend({
+Esol.EditCentreRoute = Esol.ProtectedRoute.extend({
 
     model: function(params){
         var centre;
@@ -110,11 +134,16 @@ Esol.EditCentreRoute = Ember.Route.extend({
     }
 });
 
-Esol.DeleteCentreRoute = Ember.Route.extend({
+Esol.DeleteCentreRoute = Esol.ProtectedRoute.extend({
     model: function(params){
         return this.store.findRecord("centre",params.centre_id);
     }
 });
+
+
+
+//stop protected route...
+
 
 Esol.SearchResultRoute = Ember.Route.extend({
 
@@ -129,11 +158,6 @@ Esol.SearchResultRoute = Ember.Route.extend({
         this._super(controller,model);
         controller.set("centreId",this.get("centreId"));
     }
-});
-
-
-Esol.AdministrationRoute = Ember.Route.extend({
-
 });
 
 Esol.WhatLevelRoute = Ember.Route.extend({

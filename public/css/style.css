@@ -12,7 +12,7 @@
 
 }
 .mapSearchOptionBackground{
-    background-color: #9acfea;
+    background-color: #7e9bb7;
     margin-bottom: 0;
     padding: 0;
 }
@@ -64,9 +64,13 @@
 
 .darkBluSubTitle{
     color: #00485D;
-    font-size: 16px;
-    padding: 10px 0 0 ;
-    font-weight: 600;
+    /* font-size: 16px;
+     padding: 10px 0 0 ;
+    font-weight: 600;*/
+}
+.container{
+
+
 }
 
 .btn-success {
@@ -113,6 +117,7 @@ body {
     /*color: #faf3bc;*/
     color:  white;
     background: #00485D;
+    border: none;
 }
 
 .headerMargin{
@@ -126,14 +131,14 @@ body {
 }
 
 .navbarPadding {
-    padding-top: 67px;
+    padding-top: 100px;
 }
 .advance-search {
     margin-top: 5px;
 }
 
 .tableBackground{
-    background-color: #68b604;
+    background-color: #b2a4b6;
     color:black;
 }
 
@@ -146,27 +151,55 @@ body {
     margin-top: 10px;
 }
 
-.navbar #nav > .active > .t {
-    color: #f3a130;
-}
-
 .navbar-fixed-top
 {
     background-color: rgba(0, 72, 93, 0.97) ;
     background-image: none;
-    color: #FFFFFF;
     font-family: 'MenuFont';
-
 }
-
 .nav-tabs{
     border:none;
 }
+.nav li a:hover{
+/*background: #FD3375;
+background: #7e9bb7;*/
+
+    color:#FF9100;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+color: white;
+background: #337ab7;
+border: none;
+}
+
+.nav-tabs > li > a {
+color: white;
+background: #7e9bb7;
+border-bottom: none;
+border: none;
+}
+
+.textColourBlack{
+    color: black;
+}
+
 
 /*
+
+.nav > li.active > a {
+color: #f3a130;
+background: #942ffd;
+}
+
 .nav li a:hover{
-    background: none;
-    font-style: normal;
+background: none;
+font-style: normal;
+#FF9100
+}
+
+.navbar #nav > .active > .t {
+color: #f3a130;
 }
 */
 
@@ -384,6 +417,7 @@ body {
 
 .squarAbout{
     margin: 30px 60px 30px 30px;
+    font-size: 15px
 }
 
 .contactFormat{
@@ -415,7 +449,8 @@ body {
 }
 
 .socialNetworkFormat{
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
+    padding: 0;
 }
 
 #otherInf{
@@ -439,7 +474,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .blackColor{
     color: black;
-    font-size: 12px;
+    font-size: 16px;
+    font-family: er,'Helvetica Neue','Nunito', sans-serif,'Nunito', sans-serif;
 }
 
 .formFormat{
@@ -501,8 +537,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-footer {
     margin: 50px 0 0 0;
-    font-size: .95em;
-    padding-left: 40px;
+    font-size: 1.2em;
+    padding-left: 25px;
     color: white;
 }
 
@@ -512,18 +548,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footImages{
-    padding:0 5px 0 5px;
+    padding:0px;
+
 }
 
 .th-logo {
-    width: 130px;
+    width: 155px;
     height: 90px;
     margin: -.75em 0 .95em 0;
 }
 
 .main-logo {
-    width: 155px;
-    height: 90px;
+    width: 185px;
+    height: 120px;
     margin: .75em 0 .95em .75em;
 }
 
@@ -541,7 +578,22 @@ ul {
     list-style-type: circle;
     padding-left: 30px;
     margin: 2px;
-    font-size: 14px;
+    font-size: 15px;
+}
+.im-centered{
+    margin: auto; max-width: 300px;
+}
+
+.resultPadding{
+    padding: 10px 10px 40px 60px;
+}
+
+.seeAllButtonColour {
+    background-color: #5cc0de;
+    width: 205px;
+}
+.seeAllButtonColour:hover{
+    background-color: #447ad2;
 }
 
 .helpUlContact{
@@ -612,12 +664,16 @@ ul {
     background: #f3a130;
 }
 
+.emailColor{
+    color: white ;
+}
+
 .backgroundColourGray{
 
     /*background-color: rgba(0, 72, 93, 1, ) ;
     background: #f3a130;*/
     background: rgba(0, 72, 93, 0.04);
-    padding: 0 5px 5px 5px;
+    padding: 5px 5px 15px 30px;
     border-radius: 9px;
 }
 
@@ -626,6 +682,12 @@ ul {
     /*background-color: rgba(0, 72, 93, 1, ) ;
     background: #f3a130;*/
     padding: 40px 5px 5px 5px;
+}
+
+
+.shareMedia{
+    margin: 0;
+    padding: 0;
 }
 
 .textareaScroll{

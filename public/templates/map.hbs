@@ -1,3 +1,4 @@
+<div class="panel panel-primary">
     <div class="mapSearchOptionBackground">
         <div class="row">
             <div class="col-md-12">
@@ -16,8 +17,8 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-info" {{action 'enableAdvancedSearch'}}>
-                    <span class="label ">Detailed search</span>
+                <button class="btn btn-info seeAllButtonColour" {{action 'enableAdvancedSearch'}}>
+                    <strong class="">Detailed search &nbsp;</strong>
                     {{#if detailedSearchEnabled}}
                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
                     {{else}}
@@ -26,8 +27,8 @@
                 </button>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-info" {{action 'seeAllCourses'}}>
-                    <span class="text-primary">See all courses in Newham</span>
+                <button class="btn btn-info seeAllButtonColour" {{action 'seeAllCourses'}}>
+                    <strong class="">See all courses in Newham</strong>
                 </button>
             </div>
         </div>
@@ -118,10 +119,10 @@
             <!-- Algo sobre el marker -->
         <div id="markerContent"  class="hide">
             <h4 class="text-center text-danger centerName">center name here</h4>
-            <h5 class="" >Courses:</h5>
+            <h5 class="blackColor" >Courses:</h5>
             <ul class="popupFormat text-success list">
 
             </ul>
         </div>
     </div>
-
+</div>

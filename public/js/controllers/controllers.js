@@ -567,8 +567,6 @@ Esol.MapController = Ember.Controller.extend({
     actions: {
         detailedSearchEnabled: false,
 
-
-
         freeActivateYes: function(){
 
             if(this.get("free") == "Yes"){
@@ -660,7 +658,7 @@ Esol.MapController = Ember.Controller.extend({
                 childCare: this.get("childCare"),
                 disability: this.get("disability")
                 //level: this.get("selectedLevel"),
-                //classType: this.get("selectedClassType")
+                //classType: this.get("selectedClassType"),
                 //postcode: this.get("post_code")
             };
 
@@ -796,17 +794,99 @@ Esol.SearchResultController = Ember.Controller.extend({
         mapVar.setZoom(14);
         mapVar.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-
             map: mapVar,
             position: results[0].geometry.location
 
         });
+
         this.get("model").set("location","POINT(" + lat + " " + lng+")");
     }
 
 });
 
+Ember.Handlebars.helper('mailToHelper', function(email, options) {
+    var mailTo = '<a target="_blank" href="mailto:' + email + '">';
+    mailTo += "<span>" + email + "</span></a>";
+    return new Handlebars.SafeString(mailTo);
+});
+
+Esol.LoginController = Ember.ObjectController.extend({
+
+    password: null,
+    authFailed: false,
+    needs: "application",
+
+    actions: {
+
+        login: function() {
+            var appController = this.get("controllers.application");
+            var enteredPassword = this.get("password");
+            appController.authenticate(enteredPassword);
+            //console.log("application");
+            if(appController.get("isAuthenticated")){
+                this.set("authFailed",false);
+                this.transitionToRoute("administration");
+            } else {
+                this.set("authFailed",true);
+                console.log("password incorrect ...");
+            }
+        }
+    }
+});
+
 Esol.ApplicationController = Ember.ObjectController.extend({
+
+    isAuthenticated: false,
+
+    aboutClassName: function(){
+        var currentRoute = this.get("currentRouteName");
+        if(currentRoute == "about"){
+            return "menuFormat active";
+        } else {
+            return "menuFormat";
+        }
+    }.property("currentRouteName"),
+    levelsClassName: function(){
+        var currentRoute = this.get("currentRouteName");
+        if(currentRoute == "whatLevel"){
+            return "menuFormat active";
+        } else {
+            return "menuFormat";
+        }
+    }.property("currentRouteName"),
+
+    administrationClassName: function(){
+        var currentRoute = this.get("currentRouteName");
+        if(currentRoute == "administration"){
+            return "menuFormat active";
+        } else {
+            return "menuFormat";
+        }
+    }.property("currentRouteName"),
+
+    mapClassName: function(){
+        var currentRoute = this.get("currentRouteName");
+        if(currentRoute == "map"){
+            return "menuFormat active";
+        } else {
+            return "menuFormat";
+        }
+    }.property("currentRouteName"),
+
+    helpClassName: function(){
+        var currentRoute = this.get("currentRouteName");
+        if(currentRoute == "help"){
+            return "menuFormat active";
+        } else {
+            return "menuFormat";
+        }
+    }.property("currentRouteName"),
+
+    authenticate: function(password) {
+        if(password=='mumbai'){
+            this.set("isAuthenticated", true);
+        }
+    },
 
     actions: {
 
@@ -814,7 +894,6 @@ Esol.ApplicationController = Ember.ObjectController.extend({
             this.controllerFor("map").set("seeAll",true);
             this.transitionToRoute("map");
         }
-
     }
 
 });
